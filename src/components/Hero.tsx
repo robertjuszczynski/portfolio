@@ -1,0 +1,138 @@
+'use client';
+
+import React, { useEffect, useRef, useMemo, useState } from 'react';
+import styles from './Hero.module.scss';
+import Image from 'next/image';
+import { motion, useAnimate, Variants } from 'framer-motion';
+import ActivitySign from '@/ui/ActivitySign';
+
+export default function HeroSection() {
+  const [scope, animate] = useAnimate();
+  const [fontsLoaded, setFontsLoaded] = useState(false); 
+  const subtitleRef = useRef<HTMLHeadingElement>(null);
+  const actionsRef = useRef<HTMLDivElement>(null);
+
+  const h1Text = 'I solve real problems and build clean, maintainable applications that scale';
+
+  const wordVariants: Variants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        duration: 2,
+        bounce: 0,
+        delay: i * 0.05,
+      },
+    }),
+  };
+
+  const titleWords = useMemo(() => {
+    return h1Text.split(' ').map((word, index) => (
+      <React.Fragment key={index}>
+        <motion.span
+          custom={index}
+          variants={wordVariants}
+          initial='hidden'
+          animate='visible'
+          className={`${styles.hero__word} ${
+            word === 'build' || word === 'solve' ? 'text-gradient' : ''
+          }`}
+        >
+          {word}&nbsp;
+        </motion.span>
+        {word === 'build' && <br />}
+      </React.Fragment>
+    ));
+  }, [h1Text]);
+
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      setFontsLoaded(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!fontsLoaded) return;
+
+    const wordCount = h1Text.split(' ').length;
+    const lastWordStartTime = (wordCount - 1) * 0.05;
+    const totalAnimationTime = lastWordStartTime + 2;
+
+    if (subtitleRef.current) {
+      animate(
+        subtitleRef.current,
+        { opacity: [0, 1], y: [10, 0] },
+        {
+          type: 'spring',
+          duration: 2,
+          bounce: 0,
+          delay: totalAnimationTime * 0.25,
+        }
+      );
+    }
+
+    if (actionsRef.current) {
+      animate(
+        actionsRef.current,
+        { opacity: [0, 1] },
+        {
+          type: 'spring',
+          duration: 2,
+          bounce: 0,
+          delay: totalAnimationTime * 0.5,
+        }
+      );
+    }
+  }, [animate, h1Text, fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
+  return (
+    <section className={styles.hero} ref={scope} aria-label='Introduction'>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload='auto'
+        className={styles.hero__video}
+      >
+        <source src='/videos/shadergradient.webm' type='video/webm' />
+        Your browser does not support the video tag.
+      </video>
+
+      <div className={styles.hero__container}>
+        <h1 className={styles.hero__title}>{titleWords}</h1>
+      </div>
+
+      <h3 className={styles.hero__subtitle} ref={subtitleRef}>
+        Hi! I'm Robert{' '}
+        <Image
+          className={styles.hero__image}
+          src='/images/me.jpg'
+          alt='Robert profile picture'
+          width={32}
+          height={32}
+          priority
+        />{' '}
+        – your go-to Full-stack developer.
+      </h3>
+
+      <div className={styles.hero__actions} ref={actionsRef}>
+        <button
+          className={`${styles.hero__button} ${styles.hero__button_primary} violet-gradient`}
+        >
+          Show works
+        </button>
+        <button
+          className={`${styles.hero__button} ${styles.hero__button_secondary}`}
+        >
+          <ActivitySign />
+          Call me
+        </button>
+      </div>
+    </section>
+  );
+}

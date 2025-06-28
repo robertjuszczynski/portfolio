@@ -42,3 +42,8 @@ a {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.violet-gradient {
+  background: #6C0A99;
+  background: linear-gradient(60deg, rgba(108, 10, 153, 1) 15%, rgba(180, 17, 255, 1) 80%);
+}
