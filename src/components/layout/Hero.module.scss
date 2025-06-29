@@ -21,7 +21,7 @@
     font-size: 1.25rem;
     display: flex;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 24px;
     font-weight: 400;
     opacity: 0;
     background: #FFFFFF;
@@ -44,7 +44,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
-    opacity: 15%;
+    opacity: 20%;
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     -webkit-mask-size: 100% 100%;
@@ -62,7 +62,7 @@
     gap: 18px;
     display: flex;
     position: relative;
-    right: 12px;
+    right: 20px;
     margin-top: 62px;
   }
 
@@ -70,6 +70,10 @@
     padding: 12px 34px;
     font-weight: 500;
     border-radius: 8px;
+
+    &_primary {
+      background: var(--primary-gradient);
+    }
 
     &_secondary {
       border: 1px solid rgba(255, 255, 255, 0.35);

@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useMemo, useState } from 'react';
 import styles from './Hero.module.scss';
 import Image from 'next/image';
 import { motion, useAnimate, Variants } from 'framer-motion';
-import ActivitySign from '@/ui/ActivitySign';
+import ActivitySign from '@/components/common/ActivitySign';
+import Spline from '@splinetool/react-spline/next';
 
 export default function HeroSection() {
   const [scope, animate] = useAnimate();
@@ -37,7 +38,7 @@ export default function HeroSection() {
           initial='hidden'
           animate='visible'
           className={`${styles.hero__word} ${
-            word === 'build' || word === 'solve' ? 'text-gradient' : ''
+            word === 'build' || word === 'solve' ? 'globals_text-gradient' : ''
           }`}
         >
           {word}&nbsp;
@@ -122,7 +123,7 @@ export default function HeroSection() {
 
       <div className={styles.hero__actions} ref={actionsRef}>
         <button
-          className={`${styles.hero__button} ${styles.hero__button_primary} violet-gradient`}
+          className={`${styles.hero__button} ${styles.hero__button_primary}`}
         >
           Show works
         </button>
