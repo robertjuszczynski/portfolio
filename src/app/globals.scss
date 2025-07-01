@@ -1,10 +1,18 @@
 @import "tailwindcss";
 
 :root {
+  --primary: #ffffff;
+  --secondary: #000000;
+  --primary-rgb: 255, 255, 255;
+  --secondary-rgb: 0, 0, 0;
+  --accent: #6B7AFA;
   --background: linear-gradient(-90deg,rgba(33, 33, 33, 1) 25%, rgba(62, 4, 113, 1) 100%);
   --foreground: #ffffff;
   --primary-gradient: linear-gradient(60deg, rgba(108, 10, 153, 1) 15%, rgba(180, 17, 255, 1) 80%);
   --lucide-fill: #ffffff;
+  --lucide-fill-reverse: #000000;
+  --primary-text: #ffffff;
+  --secondary-text: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,5 +63,14 @@ a {
   &.fill {
     fill: var(--lucide-fill);
     stroke-width: 0px;
+
+    &-reverse {
+      fill: var(--lucide-fill-reverse);
+    }
+
+    &-accent {
+      fill: var(--accent);
+      stroke: var(--accent);
+    }
   }
 }
