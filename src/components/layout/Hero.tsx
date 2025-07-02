@@ -5,7 +5,6 @@ import styles from './Hero.module.scss';
 import Image from 'next/image';
 import { motion, useAnimate, Variants } from 'framer-motion';
 import ActivitySign from '@/components/common/ActivitySign';
-import Spline from '@splinetool/react-spline/next';
 
 export default function HeroSection() {
   const [scope, animate] = useAnimate();

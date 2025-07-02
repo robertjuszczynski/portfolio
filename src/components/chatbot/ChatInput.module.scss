@@ -1,0 +1,33 @@
+.chatbot {
+  &__inputWrapper {
+    display: flex;
+    padding: 16px;
+    border-top: 1px solid #eee;
+  }
+
+  &__input {
+    flex: 1;
+    padding: 8px 12px 8px 18px;
+    background-color: rgba(var(--secondary-rgb), 0.05);
+    border-radius: 20px;
+    margin-right: 14px;
+    outline: none;
+    color: var(--secondary);
+
+    &::placeholder {
+      color: var(--secondary);
+      margin-left: 20px;
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+
+  &__send {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+  }
+}
