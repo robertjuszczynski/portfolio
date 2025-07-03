@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useEffect, useRef, useMemo, useState } from 'react';
 import styles from './Hero.module.scss';
 import Image from 'next/image';
