@@ -1,9 +1,6 @@
-.page {
-  padding: 180px 0px 0px 0px;
-  max-width: 1300px;
-}
-
 .main {
+  padding: 180px 0px 0px 0px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   gap: 32px;
