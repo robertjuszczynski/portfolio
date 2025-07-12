@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import ChatBot from '@/components/chatbot/ChatBot';
 import styles from './page.module.css';
@@ -16,18 +16,16 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Preloader loaded={onLoaded} />
-        {loaded ? (
-          <>
-            <Header />
-            <HeroSection />
-            {/* <ExperienceSection /> */}
-          </>
-        ) : null}
-        <ChatBot />
-      </main>
-    </div>
+    <main className={styles.main}>
+      <Preloader loaded={onLoaded} />
+      {loaded ? (
+        <>
+          <Header />
+          <HeroSection />
+          <ExperienceSection />
+        </>
+      ) : null}
+      <ChatBot />
+    </main>
   );
 }

@@ -6,7 +6,6 @@ import ActivitySign from '@/components/common/ActivitySign';
 
 export default function HeroSection() {
   const [scope, animate] = useAnimate();
-  const [fontsLoaded, setFontsLoaded] = useState(false); 
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
 
@@ -46,14 +45,6 @@ export default function HeroSection() {
   }, [h1Text]);
 
   useEffect(() => {
-    document.fonts.ready.then(() => {
-      setFontsLoaded(true);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!fontsLoaded) return;
-
     const wordCount = h1Text.split(' ').length;
     const lastWordStartTime = (wordCount - 1) * 0.05;
     const totalAnimationTime = lastWordStartTime + 2;
@@ -83,9 +74,7 @@ export default function HeroSection() {
         }
       );
     }
-  }, [animate, h1Text, fontsLoaded]);
-
-  if (!fontsLoaded) return null;
+  }, [animate, h1Text]);
 
   return (
     <section className={styles.hero} ref={scope} aria-label='Introduction'>

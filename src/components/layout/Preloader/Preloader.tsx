@@ -22,11 +22,16 @@ type PreloaderProps = {
 
 export default function Preloader({ loaded }: PreloaderProps) {
   const [index, setIndex] = useState(0);
-  const [delay, _] = useState(600);
-  const [visible, isVisible] = useState(true);
+  const [delay] = useState(600);
+  const [visible, setVisible] = useState(true);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
+
+    document.fonts.ready.then(() => {
+      if (isMounted) setFontsLoaded(true);
+    });
 
     const cycle = (i = 0, currentDelay = 550) => {
       if (!isMounted) return;
@@ -39,25 +44,34 @@ export default function Preloader({ loaded }: PreloaderProps) {
 
     const timeout = setTimeout(() => cycle(), delay);
 
-    setTimeout(() => {
-      isVisible(false);
-    }, 3000);
-
-    setTimeout(() => {
-      loaded();
-    }, 3500);
-
     return () => {
       isMounted = false;
       clearTimeout(timeout);
     };
-  }, []);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!fontsLoaded) return;
+
+    const hideTimeout = setTimeout(() => {
+      setVisible(false);
+    }, 3000);
+
+    const loadedTimeout = setTimeout(() => {
+      loaded();
+    }, 3500);
+
+    return () => {
+      clearTimeout(hideTimeout);
+      clearTimeout(loadedTimeout);
+    };
+  }, [fontsLoaded, loaded]);
 
   return (
-    <AnimatePresence mode='wait'>
+    <AnimatePresence mode="wait">
       {visible ? (
         <motion.div
-          key='textContainer'
+          key="textContainer"
           exit={{ y: '-100%' }}
           transition={{
             duration: 1.25,
