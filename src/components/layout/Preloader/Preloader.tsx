@@ -99,7 +99,7 @@ export default function Preloader({ loaded }: PreloaderProps) {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.6 }}
             style={{
-              color: 'var(--secondary-text)',
+              color: 'rgb(var(--secondary-text))',
               fontSize: '2.2rem',
               display: 'flex',
               alignItems: 'center',
