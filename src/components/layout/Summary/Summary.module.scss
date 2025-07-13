@@ -1,0 +1,45 @@
+.wrapper {
+  height: 300vh;
+  margin-bottom: 300px;
+}
+
+.stickyContainer {
+  position: sticky;
+  top: 50vh;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scaledContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transform-origin: center center;
+}
+
+.lineContainer {
+  position: relative;
+  white-space: nowrap;
+}
+
+.summaryGrey {
+  font-size: 3.75rem;
+  font-weight: 500;
+  color: rgba(var(--primary-text), 0.25);
+}
+
+.summaryWhite {
+  font-size: 3.75rem;
+  font-weight: 500;
+  color: rgba(var(--primary-text), 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}

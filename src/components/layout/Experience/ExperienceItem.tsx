@@ -21,7 +21,7 @@ export default function ExperienceItem({
         whileInView={{
           scaleY: 1,
           transition: {
-            duration: 3,
+            duration: 1.5,
             ease: 'easeInOut',
           },
         }}

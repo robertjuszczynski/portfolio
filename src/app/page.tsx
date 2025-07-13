@@ -7,6 +7,7 @@ import HeroSection from '@/components/layout/Hero/Hero';
 import ExperienceSection from '@/components/layout/Experience/Experience';
 import Preloader from '@/components/layout/Preloader/Preloader';
 import { useState } from 'react';
+import Summary from '@/components/layout/Summary/Summary';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -23,6 +24,7 @@ export default function Home() {
           <Header />
           <HeroSection />
           <ExperienceSection />
+          <Summary />
         </>
       ) : null}
       <ChatBot />
