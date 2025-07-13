@@ -1,0 +1,30 @@
+.item {
+  display: flex;
+  gap: 40px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(var(--secondary-rgb), 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.divider {
+  width: 6px;
+  flex-shrink: 0;
+  background: var(--divider-gradient);
+  border-radius: 8px;
+  transform-origin: top;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .item {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .dividerContainer {
+    display: none;
+  }
+}

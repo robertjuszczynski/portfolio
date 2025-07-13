@@ -1,0 +1,47 @@
+.positions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.position {
+  &:not(:last-child) {
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(var(--primary-text), 0.05);
+  }
+}
+
+.role {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary-text);
+  margin-bottom: 10px;
+}
+
+.period {
+  font-size: 0.875rem;
+  color: rgba(var(--primary-text), 0.7);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.description {
+  margin-bottom: 20px;
+  
+  p {
+    color: rgba(var(--primary-text), 0.8);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

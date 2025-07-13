@@ -1,0 +1,34 @@
+.experience {
+  margin-bottom: 300px;
+}
+
+.experienceHeader {
+  margin-bottom: 48px;
+
+  &__label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: rgba(var(--primary-text), 0.75);
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    position: relative;
+    font-size: 3.75rem;
+    font-weight: 500;
+    z-index: 1;
+
+    &::before {
+      content: 'EXPERIENCE';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      font-size: 8rem;
+      font-weight: 500;
+      color: rgba(var(--primary-text), 0.03);
+      z-index: 0;
+      pointer-events: none;
+    }
+  }
+}
