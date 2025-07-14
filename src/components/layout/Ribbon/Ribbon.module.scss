@@ -1,0 +1,44 @@
+.ribbon {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  height: 68px;
+  background: var(--primary-gradient);
+  color: var(--primary-text);
+  overflow: hidden;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.scrollingText {
+  display: flex;
+  animation: scroll-left 60s linear infinite;
+  width: fit-content;
+  
+  .item {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .dot {
+    margin: 0 0.875rem;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-66.666%);
+  }
+}

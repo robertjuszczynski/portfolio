@@ -9,6 +9,7 @@ import Preloader from '@/components/layout/Preloader/Preloader';
 import { useState } from 'react';
 import Summary from '@/components/layout/Summary/Summary';
 import ProjectsSection from '@/components/layout/Projects/Projects';
+import Ribbon from '@/components/layout/Ribbon/Ribbon';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -27,6 +28,7 @@ export default function Home() {
           <ExperienceSection />
           <Summary />
           <ProjectsSection />
+          <Ribbon />
         </>
       ) : null}
       <ChatBot />
