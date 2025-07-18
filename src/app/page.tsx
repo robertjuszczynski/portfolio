@@ -29,8 +29,8 @@ export default function Home() {
           <ExperienceSection />
           <Summary />
           <ProjectsSection />
-          <Skills />
           <Ribbon />
+          <Skills />
         </>
       ) : null}
       <ChatBot />
