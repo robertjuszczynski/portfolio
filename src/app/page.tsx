@@ -9,6 +9,7 @@ import Preloader from '@/components/layout/Preloader/Preloader';
 import { useState } from 'react';
 import Summary from '@/components/layout/Summary/Summary';
 import ProjectsSection from '@/components/layout/Projects/Projects';
+import Skills from '@/components/layout/Skills/Skills';
 import Ribbon from '@/components/layout/Ribbon/Ribbon';
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
           <ExperienceSection />
           <Summary />
           <ProjectsSection />
+          <Skills />
           <Ribbon />
         </>
       ) : null}

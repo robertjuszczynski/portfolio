@@ -1,0 +1,44 @@
+.skills {
+  display: flex;
+  flex-direction: column;
+
+  &__techContainer {
+    display: flex;
+    gap: 14px;
+    max-width: 1064px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.skillsHeader {
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: rgba(var(--primary-text), 0.75);
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    position: relative;
+    font-size: 3.75rem;
+    font-weight: 600;
+    z-index: 1;
+    margin-bottom: 20px;
+  }
+
+  &__divider {
+    width: 600px;
+    height: 6px;
+    flex-shrink: 0;
+    background: var(--divider-gradient-240deg);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
