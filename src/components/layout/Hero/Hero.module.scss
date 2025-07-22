@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-bottom: 150px;
   
   &__container {
     display: flex;
@@ -29,6 +30,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    align-items: center;
   }
 
   &__word {
@@ -53,8 +55,17 @@
     mask-repeat: no-repeat;
   }
 
+  &__imageContainer {
+    position: relative;
+    border-radius: 8px;
+    overflow: visible;
+    cursor: pointer;
+  }
+
   &__image {
     border-radius: 8px;
+    z-index: 2;
+    position: relative;
   }
 
   &__actions {
@@ -70,13 +81,38 @@
     padding: 12px 34px;
     font-weight: 500;
     border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::before {
+      transform: translateX(0);
+    }
 
     &_primary {
       background: var(--primary-gradient);
+      border: none;
     }
 
     &_secondary {
       border: 1px solid rgba(255, 255, 255, 0.35);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
   }
 }

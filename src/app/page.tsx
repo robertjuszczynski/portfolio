@@ -12,6 +12,7 @@ import ProjectsSection from '@/components/layout/Projects/Projects';
 import Skills from '@/components/layout/Skills/Skills';
 import Ribbon from '@/components/layout/Ribbon/Ribbon';
 import Footer from '@/components/layout/Footer/Footer';
+import { Robot } from '@/components/layout/Hero/Robot';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -34,10 +35,15 @@ export default function Home() {
       />
       <main className={styles.main}>
         <Preloader loaded={onLoaded} />
-        {loaded ? (
+        {loaded && (
           <>
             <Header />
             <HeroSection />
+          </>
+        )}
+        <Robot />
+        {loaded && (
+          <>
             <ExperienceSection />
             <Summary />
             <ProjectsSection />
@@ -45,7 +51,7 @@ export default function Home() {
             <Skills />
             <Footer />
           </>
-        ) : null}
+        )}   
         <ChatBot />
       </main>
     </>

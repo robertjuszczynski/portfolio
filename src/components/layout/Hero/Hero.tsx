@@ -8,6 +8,7 @@ export default function HeroSection() {
   const [scope, animate] = useAnimate();
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
+  const [imageHovered, setImageHovered] = useState(false);
 
   const h1Text = 'I solve real problems and build clean, maintainable applications that scale';
 
@@ -96,29 +97,59 @@ export default function HeroSection() {
 
       <h3 className={styles.hero__subtitle} ref={subtitleRef}>
         Hi! I'm Robert{' '}
-        <Image
-          className={styles.hero__image}
-          src='/images/me.jpg'
-          alt='Robert profile picture'
-          width={32}
-          height={32}
-          priority
-        />{' '}
+        <motion.div
+          className={styles.hero__imageContainer}
+          whileHover={{ 
+            scale: 1.2,
+            rotate: [0, -5, 5, 0],
+            transition: { rotate: { repeat: Infinity, duration: 1 } }
+          }}
+          onHoverStart={() => setImageHovered(true)}
+          onHoverEnd={() => setImageHovered(false)}
+        >
+          <Image
+            className={styles.hero__image}
+            src='/images/me.jpg'
+            alt='Robert profile picture'
+            width={32}
+            height={32}
+            priority
+          />
+          <motion.div 
+            className={styles.hero__imageGlow}
+            animate={{ 
+              opacity: imageHovered ? 1 : 0,
+              scale: imageHovered ? 1.5 : 1
+            }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.div>{' '}
         – your go-to Full-stack developer.
       </h3>
 
       <div className={styles.hero__actions} ref={actionsRef}>
-        <button
+        <motion.button
           className={`${styles.hero__button} ${styles.hero__button_primary}`}
+          whileHover={{ 
+            scale: 1.05,
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{ scale: 0.95 }}
         >
           Show works
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           className={`${styles.hero__button} ${styles.hero__button_secondary}`}
+          whileHover={{ 
+            scale: 1.05,
+            borderColor: 'rgba(var(--primary), 0.8)',
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{ scale: 0.95 }}
         >
           <ActivitySign />
           Call me
-        </button>
+        </motion.button>
       </div>
     </section>
   );

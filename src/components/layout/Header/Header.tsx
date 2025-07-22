@@ -39,7 +39,7 @@ export default function Header() {
         opacity: hidden ? 0 : 1
       }}
       transition={{ 
-        duration: 2,
+        duration: 0.5,
         ease: "easeInOut"
       }}
     >
