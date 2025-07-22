@@ -29,6 +29,8 @@ body {
   display: flex;
   justify-content: center;
   overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 body {

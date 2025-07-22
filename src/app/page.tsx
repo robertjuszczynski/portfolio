@@ -11,6 +11,7 @@ import Summary from '@/components/layout/Summary/Summary';
 import ProjectsSection from '@/components/layout/Projects/Projects';
 import Skills from '@/components/layout/Skills/Skills';
 import Ribbon from '@/components/layout/Ribbon/Ribbon';
+import Footer from '@/components/layout/Footer/Footer';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -22,11 +23,11 @@ export default function Home() {
   return (
     <>
       <div
-        className='fixed inset-0 z-0'
+        className='fixed inset-0 z-[-1]'
         style={{
           backgroundImage: `
-              linear-gradient(to right, rgba(229,231,235,0.03) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(229,231,235,0.03) 1px, transparent 1px)
+              linear-gradient(to right, rgba(229,231,235,0.04) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(229,231,235,0.04) 1px, transparent 1px)
             `,
           backgroundSize: '48px 48px, 48px 48px, 100% 100%, 100% 100%',
         }}
@@ -42,6 +43,7 @@ export default function Home() {
             <ProjectsSection />
             <Ribbon />
             <Skills />
+            <Footer />
           </>
         ) : null}
         <ChatBot />

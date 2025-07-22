@@ -1,96 +1,397 @@
-import { motion } from 'framer-motion';
+'use client';
+
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import styles from './Footer.module.scss';
 import { ArrowUpRight, MoveUp } from 'lucide-react';
 
 export default function Footer() {
+  const footerRef = useRef(null);
+  const isInView = useInView(footerRef, {
+    amount: 0.8,
+    once: false,
+  });
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
+  const linkHoverProps = {
+    whileHover: { 
+      color: 'rgb(var(--primary))', 
+      x: 5,
+      transition: { duration: 0.2 } 
+    },
+    whileTap: { scale: 0.98 }
+  };
+
+  const socialHoverProps = {
+    whileHover: { 
+      scale: 1.05,
+      color: 'rgb(var(--primary))',
+      transition: { duration: 0.2 } 
+    },
+    whileTap: { scale: 0.95 }
+  };
+
+  const contactHoverProps = {
+    whileHover: { 
+      scale: 1.02,
+      x: 5,
+      transition: { duration: 0.2 } 
+    },
+    whileTap: { scale: 0.98 }
+  };
+
   return (
-    <footer className={styles.footer}>
-      <div className={`${styles.footer__section} ${styles['footer__section--intro']}`}>
-        <motion.h2 
-          className={styles.footer__title}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Get in <span className="globals_text-gradient">touch</span>
+    <motion.footer
+      ref={footerRef}
+      className={styles.footer}
+      initial='hidden'
+      animate={isInView ? 'visible' : 'hidden'}
+    >
+      <motion.div
+        className={`${styles.footer__section} ${styles['footer__section--intro']}`}
+        variants={sectionVariants}
+      >
+        <motion.h2 className={styles.footer__title} variants={sectionVariants}>
+          Get in <span className='globals_text-gradient'>touch</span>
         </motion.h2>
-      </div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--empty-1']}`}></div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--socials']}`}>
-        <ul className={styles.footer__list}>
-          <li className={styles.footer__item}>Github</li>
-          <li className={styles.footer__item}>Linkedin</li>
-          <li className={styles.footer__item}>Facebook</li>
-          <li className={styles.footer__item}>Instagram</li>
-        </ul>
-      </div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--contact']}`}>
-        <span className={styles.footer__contact}>
-          robert.j.dev@icloud.com 
-          <ArrowUpRight className={styles.footer__icon} width={46} height={46}/>
-        </span>
-        <span className={styles.footer__contact}>
-          +48 515 177 920 
-          <ArrowUpRight className={styles.footer__icon} width={46} height={46}/>
-        </span>
-      </div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--empty-2']}`}></div>
-      <div className={`${styles.footer__section} ${styles['footer__section--empty-3']}`}></div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--navigation']}`}>
-        <div className={styles.footer__column}>
-          <h3 className={styles.footer__heading}>Menu</h3>
-          <div className={styles.footer__itemslist}>
-            <a href='#' className={styles.footer__link}>Projects</a>
-            <a href='#' className={styles.footer__link}>Experience</a>
-            <a href='#' className={styles.footer__link}>Skills & Technologies</a>
-            <a href='#' className={styles.footer__link}>About me</a>
-            <a href='#' className={styles.footer__link}>Contact</a>
-          </div>
-        </div>
+      </motion.div>
 
-        <div className={`${styles.footer__column} ${styles['footer__column--contact']}`}>
-          <h3 className={styles.footer__heading}>
-            <a href='#'>Contact</a>
-          </h3>
-          <div className={styles.footer__itemslist}>
-            <a href='mailto:robert.j.dev@icloud.com' className={styles.footer__link}>
+      <div
+        className={`${styles.footer__section} ${styles['footer__section--empty-1']}`}
+      ></div>
+
+      <motion.div
+        className={`${styles.footer__section} ${styles['footer__section--socials']}`}
+        variants={containerVariants}
+      >
+        <motion.ul className={styles.footer__list}>
+          <motion.li 
+            className={styles.footer__item} 
+            variants={itemVariants}
+            {...socialHoverProps}
+          >
+            <motion.a 
+              href="https://github.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Github
+            </motion.a>
+          </motion.li>
+          <motion.li 
+            className={styles.footer__item} 
+            variants={itemVariants}
+            {...socialHoverProps}
+          >
+            <motion.a 
+              href="https://linkedin.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Linkedin
+            </motion.a>
+          </motion.li>
+          <motion.li 
+            className={styles.footer__item} 
+            variants={itemVariants}
+            {...socialHoverProps}
+          >
+            <motion.a 
+              href="https://facebook.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Facebook
+            </motion.a>
+          </motion.li>
+          <motion.li 
+            className={styles.footer__item} 
+            variants={itemVariants}
+            {...socialHoverProps}
+          >
+            <motion.a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </motion.a>
+          </motion.li>
+        </motion.ul>
+      </motion.div>
+
+      <motion.div
+        className={`${styles.footer__section} ${styles['footer__section--contact']}`}
+        variants={containerVariants}
+      >
+        <motion.a 
+          href="mailto:robert.j.dev@icloud.com"
+          className={styles.footer__contact} 
+          variants={itemVariants}
+          {...contactHoverProps}
+        >
+          robert.j.dev@icloud.com
+          <motion.div
+            whileHover={{ x: 3, y: -3 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ArrowUpRight
+              className={styles.footer__icon}
+              width={46}
+              height={46}
+            />
+          </motion.div>
+        </motion.a>
+        <motion.a 
+          href="tel:+48515177920"
+          className={styles.footer__contact} 
+          variants={itemVariants}
+          {...contactHoverProps}
+        >
+          +48 515 177 920
+          <motion.div
+            whileHover={{ x: 3, y: -3 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ArrowUpRight
+              className={styles.footer__icon}
+              width={46}
+              height={46}
+            />
+          </motion.div>
+        </motion.a>
+      </motion.div>
+
+      <div
+        className={`${styles.footer__section} ${styles['footer__section--empty-2']}`}
+      ></div>
+      <div
+        className={`${styles.footer__section} ${styles['footer__section--empty-3']}`}
+      ></div>
+
+      <motion.div
+        className={`${styles.footer__section} ${styles['footer__section--navigation']}`}
+        variants={containerVariants}
+      >
+        <motion.div className={styles.footer__column} variants={itemVariants}>
+          <motion.h3 className={styles.footer__heading}>Menu</motion.h3>
+          <motion.div
+            className={styles.footer__itemslist}
+            variants={containerVariants}
+          >
+            <motion.a
+              href='#projects'
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Projects
+            </motion.a>
+            <motion.a
+              href='#experience'
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Experience
+            </motion.a>
+            <motion.a
+              href='#skills'
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Skills & Technologies
+            </motion.a>
+            <motion.a
+              href='#about'
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              About me
+            </motion.a>
+            <motion.a
+              href='#contact'
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Contact
+            </motion.a>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          className={`${styles.footer__column} ${styles['footer__column--contact']}`}
+          variants={itemVariants}
+        >
+          <motion.h3 className={styles.footer__heading}>
+            <motion.a href='#contact'>Contact</motion.a>
+          </motion.h3>
+          <motion.div
+            className={styles.footer__itemslist}
+            variants={containerVariants}
+          >
+            <motion.a
+              href='mailto:robert.j.dev@icloud.com'
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
               robert.j.dev@icloud.com
-            </a>
-            <span className={styles.footer__phone}>+48 515 177 920</span>
-          </div>
-        </div>
+            </motion.a>
+            <motion.a
+              href='tel:+48515177920'
+              className={styles.footer__phone}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              +48 515 177 920
+            </motion.a>
+          </motion.div>
+        </motion.div>
 
-        <div className={styles.footer__column}>
-          <h3 className={styles.footer__heading}>Socials</h3>
-          <div className={styles.footer__itemslist}>
-            <a href='#' className={styles.footer__link}>Github</a>
-            <a href='#' className={styles.footer__link}>Linkedin</a>
-            <a href='#' className={styles.footer__link}>Instagram</a>
-            <a href='#' className={styles.footer__link}>Facebook</a>
-          </div>
-        </div>
-      </div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--empty-4']}`}></div>
-      
-      <div className={`${styles.footer__section} ${styles['footer__section--message']}`}>
-        <p className={styles.footer__text}>
-          Always curious about new projects and challenges. Whether you're looking 
-          for a <span className="globals_text-gradient">full-time teammate</span> or a <span className="globals_text-gradient">freelance partner</span>, I'm just a message away. 
-          Let's connect!
-        </p>
-        <span className={styles.footer__scroll}>
-          Take me to the top 
-          <div className={styles.footer__scrollIcon}>
+        <motion.div className={styles.footer__column} variants={itemVariants}>
+          <motion.h3 className={styles.footer__heading}>Socials</motion.h3>
+          <motion.div
+            className={styles.footer__itemslist}
+            variants={containerVariants}
+          >
+            <motion.a
+              href='https://github.com'
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Github
+            </motion.a>
+            <motion.a
+              href='https://linkedin.com'
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Linkedin
+            </motion.a>
+            <motion.a
+              href='https://instagram.com'
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Instagram
+            </motion.a>
+            <motion.a
+              href='https://facebook.com'
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.footer__link}
+              variants={itemVariants}
+              {...linkHoverProps}
+            >
+              Facebook
+            </motion.a>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      <div
+        className={`${styles.footer__section} ${styles['footer__section--empty-4']}`}
+      ></div>
+
+      <motion.div
+        className={`${styles.footer__section} ${styles['footer__section--message']}`}
+        variants={sectionVariants}
+      >
+        <motion.p
+          className={styles.footer__text}
+          variants={{
+            hidden: { opacity: 0, x: -30 },
+            visible: {
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.6, delay: 0.3 },
+            },
+          }}
+        >
+          Always curious about new projects and challenges. Whether you're
+          looking for a{' '}
+          <span className='globals_text-gradient'>full-time teammate</span> or a{' '}
+          <span className='globals_text-gradient'>freelance partner</span>, I'm
+          just a message away. Let's connect!
+        </motion.p>
+        <motion.button
+          onClick={scrollToTop}
+          className={styles.footer__scroll}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.4, delay: 0.5 },
+            },
+          }}
+          whileHover={{ 
+            scale: 1.05,
+            transition: { duration: 0.2 }
+          }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Take me to the top
+          <motion.div
+            className={styles.footer__scrollIcon}
+            animate={{ y: [0, -5, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+          >
             <MoveUp width={14} height={14} />
-          </div>
-        </span>
-      </div>
-    </footer>
+          </motion.div>
+        </motion.button>
+      </motion.div>
+    </motion.footer>
   );
 }
