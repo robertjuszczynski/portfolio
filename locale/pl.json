@@ -1,0 +1,11 @@
+{
+  "hero": {
+    "title": "Rozwiązuję prawdziwe problemy i tworzę czyste aplikacje, które się skalują",
+    "subtitle-first": "Hej! Jestem Robert",
+    "subtitle-sec": "twój przyszły Full-stack developer",
+    "actions": {
+      "viewProjects": "Zobacz projekty",
+      "contactMe": "Skontaktuj się ze mną"
+    }
+  }
+}

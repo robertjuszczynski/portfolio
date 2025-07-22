@@ -3,14 +3,18 @@ import styles from './Hero.module.scss';
 import Image from 'next/image';
 import { motion, useAnimate, Variants } from 'framer-motion';
 import ActivitySign from '@/components/common/ActivitySign';
+import useTranslate from '@/hooks/useTranslate';
 
 export default function HeroSection() {
   const [scope, animate] = useAnimate();
+  const { t } = useTranslate();
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
   const [imageHovered, setImageHovered] = useState(false);
 
-  const h1Text = 'I solve real problems and build clean, maintainable applications that scale';
+  const h1Text = t('hero.title');
+  const firstSubtitlePart = t('hero.subtitle-first');
+  const secondSubtitlePart = t('hero.subtitle-sec');
 
   const wordVariants: Variants = {
     hidden: { opacity: 0, y: 10 },
@@ -35,7 +39,7 @@ export default function HeroSection() {
           initial='hidden'
           animate='visible'
           className={`${styles.hero__word} ${
-            word === 'build' || word === 'solve' ? 'globals_text-gradient' : ''
+            word === 'build' || word === 'solve' || word === 'tworzę' || word === 'aplikacje' ? 'globals_text-gradient' : ''
           }`}
         >
           {word}&nbsp;
@@ -96,7 +100,7 @@ export default function HeroSection() {
       </div>
 
       <h3 className={styles.hero__subtitle} ref={subtitleRef}>
-        Hi! I'm Robert{' '}
+        {firstSubtitlePart}{' '}
         <motion.div
           className={styles.hero__imageContainer}
           whileHover={{ 
@@ -124,7 +128,7 @@ export default function HeroSection() {
             transition={{ duration: 0.3 }}
           />
         </motion.div>{' '}
-        – your go-to Full-stack developer.
+        – {secondSubtitlePart}
       </h3>
 
       <div className={styles.hero__actions} ref={actionsRef}>

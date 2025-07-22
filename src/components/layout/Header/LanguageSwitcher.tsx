@@ -5,22 +5,41 @@ import PLFlag from '@/../public/images/pl.png';
 import styles from './LanguageSwitcher.module.scss';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import useTranslate from '@/hooks/useTranslate';
+import { useRouter } from 'next/navigation';
+
+const languages = [
+  { code: 'en', flag: UKFlag },
+  { code: 'pl', flag: PLFlag },
+];
 
 export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
+  const { lang } = useTranslate();
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    languages.find((i) => i.code === lang)
+  );
+  const router = useRouter();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const selectLanguage = (lang: string) => {
+    router.push(`/${lang}`);
     setIsOpen(false);
+    setSelectedLanguage(languages.find((i) => i.code === lang));
   };
 
   return (
     <div className={styles.switcher}>
       <div className={styles.switcher__selected} onClick={toggleDropdown}>
-        <Image src={UKFlag} alt='United Kingdom flag' width={28} height={28} />
+        <Image
+          src={selectedLanguage!.flag}
+          alt={selectedLanguage!.code}
+          width={28}
+          height={28}
+        />
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
@@ -28,22 +47,32 @@ export default function LanguageSwitcher() {
           <ChevronDown />
         </motion.div>
       </div>
-      
+
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             className={styles.switcher__dropdown}
             initial={{ opacity: 0, y: -10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div 
-              className={styles.switcher__option}
-              onClick={() => selectLanguage('pl')}
-            >
-              <Image src={PLFlag} alt='Polish flag' width={28} height={28} />
-            </div>
+            {languages
+              .filter((langObj) => langObj.code !== selectedLanguage?.code)
+              .map((langObj) => (
+                <div
+                  key={langObj.code}
+                  className={styles.switcher__option}
+                  onClick={() => selectLanguage(langObj.code)}
+                >
+                  <Image
+                    src={langObj.flag}
+                    alt={`${langObj.code} flag`}
+                    width={28}
+                    height={28}
+                  />
+                </div>
+              ))}
           </motion.div>
         )}
       </AnimatePresence>

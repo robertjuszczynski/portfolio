@@ -9,7 +9,7 @@ export default function Footer() {
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, {
     amount: 0.8,
-    once: false,
+    once: true,
   });
 
   const scrollToTop = () => {
@@ -25,7 +25,7 @@ export default function Footer() {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 1,
         ease: 'easeOut',
       },
     },
@@ -52,30 +52,30 @@ export default function Footer() {
   };
 
   const linkHoverProps = {
-    whileHover: { 
-      color: 'rgb(var(--primary))', 
+    whileHover: {
+      color: 'rgb(var(--primary))',
       x: 5,
-      transition: { duration: 0.2 } 
+      transition: { duration: 0.2 },
     },
-    whileTap: { scale: 0.98 }
+    whileTap: { scale: 0.98 },
   };
 
   const socialHoverProps = {
-    whileHover: { 
+    whileHover: {
       scale: 1.05,
       color: 'rgb(var(--primary))',
-      transition: { duration: 0.2 } 
+      transition: { duration: 0.2 },
     },
-    whileTap: { scale: 0.95 }
+    whileTap: { scale: 0.95 },
   };
 
   const contactHoverProps = {
-    whileHover: { 
+    whileHover: {
       scale: 1.02,
       x: 5,
-      transition: { duration: 0.2 } 
+      transition: { duration: 0.2 },
     },
-    whileTap: { scale: 0.98 }
+    whileTap: { scale: 0.98 },
   };
 
   return (
@@ -94,63 +94,64 @@ export default function Footer() {
         </motion.h2>
       </motion.div>
 
-      <div
+      <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-1']}`}
-      ></div>
+        variants={sectionVariants}
+      ></motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--socials']}`}
-        variants={containerVariants}
+        variants={sectionVariants}
       >
-        <motion.ul className={styles.footer__list}>
-          <motion.li 
-            className={styles.footer__item} 
+        <motion.ul className={styles.footer__list} variants={containerVariants}>
+          <motion.li
+            className={styles.footer__item}
             variants={itemVariants}
             {...socialHoverProps}
           >
-            <motion.a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <motion.a
+              href='https://github.com'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Github
             </motion.a>
           </motion.li>
-          <motion.li 
-            className={styles.footer__item} 
+          <motion.li
+            className={styles.footer__item}
             variants={itemVariants}
             {...socialHoverProps}
           >
-            <motion.a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <motion.a
+              href='https://linkedin.com'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Linkedin
             </motion.a>
           </motion.li>
-          <motion.li 
-            className={styles.footer__item} 
+          <motion.li
+            className={styles.footer__item}
             variants={itemVariants}
             {...socialHoverProps}
           >
-            <motion.a 
-              href="https://facebook.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <motion.a
+              href='https://facebook.com'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Facebook
             </motion.a>
           </motion.li>
-          <motion.li 
-            className={styles.footer__item} 
+          <motion.li
+            className={styles.footer__item}
             variants={itemVariants}
             {...socialHoverProps}
           >
-            <motion.a 
-              href="https://instagram.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
+            <motion.a
+              href='https://instagram.com'
+              target='_blank'
+              rel='noopener noreferrer'
             >
               Instagram
             </motion.a>
@@ -160,11 +161,11 @@ export default function Footer() {
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--contact']}`}
-        variants={containerVariants}
+        variants={sectionVariants}
       >
-        <motion.a 
-          href="mailto:robert.j.dev@icloud.com"
-          className={styles.footer__contact} 
+        <motion.a
+          href='mailto:robert.j.dev@icloud.com'
+          className={styles.footer__contact}
           variants={itemVariants}
           {...contactHoverProps}
         >
@@ -180,9 +181,9 @@ export default function Footer() {
             />
           </motion.div>
         </motion.a>
-        <motion.a 
-          href="tel:+48515177920"
-          className={styles.footer__contact} 
+        <motion.a
+          href='tel:+48515177920'
+          className={styles.footer__contact}
           variants={itemVariants}
           {...contactHoverProps}
         >
@@ -200,18 +201,20 @@ export default function Footer() {
         </motion.a>
       </motion.div>
 
-      <div
+      <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-2']}`}
-      ></div>
-      <div
+        variants={sectionVariants}
+      ></motion.div>
+      <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-3']}`}
-      ></div>
+        variants={sectionVariants}
+      ></motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--navigation']}`}
-        variants={containerVariants}
+        variants={sectionVariants}
       >
-        <motion.div className={styles.footer__column} variants={itemVariants}>
+        <motion.div className={styles.footer__column} variants={containerVariants}>
           <motion.h3 className={styles.footer__heading}>Menu</motion.h3>
           <motion.div
             className={styles.footer__itemslist}
@@ -262,7 +265,7 @@ export default function Footer() {
 
         <motion.div
           className={`${styles.footer__column} ${styles['footer__column--contact']}`}
-          variants={itemVariants}
+          variants={containerVariants}
         >
           <motion.h3 className={styles.footer__heading}>
             <motion.a href='#contact'>Contact</motion.a>
@@ -290,7 +293,7 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        <motion.div className={styles.footer__column} variants={itemVariants}>
+        <motion.div className={styles.footer__column} variants={containerVariants}>
           <motion.h3 className={styles.footer__heading}>Socials</motion.h3>
           <motion.div
             className={styles.footer__itemslist}
@@ -298,8 +301,8 @@ export default function Footer() {
           >
             <motion.a
               href='https://github.com'
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -308,8 +311,8 @@ export default function Footer() {
             </motion.a>
             <motion.a
               href='https://linkedin.com'
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -318,8 +321,8 @@ export default function Footer() {
             </motion.a>
             <motion.a
               href='https://instagram.com'
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -328,8 +331,8 @@ export default function Footer() {
             </motion.a>
             <motion.a
               href='https://facebook.com'
-              target="_blank"
-              rel="noopener noreferrer"
+              target='_blank'
+              rel='noopener noreferrer'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -340,9 +343,10 @@ export default function Footer() {
         </motion.div>
       </motion.div>
 
-      <div
+      <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-4']}`}
-      ></div>
+        variants={sectionVariants}
+      ></motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--message']}`}
@@ -376,9 +380,9 @@ export default function Footer() {
               transition: { duration: 0.4, delay: 0.5 },
             },
           }}
-          whileHover={{ 
+          whileHover={{
             scale: 1.05,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
         >

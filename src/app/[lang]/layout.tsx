@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
-import "./globals.scss";
+import "../globals.scss";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -14,11 +14,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: string };
 }>) {
+
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <body className={`${outfit.className} ${outfit.variable}`}>
         {children}
       </body>
