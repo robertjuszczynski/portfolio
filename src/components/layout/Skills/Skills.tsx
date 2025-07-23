@@ -9,6 +9,8 @@ export default function SkillsSection() {
     'Next.js',
     'TypeScript',
     'JavaScript',
+    'Nuxt.js',
+    'Vue',
     'Node.js',
     'Laravel',
     'PHP',
@@ -17,10 +19,9 @@ export default function SkillsSection() {
     'Tailwind CSS',
     'Vuetify',
     'Framer Motion',
-    'Git',
-    'Gitlab',
     'HTML',
     'CSS',
+    'Git',
   ];
 
   return (

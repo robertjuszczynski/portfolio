@@ -8,7 +8,7 @@ type TechTagProps = {
 };
 
 export default function TechTag({ technology }: TechTagProps) {
-  const imageName = technology.toLowerCase().replace('.js', '') + '.png';
+  const imageName = technology.toLowerCase().replace('.js', '').replace(' ', '-') + '.png';
   const src = `/images/technologies/${imageName}`;
 
   return (
