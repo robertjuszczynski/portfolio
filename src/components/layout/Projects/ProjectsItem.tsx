@@ -19,23 +19,6 @@ export default function ProjectsItem(props: Project) {
         scale: 1.02,
         transition: { duration: 0.5, ease: 'easeOut' },
       }}
-      initial={{
-        position: 'relative',
-        opacity: 0,
-        x: flexDirection ? -50 : 50
-      }}
-      whileInView={{
-        opacity: 1,
-        x: 0
-      }}
-      viewport={{
-        once: true,
-        amount: 1
-      }}
-      transition={{
-        duration: 1,
-        ease: 'easeIn'
-      }}
     >
       <Image
         className={styles.projectItem__screenshot}
