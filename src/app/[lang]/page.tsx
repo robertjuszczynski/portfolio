@@ -13,6 +13,7 @@ import Skills from '@/components/layout/Skills/Skills';
 import Ribbon from '@/components/layout/Ribbon/Ribbon';
 import Footer from '@/components/layout/Footer/Footer';
 import { Robot } from '@/components/layout/Hero/Robot';
+import AboutMe from '@/components/layout/AboutMe/AboutMe';
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,7 @@ export default function Home() {
             <ExperienceSection />
             <Summary />
             <ProjectsSection />
+            <AboutMe />
             <Ribbon />
             <Skills />
             <Footer />
