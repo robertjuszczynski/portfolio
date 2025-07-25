@@ -39,7 +39,12 @@ export default function HeroSection() {
           initial='hidden'
           animate='visible'
           className={`${styles.hero__word} ${
-            word === 'build' || word === 'solve' || word === 'tworzę' || word === 'aplikacje' ? 'globals_text-gradient' : ''
+            word === 'build' ||
+            word === 'solve' ||
+            word === 'tworzę' ||
+            word === 'aplikacje'
+              ? 'globals_text-gradient'
+              : ''
           }`}
         >
           {word}&nbsp;
@@ -103,10 +108,10 @@ export default function HeroSection() {
         {firstSubtitlePart}{' '}
         <motion.div
           className={styles.hero__imageContainer}
-          whileHover={{ 
+          whileHover={{
             scale: 1.2,
             rotate: [0, -5, 5, 0],
-            transition: { rotate: { repeat: Infinity, duration: 1 } }
+            transition: { rotate: { repeat: Infinity, duration: 1 } },
           }}
           onHoverStart={() => setImageHovered(true)}
           onHoverEnd={() => setImageHovered(false)}
@@ -119,11 +124,11 @@ export default function HeroSection() {
             height={32}
             priority
           />
-          <motion.div 
+          <motion.div
             className={styles.hero__imageGlow}
-            animate={{ 
+            animate={{
               opacity: imageHovered ? 1 : 0,
-              scale: imageHovered ? 1.5 : 1
+              scale: imageHovered ? 1.5 : 1,
             }}
             transition={{ duration: 0.3 }}
           />
@@ -134,25 +139,25 @@ export default function HeroSection() {
       <div className={styles.hero__actions} ref={actionsRef}>
         <motion.button
           className={`${styles.hero__button} ${styles.hero__button_primary}`}
-          whileHover={{ 
+          whileHover={{
             scale: 1.05,
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
         >
-          Show works
+          {t('hero.actions.viewProjects')}
         </motion.button>
         <motion.button
           className={`${styles.hero__button} ${styles.hero__button_secondary}`}
-          whileHover={{ 
+          whileHover={{
             scale: 1.05,
             borderColor: 'rgba(var(--primary), 0.8)',
-            transition: { duration: 0.2 }
+            transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
         >
           <ActivitySign />
-          Call me
+          {t('hero.actions.callMe')}
         </motion.button>
       </div>
     </section>
