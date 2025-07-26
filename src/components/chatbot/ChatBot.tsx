@@ -1,3 +1,5 @@
+'use client';
+
 import { MessagesSquare, X, Sparkles } from 'lucide-react';
 import styles from './ChatBot.module.scss';
 import { motion } from 'framer-motion';

@@ -5,10 +5,8 @@ const Spline = lazy(() => import('@splinetool/react-spline'));
 
 export const Robot = ({
   onReady,
-  startAnimation,
 }: {
   onReady: () => void;
-  startAnimation: boolean;
 }) => {
   const [splineLoading, setSplineLoading] = useState(true);
   useEffect(() => {

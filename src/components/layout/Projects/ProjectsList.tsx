@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef } from 'react'
 import projectsData from '@/data/projectsData'
 import ProjectsItem from './ProjectsItem'

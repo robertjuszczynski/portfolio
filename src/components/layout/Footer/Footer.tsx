@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import styles from './Footer.module.scss';

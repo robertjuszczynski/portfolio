@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, memo } from 'react';
 import {
   motion,
@@ -16,6 +18,38 @@ const lines = [
   'that meet real-world needs.',
 ];
 
+const SummaryLine = memo(function SummaryLine({
+  item,
+  index,
+  scrollYProgress,
+  linesCount,
+}: {
+  item: string;
+  index: number;
+  scrollYProgress: any;
+  linesCount: number;
+}) {
+  const start = index * (1 / linesCount);
+  const end = start + 1 / linesCount;
+  const width = useTransform(scrollYProgress, [start, end], ['0%', '100%']);
+  const mask = useMotionTemplate`linear-gradient(to right, black ${width}, transparent ${width})`;
+
+  return (
+    <div className={styles.lineContainer}>
+      <div className={styles.summaryGrey}>{item}</div>
+      <motion.div
+        className={styles.summaryWhite}
+        style={{
+          WebkitMaskImage: mask,
+          maskImage: mask,
+        }}
+      >
+        {item}
+      </motion.div>
+    </div>
+  );
+});
+
 const Summary = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -30,35 +64,23 @@ const Summary = () => {
     mass: 0.5
   });
 
-  const masks = lines.map((_, index) => {
-    const start = index * (1 / lines.length);
-    const end = start + 1 / lines.length;
-    const width = useTransform(scrollYProgress, [start, end], ['0%', '100%']);
-    return useMotionTemplate`linear-gradient(to right, black ${width}, transparent ${width})`;
-  });
-
   return (
     <div ref={ref} className={styles.wrapper}>
       <div className={styles.stickyContainer}>
         <motion.div className={styles.scaledContent} style={{ scale }}>
           {lines.map((item, index) => (
-            <div key={index} className={styles.lineContainer}>
-              <div className={styles.summaryGrey}>{item}</div>
-              <motion.div
-                className={styles.summaryWhite}
-                style={{
-                  WebkitMaskImage: masks[index],
-                  maskImage: masks[index],
-                }}
-              >
-                {item}
-              </motion.div>
-            </div>
+            <SummaryLine
+              key={index}
+              item={item}
+              index={index}
+              scrollYProgress={scrollYProgress}
+              linesCount={lines.length}
+            />
           ))}
         </motion.div>
       </div>
     </div>
   );
-}
+};
 
 export default memo(Summary);
