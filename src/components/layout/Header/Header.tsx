@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import styles from './Header.module.scss';
-import { Moon } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
-
+import { smoothScrollTo } from '@/lib/utils';
 export default function Header() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
@@ -48,15 +47,14 @@ export default function Header() {
       </div>
       <nav className={styles.header__nav}>
         <ul className={styles.header__nav_list}>
-          <li className={styles.header__nav_item}>Projects</li>
-          <li className={styles.header__nav_item}>Experience</li>
-          <li className={styles.header__nav_item}>Skills & Technologies</li>
-          <li className={styles.header__nav_item}>About me</li>
-          <li className={styles.header__nav_item}>Contact</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('projects')}>Projects</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('experience')}>Experience</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('skillsTech')}>Skills & Technologies</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('aboutMe')}>About me</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('footer')}>Contact</li>
         </ul>
       </nav>
       <div className={styles.header__actions}>
-        <Moon className="fill" />
         <LanguageSwitcher />
       </div>
     </motion.header>

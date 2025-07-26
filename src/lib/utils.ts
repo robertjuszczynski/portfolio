@@ -3,3 +3,9 @@ export function sleep(ms: any) {
     setTimeout(resolve, ms);
   });
 }
+
+export const smoothScrollTo = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({
+    behavior: 'smooth'
+  })
+}

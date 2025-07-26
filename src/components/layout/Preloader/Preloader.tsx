@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const texts = [
@@ -17,111 +19,112 @@ const texts = [
 ];
 
 type PreloaderProps = {
-  loaded: () => void;
+  visible: boolean;
 };
 
-export default function Preloader({ loaded }: PreloaderProps) {
+export default function Preloader({ visible }: PreloaderProps) {
   const [index, setIndex] = useState(0);
-  const [delay] = useState(600);
-  const [visible, setVisible] = useState(true);
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const [fontsReady, setFontsReady] = useState(false);
+  const [hideAfterTimeout, setHideAfterTimeout] = useState(false);
+  const cycleTimeout = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeout = useRef<NodeJS.Timeout | null>(null);
+  const delayRef = useRef(600);
 
   useEffect(() => {
-    let isMounted = true;
+    if (!visible && hideAfterTimeout) return;
 
-    document.fonts.ready.then(() => {
-      if (isMounted) setFontsLoaded(true);
-    });
-
-    const cycle = (i = 0, currentDelay = 550) => {
-      if (!isMounted) return;
+    const cycle = () => {
       setIndex((prev) => (prev + 1) % texts.length);
-
-      const nextDelay = currentDelay > 200 ? currentDelay - 100 : 200;
-
-      setTimeout(() => cycle(i + 1, nextDelay), nextDelay);
+      delayRef.current = Math.max(delayRef.current - 100, 150);
+      cycleTimeout.current = setTimeout(cycle, delayRef.current);
     };
 
-    const timeout = setTimeout(() => cycle(), delay);
+    cycleTimeout.current = setTimeout(cycle, delayRef.current);
 
     return () => {
-      isMounted = false;
-      clearTimeout(timeout);
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
     };
-  }, [delay]);
+  }, [visible, hideAfterTimeout]);
 
   useEffect(() => {
-    if (!fontsLoaded) return;
-
-    const hideTimeout = setTimeout(() => {
-      setVisible(false);
-    }, 3000);
-
-    const loadedTimeout = setTimeout(() => {
-      loaded();
-    }, 3500);
-
+    if (!visible) {
+      hideTimeout.current = setTimeout(() => setHideAfterTimeout(true), 3000);
+    } else {
+      setHideAfterTimeout(false);
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
+    }
     return () => {
-      clearTimeout(hideTimeout);
-      clearTimeout(loadedTimeout);
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
     };
-  }, [fontsLoaded, loaded]);
+  }, [visible]);
+
+  useEffect(() => {
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) setFontsReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const shouldShow = visible || !hideAfterTimeout || !fontsReady;
 
   return (
-    <AnimatePresence mode="wait">
-      {visible ? (
+    <AnimatePresence>
+      {shouldShow && (
         <motion.div
-          key="textContainer"
-          exit={{ y: '-100%' }}
-          transition={{
-            duration: 1.25,
-            ease: 'easeInOut',
-          }}
+          key='preloader'
+          initial={{ y: 0 }}
+          animate={{ y: 0, pointerEvents: 'auto' }}
+          exit={{ y: '-100%', pointerEvents: 'none' }}
+          transition={{ duration: 1.25, ease: 'easeInOut' }}
           style={{
-            position: 'absolute',
+            position: 'fixed',
             width: '100vw',
             height: '100vh',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             fontWeight: '300',
-            zIndex: '1000',
+            zIndex: 1000,
             backgroundColor: 'var(--foreground)',
             top: 0,
             left: 0,
             overflow: 'hidden',
           }}
         >
-          <motion.span
-            key={texts[index]}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
-            style={{
-              color: 'rgb(var(--secondary-text))',
-              fontSize: '2.2rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              fontWeight: 300,
-            }}
-          >
-            <span
+            <motion.span
+              key={texts[index]}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
               style={{
-                fontSize: '3rem',
-                lineHeight: '1',
-                display: 'inline-block',
-                position: 'relative',
-                top: '2px',
+                color: 'rgb(var(--secondary-text))',
+                fontSize: '2.2rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                fontWeight: 300,
+                position: 'absolute',
               }}
             >
-              •
-            </span>
-            {texts[index]}
-          </motion.span>
+              <span
+                style={{
+                  fontSize: '3rem',
+                  lineHeight: '1',
+                  display: 'inline-block',
+                  position: 'relative',
+                  top: '2px',
+                }}
+              >
+                •
+              </span>
+              {texts[index]}
+            </motion.span>
         </motion.div>
-      ) : null}
+      )}
     </AnimatePresence>
   );
 }
