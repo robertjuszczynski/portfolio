@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styles from './Ribbon.module.scss';
 
-export default function Ribbon() {
+const Ribbon = () => {
   const items = [
     "Dedicated systems",
     "Websites",
@@ -35,3 +35,5 @@ export default function Ribbon() {
     </div>
   )
 }
+
+export default memo(Ribbon);

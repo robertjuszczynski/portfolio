@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Projects.module.scss';
 import ProjectsList from './ProjectsList';
 
-export default function ProjectsSection() {
+const ProjectsSection = () => {
   return (
-    <section className={styles.projects}>
+    <section id="projects" className={styles.projects}>
       <ProjectsList />
     </section>
   );
-}
+});
+
+export default memo(ProjectsSection);

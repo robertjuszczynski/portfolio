@@ -1,11 +1,9 @@
-'use client';
-
-import { useRef } from 'react';
+import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import styles from './Footer.module.scss';
 import { ArrowUpRight, MoveUp } from 'lucide-react';
 
-export default function Footer() {
+const Footer = () => {
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, {
     amount: 0.8,
@@ -80,6 +78,7 @@ export default function Footer() {
 
   return (
     <motion.footer
+      id='footer'
       ref={footerRef}
       className={styles.footer}
       initial='hidden'
@@ -214,7 +213,10 @@ export default function Footer() {
         className={`${styles.footer__section} ${styles['footer__section--navigation']}`}
         variants={sectionVariants}
       >
-        <motion.div className={styles.footer__column} variants={containerVariants}>
+        <motion.div
+          className={styles.footer__column}
+          variants={containerVariants}
+        >
           <motion.h3 className={styles.footer__heading}>Menu</motion.h3>
           <motion.div
             className={styles.footer__itemslist}
@@ -293,7 +295,10 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        <motion.div className={styles.footer__column} variants={containerVariants}>
+        <motion.div
+          className={styles.footer__column}
+          variants={containerVariants}
+        >
           <motion.h3 className={styles.footer__heading}>Socials</motion.h3>
           <motion.div
             className={styles.footer__itemslist}
@@ -399,3 +404,5 @@ export default function Footer() {
     </motion.footer>
   );
 }
+
+export default memo(Footer);

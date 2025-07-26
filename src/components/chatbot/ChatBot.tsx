@@ -1,11 +1,11 @@
 import { MessagesSquare, X, Sparkles } from 'lucide-react';
 import styles from './ChatBot.module.scss';
 import { motion } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import ChatMessageComponent, { type ChatMessage } from './ChatMessage';
 import ChatInput from './ChatInput';
 
-export default function ChatBot() {
+const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -83,3 +83,5 @@ export default function ChatBot() {
     </div>
   );
 }
+
+export default memo(ChatBot);

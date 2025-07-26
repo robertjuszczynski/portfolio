@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import styles from './AboutMe.module.scss';
 import Image from 'next/image';
 
-export default function AboutMe() {
+const AboutMe = () => {
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -12,7 +12,7 @@ export default function AboutMe() {
   };
 
   return (
-    <section className={styles.aboutMe}>
+    <section id="aboutMe" className={styles.aboutMe}>
       <div className={styles.aboutMe__content}>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -26,7 +26,7 @@ export default function AboutMe() {
         >
           <p className={styles.aboutMeHeader__label}>LITTLE BIT ABOUT MYSELF</p>
           <h2 className={styles.aboutMeHeader__title}>
-            Some say I <span className="globals_text-gradient">debug</span> in my sleep. I'm <span className='globals_text-gradient'>Robert</span>.
+            Some say I <span className="globals_text-gradient">debug</span> in my sleep.
           </h2>
         </motion.div>
 
@@ -133,3 +133,5 @@ export default function AboutMe() {
     </section>
   );
 }
+
+export default memo(AboutMe);

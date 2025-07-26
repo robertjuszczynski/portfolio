@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Skills.module.scss';
 import TechTag from '../../common/TechTag';
 
-export default function SkillsSection() {
+const SkillsSection = () => {
   const technologies = [
     'React.js',
     'Next.js',
@@ -25,7 +25,7 @@ export default function SkillsSection() {
   ];
 
   return (
-    <section className={styles.skills}>
+    <section id="skillsTech" className={styles.skills}>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{
@@ -74,3 +74,5 @@ export default function SkillsSection() {
     </section>
   );
 }
+
+export default memo(SkillsSection);

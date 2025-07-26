@@ -1,12 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import ChatBot from '@/components/chatbot/ChatBot';
 import styles from './page.module.css';
 import Header from '@/components/layout/Header/Header';
 import HeroSection from '@/components/layout/Hero/Hero';
 import ExperienceSection from '@/components/layout/Experience/Experience';
 import Preloader from '@/components/layout/Preloader/Preloader';
-import { useState } from 'react';
 import Summary from '@/components/layout/Summary/Summary';
 import ProjectsSection from '@/components/layout/Projects/Projects';
 import Skills from '@/components/layout/Skills/Skills';
@@ -16,11 +16,23 @@ import { Robot } from '@/components/layout/Hero/Robot';
 import AboutMe from '@/components/layout/AboutMe/AboutMe';
 
 export default function Home() {
-  const [loaded, setLoaded] = useState(false);
+  const [heroReady, setHeroReady] = useState(false);
+  const [splineLoading, setSplineLoading] = useState(true);
+  const [preloaderVisible, setPreloaderVisible] = useState(true);
+  const [startAnimation, setStartAnimation] = useState(false);
 
-  const onLoaded = () => {
-    setLoaded(true);
+  const handleHeroReady = () => {
+    setHeroReady(true);
   };
+
+  const handleSplineLoad = () => {
+    setSplineLoading(false);
+  };
+
+  if (heroReady && preloaderVisible && !splineLoading) {
+    setPreloaderVisible(false);
+    setTimeout(() => setStartAnimation(true), 3750);
+  }
 
   return (
     <>
@@ -34,26 +46,18 @@ export default function Home() {
           backgroundSize: '48px 48px, 48px 48px, 100% 100%, 100% 100%',
         }}
       />
-      <main className={styles.main}>
-        <Preloader loaded={onLoaded} />
-        {loaded && (
-          <>
-            <Header />
-            <HeroSection />
-          </>
-        )}
-        <Robot />
-        {loaded && (
-          <>
-            <ExperienceSection />
-            <Summary />
-            <ProjectsSection />
-            <AboutMe />
-            <Ribbon />
-            <Skills />
-            <Footer />
-          </>
-        )}   
+      <Preloader visible={preloaderVisible} />
+      <main className={styles.main} style={{ opacity: preloaderVisible ? 0 : 1, transition: 'opacity 0.5s' }}>
+        <Header />
+        <HeroSection onReady={handleHeroReady} startAnimation={startAnimation} />
+        <Robot onReady={handleSplineLoad} />
+        {!splineLoading && <ExperienceSection />}
+        <Summary />
+        <ProjectsSection />
+        <AboutMe />
+        <Ribbon />
+        <Skills />
+        <Footer />
         <ChatBot />
       </main>
     </>

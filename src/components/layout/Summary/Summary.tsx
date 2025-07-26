@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import {
   motion,
   useScroll,
@@ -16,7 +16,7 @@ const lines = [
   'that meet real-world needs.',
 ];
 
-export default function Summary() {
+const Summary = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -60,3 +60,5 @@ export default function Summary() {
     </div>
   );
 }
+
+export default memo(Summary);

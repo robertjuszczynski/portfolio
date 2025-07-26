@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useMemo, useState } from 'react';
 import styles from './Hero.module.scss';
 import Image from 'next/image';
@@ -5,7 +7,7 @@ import { motion, useAnimate, Variants } from 'framer-motion';
 import ActivitySign from '@/components/common/ActivitySign';
 import useTranslate from '@/hooks/useTranslate';
 
-export default function HeroSection() {
+export default function HeroSection({ onReady, startAnimation }: { onReady: () => void, startAnimation: boolean }) {
   const [scope, animate] = useAnimate();
   const { t } = useTranslate();
   const subtitleRef = useRef<HTMLHeadingElement>(null);
@@ -37,7 +39,7 @@ export default function HeroSection() {
           custom={index}
           variants={wordVariants}
           initial='hidden'
-          animate='visible'
+          animate={startAnimation ? 'visible' : 'hidden'}
           className={`${styles.hero__word} ${
             word === 'build' ||
             word === 'solve' ||
@@ -52,9 +54,15 @@ export default function HeroSection() {
         {word === 'build' && <br />}
       </React.Fragment>
     ));
-  }, [h1Text]);
+  }, [h1Text, startAnimation]);
 
   useEffect(() => {
+    onReady();
+  }, []);
+
+  useEffect(() => {
+    if (!startAnimation) return;
+
     const wordCount = h1Text.split(' ').length;
     const lastWordStartTime = (wordCount - 1) * 0.05;
     const totalAnimationTime = lastWordStartTime + 2;
@@ -84,7 +92,7 @@ export default function HeroSection() {
         }
       );
     }
-  }, [animate, h1Text]);
+  }, [animate, h1Text, startAnimation]);
 
   return (
     <section className={styles.hero} ref={scope} aria-label='Introduction'>
@@ -104,7 +112,7 @@ export default function HeroSection() {
         <h1 className={styles.hero__title}>{titleWords}</h1>
       </div>
 
-      <h3 className={styles.hero__subtitle} ref={subtitleRef}>
+      <h3 className={styles.hero__subtitle} ref={subtitleRef} style={{ opacity: 0 }}>
         {firstSubtitlePart}{' '}
         <motion.div
           className={styles.hero__imageContainer}
@@ -136,7 +144,7 @@ export default function HeroSection() {
         – {secondSubtitlePart}
       </h3>
 
-      <div className={styles.hero__actions} ref={actionsRef}>
+      <div className={styles.hero__actions} ref={actionsRef} style={{ opacity: 0 }}>
         <motion.button
           className={`${styles.hero__button} ${styles.hero__button_primary}`}
           whileHover={{
@@ -144,10 +152,13 @@ export default function HeroSection() {
             transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => document.getElementById('projects')?.scrollIntoView({
+            behavior: 'smooth'
+          })}
         >
           {t('hero.actions.viewProjects')}
         </motion.button>
-        <motion.button
+        <motion.a
           className={`${styles.hero__button} ${styles.hero__button_secondary}`}
           whileHover={{
             scale: 1.05,
@@ -155,10 +166,11 @@ export default function HeroSection() {
             transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
+          href="tel:515-177-920"
         >
           <ActivitySign />
           {t('hero.actions.callMe')}
-        </motion.button>
+        </motion.a>
       </div>
     </section>
   );
