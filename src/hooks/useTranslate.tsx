@@ -8,13 +8,20 @@ const dictionaries = {
 const getDictionary = async (locale: 'en' | 'pl') => dictionaries[locale]();
 
 const useTranslate = () => {
-  const lang = window.location.pathname.split('/')[1] || 'en';
+  const [lang, setLang] = React.useState<'en' | 'pl'>('en');
   const [dictionary, setDictionary] = React.useState<Record<string, string>>({});
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const detected = window.location.pathname.split('/')[1];
+      setLang(detected === 'pl' ? 'pl' : 'en');
+    }
+  }, []);
 
   React.useEffect(() => {
     const loadDictionary = async () => {
       try {
-        const dict = await getDictionary(lang as 'en' | 'pl');
+        const dict = await getDictionary(lang);
         const flatten = (obj: any, prefix = ''): Record<string, string> =>
           Object.keys(obj).reduce((acc, k) => {
             const pre = prefix.length ? `${prefix}.${k}` : k;
@@ -31,7 +38,7 @@ const useTranslate = () => {
       }
     };
     loadDictionary();
-  }, []);
+  }, [lang]);
 
   function t(key: string): string {
     return dictionary[key] || key;
