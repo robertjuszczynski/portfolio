@@ -24,51 +24,41 @@ type PreloaderProps = {
 
 export default function Preloader({ visible }: PreloaderProps) {
   const [index, setIndex] = useState(0);
-  const [fontsReady, setFontsReady] = useState(false);
-  const [hideAfterTimeout, setHideAfterTimeout] = useState(false);
+  const [showTexts, setShowTexts] = useState(false);
+  const [shouldShow, setShouldShow] = useState(true);
   const cycleTimeout = useRef<NodeJS.Timeout | null>(null);
   const hideTimeout = useRef<NodeJS.Timeout | null>(null);
   const delayRef = useRef(600);
 
   useEffect(() => {
-    if (!visible && hideAfterTimeout) return;
-
-    const cycle = () => {
-      setIndex((prev) => (prev + 1) % texts.length);
-      delayRef.current = Math.max(delayRef.current - 100, 150);
-      cycleTimeout.current = setTimeout(cycle, delayRef.current);
-    };
-
-    cycleTimeout.current = setTimeout(cycle, delayRef.current);
-
-    return () => {
-      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
-    };
-  }, [visible, hideAfterTimeout]);
-
-  useEffect(() => {
     if (!visible) {
-      hideTimeout.current = setTimeout(() => setHideAfterTimeout(true), 3000);
+      setShowTexts(true);
+      setIndex(0);
+      delayRef.current = 600;
+
+      // Cykl tekstów
+      const cycle = () => {
+        setIndex((prev) => (prev + 1) % texts.length);
+        delayRef.current = Math.max(delayRef.current - 100, 150);
+        cycleTimeout.current = setTimeout(cycle, delayRef.current);
+      };
+      cycleTimeout.current = setTimeout(cycle, delayRef.current);
+
+      // Ukryj preloader po 3s
+      hideTimeout.current = setTimeout(() => {
+        setShouldShow(false);
+      }, 3000);
     } else {
-      setHideAfterTimeout(false);
+      setShowTexts(false);
+      setShouldShow(true);
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
       if (hideTimeout.current) clearTimeout(hideTimeout.current);
     }
     return () => {
+      if (cycleTimeout.current) clearTimeout(cycleTimeout.current);
       if (hideTimeout.current) clearTimeout(hideTimeout.current);
     };
   }, [visible]);
-
-  useEffect(() => {
-    let cancelled = false;
-    document.fonts.ready.then(() => {
-      if (!cancelled) setFontsReady(true);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const shouldShow = visible || !hideAfterTimeout || !fontsReady;
 
   return (
     <AnimatePresence>
@@ -94,6 +84,7 @@ export default function Preloader({ visible }: PreloaderProps) {
             overflow: 'hidden',
           }}
         >
+          {showTexts && (
             <motion.span
               key={texts[index]}
               initial={{ opacity: 0, y: 20 }}
@@ -123,6 +114,7 @@ export default function Preloader({ visible }: PreloaderProps) {
               </span>
               {texts[index]}
             </motion.span>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
