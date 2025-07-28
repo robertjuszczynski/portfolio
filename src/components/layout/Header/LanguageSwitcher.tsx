@@ -16,9 +16,7 @@ const languages = [
 export default function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const { lang } = useTranslate();
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    languages.find((i) => i.code === lang)
-  );
+  const selectedLanguage = languages.find((i) => i.code === lang);
   const router = useRouter();
 
   const toggleDropdown = () => {
@@ -28,7 +26,6 @@ export default function LanguageSwitcher() {
   const selectLanguage = (lang: string) => {
     router.push(`/${lang}`);
     setIsOpen(false);
-    setSelectedLanguage(languages.find((i) => i.code === lang));
   };
 
   return (
