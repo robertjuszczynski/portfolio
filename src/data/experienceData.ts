@@ -3,26 +3,19 @@ import { ExperienceData } from '@/types/experience';
 const experienceData: ExperienceData = [
   {
     company: 'Solve IT',
-    period: 'Jun 2019 - Present',
+    period: 'July 2023 - Present',
     icon: 'solveit.png',
     positions: [
       {
         role: 'Full-stack Developer',
-        period: 'Jan 2021 – Present',
+        period: 'July 2023 – Present',
         description: [
-          'Odpowiedzialny za tworzenie i utrzymanie aplikacji webowych zarówno po stronie frontendu (interfejs użytkownika), jak i backendu (logika aplikacji, bazy danych).',
-          'Zakres prac obejmuje projektowanie architektury systemu, implementację API, integrację z bazami danych, optymalizację wydajności oraz zapewnienie responsywności i intuicyjności interfejsu. Praca często wymaga współpracy z zespołem UX/UI, testerami oraz innymi programistami.',
+          'Worked on large-scale, high-complexity projects, often tasked with solving non-standard technical challenges such as integrating legacy systems with modern APIs, improving system scalability, or addressing critical performance bottlenecks. Took ownership of cross-project integrations and contributed to architectural decisions across multiple teams.',
+          'Involved in full-stack development using technologies such as React, Node.js, Vue, Laravel, PHP, and PostgreSQL. Regularly collaborated with QA engineers, designers, and product owners to refine requirements and deliver high-quality features in agile environments (Scrum/Kanban).',
+          'Participated in sprint planning, backlog grooming, and technical discussions; played an active role in code reviews and contributed to the adoption of best practices around clean code, testing, and CI/CD pipelines. Contributed to refactoring initiatives aimed at reducing technical debt, such as modularizing monolithic codebases and migrating legacy systems to microservices or more modern front-end stacks.',
+          'Supported architectural improvements and evolution of the tech stack, advocating for tools and frameworks that improved developer productivity and code maintainability. Mentored junior developers and collaborated across teams to ensure consistency in code style, testing strategies, and deployment processes.'
         ],
-        technologies: ['React', 'React', 'React'],
-      },
-      {
-        role: 'Intern',
-        period: 'Jun 2019 – Dec 2020',
-        description: [
-          'W ramach stażu uczestnik wspiera zespół przy rozwoju aplikacji webowych, zarówno po stronie frontendu, jak i backendu. Do głównych zadań należy tworzenie prostych interfejsów użytkownika przy użyciu HTML, CSS i JavaScript, a także pomoc w implementacji logiki po stronie serwera (np. Node.js, Django).',
-          'Stażysta współpracuje przy integracji z bazami danych takimi jak PostgreSQL czy MongoDB, pisze podstawowe testy jednostkowe, bierze udział w debugowaniu i poznaje dobre praktyki pracy zespołowej – w tym code review, korzystanie z Gita, a także udział w spotkaniach w ramach Scrum/Agile. Staż ma charakter rozwojowy i nastawiony jest na naukę oraz praktyczne zdobywanie doświadczenia w środowisku produkcyjnym.',
-        ],
-        technologies: ['React', 'React', 'React'],
+        technologies: ['React.js', 'Next.js', 'Node.js', 'Typescript', 'Vue.js', 'Laravel', 'PHP', 'PostgreSQL', 'MySQL', 'Wordpress'],
       },
     ],
   },
