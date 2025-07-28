@@ -88,21 +88,21 @@ const Footer = () => {
     >
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--intro']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       >
-        <motion.h2 className={styles.footer__title} variants={sectionVariants}>
+        <motion.h2 className={styles.footer__title} variants={containerVariants}>
           Get in <span className='globals_text-gradient'>touch</span>
         </motion.h2>
       </motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-1']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       ></motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--socials']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       >
         <motion.ul className={styles.footer__list} variants={containerVariants}>
           <motion.li
@@ -162,7 +162,7 @@ const Footer = () => {
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--contact']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       >
         <motion.a
           href='mailto:robert.j.dev@icloud.com'
@@ -204,16 +204,16 @@ const Footer = () => {
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-2']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       ></motion.div>
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-3']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       ></motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--navigation']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       >
         <motion.div
           className={styles.footer__column}
@@ -352,12 +352,12 @@ const Footer = () => {
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-4']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       ></motion.div>
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--message']}`}
-        variants={sectionVariants}
+        variants={containerVariants}
       >
         <motion.p
           className={styles.footer__text}

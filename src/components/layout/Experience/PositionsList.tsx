@@ -21,10 +21,13 @@ function PositionItem({ position }: { position: ExperiencePosition }) {
     <div className={styles.position}>
       <h3 className={styles.role}>{position.role}</h3>
       <p className={styles.period}>{position.period}</p>
-      
+
       <div className={styles.description}>
         {position.description.map((desc, index) => (
-          <p key={index}>{desc}</p>
+          <>
+            <p key={index}>{desc}</p>
+            <br />
+          </>
         ))}
       </div>
 
