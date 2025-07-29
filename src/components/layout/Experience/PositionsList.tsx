@@ -1,6 +1,7 @@
 import TechTag from '@/components/common/TechTag';
 import styles from './PositionsList.module.scss';
 import { ExperiencePosition } from '@/types/experience';
+import { motion } from 'framer-motion';
 
 interface PositionsListProps {
   positions: ExperiencePosition[];
@@ -18,24 +19,40 @@ export default function PositionsList({ positions }: PositionsListProps) {
 
 function PositionItem({ position }: { position: ExperiencePosition }) {
   return (
-    <div className={styles.position}>
-      <h3 className={styles.role}>{position.role}</h3>
-      <p className={styles.period}>{position.period}</p>
+    <>
+      <motion.div
+        initial={{
+          scaleY: 0,
+        }}
+        whileInView={{
+          scaleY: 1,
+          transition: {
+            duration: 1.5,
+            ease: 'easeInOut',
+          },
+        }}
+        viewport={{ once: true }}
+        className={styles.divider}
+      />
+      <div className={styles.position}>
+        <h3 className={styles.role}>{position.role}</h3>
+        <p className={styles.period}>{position.period}</p>
 
-      <div className={styles.description}>
-        {position.description.map((desc, index) => (
-          <>
-            <p key={index}>{desc}</p>
-            <br />
-          </>
-        ))}
-      </div>
+        <div className={styles.description}>
+          {position.description.map((desc, index) => (
+            <>
+              <p key={index}>{desc}</p>
+              <br />
+            </>
+          ))}
+        </div>
 
-      <div className={styles.technologies}>
-        {position.technologies.map((tech, index) => (
-          <TechTag key={index} technology={tech as any} />
-        ))}
+        <div className={styles.technologies}>
+          {position.technologies.map((tech, index) => (
+            <TechTag key={index} technology={tech as any} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

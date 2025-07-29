@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .positions {
   flex: 1;
   display: flex;
@@ -44,4 +46,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.divider {
+  width: 6px;
+  flex-shrink: 0;
+  background: var(--divider-gradient-180deg);
+  border-radius: 8px;
+  transform-origin: top;
+  overflow: hidden;
 }
