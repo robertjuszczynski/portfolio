@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .projectItem {
   width: 1080px;
   height: 524px;
@@ -59,6 +61,63 @@
     &Item {
       display: flex;
       gap: 10px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .projectItem {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    flex-direction: column;
+    padding: 16px 16px 20px 16px;
+    gap: 18px;
+  }
+
+  .projectItem__screenshot {
+    width: 100%;
+    height: 200px;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .projectInfo {
+    font-size: 12px;
+
+    &__name {
+      font-size: 1.125rem;
+      margin-bottom: 10px;
+    }
+
+    &__desc {
+      font-size: 0.875rem;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    &__technologies {
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    &__techTag {
+      font-size: 0.8rem;
+      padding: 2px 10px;
+    }
+
+    &__links {
+      gap: 12px;
+    }
+
+    &__divider {
+      display: none;
     }
   }
 }

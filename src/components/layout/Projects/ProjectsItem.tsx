@@ -6,24 +6,22 @@ import Link from 'next/link';
 import { Link as LinkIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import useTranslate from '@/hooks/useTranslate';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 export default function ProjectsItem(props: Project) {
-  const flexDirection = props.index! % 2 === 0 ? true : false;
   const { t } = useTranslate();
+  const { isMobile } = useMediaQuery();
 
   return (
     <motion.div
       className={styles.projectItem}
-      style={{
-        flexDirection: 'row'
-      }}
       whileHover={{
         scale: 1.02,
         transition: { duration: 0.5, ease: 'easeOut' },
       }}
     >
       <Image
-      unoptimized={true}
+        unoptimized={true}
         className={styles.projectItem__screenshot}
         src={props.imgSrc}
         alt={`${props.name} screenshot`}
@@ -47,7 +45,7 @@ export default function ProjectsItem(props: Project) {
             {props.links.map((link) => {
               return (
                 <div className={styles.projectInfo__linksItem}>
-                  <LinkIcon />
+                  <LinkIcon width={isMobile ? 16 : 24} height={isMobile ? 16 : 24} />
                   <Link href={link.src}>{link.name}</Link>
                 </div>
               );
