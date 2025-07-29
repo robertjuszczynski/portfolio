@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .hero {
   display: flex;
   flex-direction: column;
@@ -15,7 +17,8 @@
     text-align: center;
     font-weight: 600;
     max-width: 1200px;
-    font-size: 3.75rem;
+    line-height: 1.375;
+    font-size: clamp(1rem, 3.75rem, 3.75rem);
     margin-bottom: 12px;
   }
 
@@ -64,9 +67,11 @@
   }
 
   &__image {
-    border-radius: 8px;
+    border-radius: 16px;
     z-index: 2;
     position: relative;
+    width: 64px;
+    height: 32px;
   }
 
   &__actions {
@@ -114,5 +119,26 @@
       align-items: center;
       gap: 8px;
     }
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .hero__title {
+    text-align: start;
+    font-size: 36px;
+  }
+  .hero__subtitle {
+    font-size: 18px;
+  }
+  .hero__actions {
+    width: 100%;
+    margin-top: 32px;
+  }
+  .hero__button {
+    height: 45px;
+    font-size: 14px;
+  }
+  .hero__button_secondary {
+    gap: 4px;
   }
 }

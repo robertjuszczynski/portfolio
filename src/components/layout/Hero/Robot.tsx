@@ -1,13 +1,11 @@
 'use client';
 
+import useMediaQuery from '@/hooks/useMediaQuery';
 import { lazy, Suspense, useState, useEffect } from 'react';
 const Spline = lazy(() => import('@splinetool/react-spline'));
 
-export const Robot = ({
-  onReady,
-}: {
-  onReady: () => void;
-}) => {
+export const Robot = ({ onReady }: { onReady: () => void }) => {
+  const { isMobile } = useMediaQuery();
   const [splineLoading, setSplineLoading] = useState(true);
   useEffect(() => {
     if (!splineLoading) {
@@ -16,14 +14,24 @@ export const Robot = ({
   }, [splineLoading]);
 
   return (
-    <div className='flex w-screen !mt-[-580px] !mb-[-30px] z-[-1]'>
       <Suspense fallback={<div>Loading...</div>}>
-        <Spline
-          onLoad={() => setSplineLoading(false)}
-          scene='https://prod.spline.design/Ly3SwDx8y5-TfDP5/scene.splinecode'
-        />
-        {splineLoading && <div>Loading...</div>}
+          <Spline
+            onLoad={() => setSplineLoading(false)}
+            scene='https://prod.spline.design/Ly3SwDx8y5-TfDP5/scene.splinecode'
+    style={{
+      width: '100vw',
+      position: 'absolute',
+      height: '100%',
+      overflow: 'hidden',
+      bottom: 0
+    }}
+          />
       </Suspense>
-    </div>
+    // <div
+    //   className={`z-[-1] overflow-x-hidden ${
+    //     isMobile ? '!mt-[-205px]' : '!mt-[-580px] !mb-[-30px]'
+    //   }`}
+    // >
+    // </div>
   );
 };

@@ -6,15 +6,24 @@ import Image from 'next/image';
 import { motion, useAnimate, Variants } from 'framer-motion';
 import ActivitySign from '@/components/common/ActivitySign';
 import useTranslate from '@/hooks/useTranslate';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import { Robot } from './Robot';
 
-export default function HeroSection({ onReady, startAnimation }: { onReady: () => void, startAnimation: boolean }) {
+export default function HeroSection({
+  onReady,
+  startAnimation,
+}: {
+  onReady: () => void;
+  startAnimation: boolean;
+}) {
   const [scope, animate] = useAnimate();
   const { t } = useTranslate();
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
   const [imageHovered, setImageHovered] = useState(false);
+  const { isMobile } = useMediaQuery();
 
-  const h1Text = t('hero.title');
+  const h1Text = isMobile ? t('hero.title-mobile') : t('hero.title');
   const firstSubtitlePart = t('hero.subtitle-first');
   const secondSubtitlePart = t('hero.subtitle-sec');
 
@@ -51,7 +60,7 @@ export default function HeroSection({ onReady, startAnimation }: { onReady: () =
         >
           {word}&nbsp;
         </motion.span>
-        {word === 'build' && <br />}
+        {(!isMobile && word === 'build') && <br />}
       </React.Fragment>
     ));
   }, [h1Text, startAnimation]);
@@ -112,39 +121,66 @@ export default function HeroSection({ onReady, startAnimation }: { onReady: () =
         <h1 className={styles.hero__title}>{titleWords}</h1>
       </div>
 
-      <h3 className={styles.hero__subtitle} ref={subtitleRef} style={{ opacity: 0 }}>
-        {firstSubtitlePart}{' '}
-        <motion.div
-          className={styles.hero__imageContainer}
-          whileHover={{
-            scale: 1.2,
-            rotate: [0, -5, 5, 0],
-            transition: { rotate: { repeat: Infinity, duration: 1 } },
-          }}
-          onHoverStart={() => setImageHovered(true)}
-          onHoverEnd={() => setImageHovered(false)}
-        >
-          <Image
-            className={styles.hero__image}
-            src='/images/me.jpg'
-            alt='Robert profile picture'
-            width={32}
-            height={32}
-            priority
-          />
-          <motion.div
-            className={styles.hero__imageGlow}
-            animate={{
-              opacity: imageHovered ? 1 : 0,
-              scale: imageHovered ? 1.5 : 1,
-            }}
-            transition={{ duration: 0.3 }}
-          />
-        </motion.div>{' '}
-        – {secondSubtitlePart}
-      </h3>
+      {/* <h2
+        className={styles.hero__subtitle}
+        ref={subtitleRef}
+        style={{ opacity: 0 }}
+      >
+        {isMobile ? (
+          <>
+          <span>
+            {firstSubtitlePart}
+              <Image
+                className={styles.hero__image}
+                src='/images/me.png'
+                alt='Robert profile picture'
+                width={24}
+                height={24}
+                priority
+              />
+          </span>
+            {secondSubtitlePart}
+          </>
+        ) : (
+          <>
+            {firstSubtitlePart}{' '}
+            <motion.div
+              className={styles.hero__imageContainer}
+              whileHover={{
+                scale: 1.2,
+                rotate: [0, -5, 5, 0],
+                transition: { rotate: { repeat: Infinity, duration: 1 } },
+              }}
+              onHoverStart={() => setImageHovered(true)}
+              onHoverEnd={() => setImageHovered(false)}
+            >
+              <Image
+                className={styles.hero__image}
+                src='/images/me.png'
+                alt='Robert profile picture'
+                width={32}
+                height={32}
+                priority
+              />
+              <motion.div
+                className={styles.hero__imageGlow}
+                animate={{
+                  opacity: imageHovered ? 1 : 0,
+                  scale: imageHovered ? 1.5 : 1,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.div>{' '}
+            – {secondSubtitlePart}
+          </>
+        )}
+      </h2> */}
 
-      <div className={styles.hero__actions} ref={actionsRef} style={{ opacity: 0 }}>
+      <div
+        className={styles.hero__actions}
+        ref={actionsRef}
+        style={{ opacity: 0 }}
+      >
         <motion.button
           className={`${styles.hero__button} ${styles.hero__button_primary}`}
           whileHover={{
@@ -152,9 +188,11 @@ export default function HeroSection({ onReady, startAnimation }: { onReady: () =
             transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => document.getElementById('projects')?.scrollIntoView({
-            behavior: 'smooth'
-          })}
+          onClick={() =>
+            document.getElementById('projects')?.scrollIntoView({
+              behavior: 'smooth',
+            })
+          }
         >
           {t('hero.actions.viewProjects')}
         </motion.button>
@@ -166,12 +204,13 @@ export default function HeroSection({ onReady, startAnimation }: { onReady: () =
             transition: { duration: 0.2 },
           }}
           whileTap={{ scale: 0.95 }}
-          href="tel:515-177-920"
+          href='tel:515-177-920'
         >
           <ActivitySign />
-          {t('hero.actions.callMe')}
+          <span>{t('hero.actions.callMe')}</span>
         </motion.a>
       </div>
+      <Robot onReady={onReady} />
     </section>
   );
 }

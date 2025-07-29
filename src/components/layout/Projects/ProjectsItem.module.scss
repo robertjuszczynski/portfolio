@@ -10,7 +10,7 @@
   cursor: pointer;
 
   &__screenshot {
-    object-fit: none;
+    object-fit: cover;
     border-radius: 24px;
   }
 }

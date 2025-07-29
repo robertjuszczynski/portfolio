@@ -8,6 +8,6 @@ const ProjectsSection = () => {
       <ProjectsList />
     </section>
   );
-});
+}
 
 export default memo(ProjectsSection);

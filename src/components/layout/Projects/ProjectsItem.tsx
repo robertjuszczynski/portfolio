@@ -5,15 +5,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Link as LinkIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import useTranslate from '@/hooks/useTranslate';
 
 export default function ProjectsItem(props: Project) {
   const flexDirection = props.index! % 2 === 0 ? true : false;
+  const { t } = useTranslate();
 
   return (
     <motion.div
       className={styles.projectItem}
       style={{
-        flexDirection: flexDirection ? 'row' : 'row-reverse',
+        flexDirection: 'row'
       }}
       whileHover={{
         scale: 1.02,
@@ -21,16 +23,18 @@ export default function ProjectsItem(props: Project) {
       }}
     >
       <Image
+      unoptimized={true}
         className={styles.projectItem__screenshot}
-        src='/images/screenshots/000.png'
+        src={props.imgSrc}
         alt={`${props.name} screenshot`}
+        quality={100}
         width={558}
         height={457}
       />
       <div className={styles.projectInfo}>
         <div>
-          <p className={styles.projectInfo__name}>{props.name}</p>
-          <p className={styles.projectInfo__desc}>{props.desc}</p>
+          <p className={styles.projectInfo__name}>{t(props.name)}</p>
+          <p className={styles.projectInfo__desc}>{t(props.desc)}</p>
         </div>
         <div>
           <div className={styles.projectInfo__divider}></div>

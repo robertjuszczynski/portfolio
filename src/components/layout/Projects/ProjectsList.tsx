@@ -13,7 +13,7 @@ export default function ProjectsList() {
     target: targetRef,
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ['1%', '-65%']);
+  const x = useTransform(scrollYProgress, [0, 1], ['1%', '-80%']);
 
   const headerOpacity = useTransform(
     scrollYProgress, 

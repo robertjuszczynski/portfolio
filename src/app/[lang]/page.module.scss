@@ -1,0 +1,17 @@
+@import 'src/app/variables.scss';
+
+.main {
+  padding: 180px 0px 0px 0px;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  grid-row-start: 2;
+  align-items: center;
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .main {
+    padding: 112px 28px;
+  }
+}
