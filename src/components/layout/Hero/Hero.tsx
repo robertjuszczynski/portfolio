@@ -8,6 +8,7 @@ import ActivitySign from '@/components/common/ActivitySign';
 import useTranslate from '@/hooks/useTranslate';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import { Robot } from './Robot';
+import { ChevronRightIcon } from 'lucide-react';
 
 export default function HeroSection({
   onReady,
@@ -117,6 +118,14 @@ export default function HeroSection({
         Your browser does not support the video tag.
       </video>
 
+      <div className={styles.hero__announcement}>
+        <div className={styles.hero__announcementNew}>
+          {t('common.new')}
+        </div>
+        <span className={styles.hero__announcementText}>
+          {t('hero.announcement')} <ChevronRightIcon  width={16} height={21} />
+        </span>
+      </div>
       <div className={styles.hero__container}>
         <h1 className={styles.hero__title}>{titleWords}</h1>
       </div>
