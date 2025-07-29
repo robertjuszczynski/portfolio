@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .aboutMe {
   display: flex;
   justify-content: space-between;
@@ -82,17 +84,18 @@
     padding: 14px 32px;
     font-weight: 600;
     font-size: 1.125rem;
-    border: 10px solid;
+    border: 2px solid;
     border-image-slice: 1;
     border-radius: 8px;
-    border-width: 2px;
     border-image-source: var(--primary-gradient);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
 
     &:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(var(--primary-gradient), 0.2);
+      box-shadow: 0 8px 15px rgba(var(--primary), 0.2);
     }
 
     &:active {
@@ -134,75 +137,91 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: #{$breakpoint-mobile}) {
   .aboutMe {
     flex-direction: column;
+    gap: 32px;
+    padding: 0 12px;
+    margin-bottom: 64px;
 
-    &__images {
-      height: 600px;
+    &__content {
+      max-width: 100%;
     }
 
-    &__imageWrapper {
-      &--top {
-        left: 0;
-        right: auto;
-      }
-
-      &--middle {
-        left: 120px;
-        right: auto;
-      }
-
-      &--bottom {
-        left: 240px;
-        right: auto;
-      }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .aboutMe {
     &__images {
       height: auto;
-      margin-top: 40px;
-
-      &:hover {
-
-        .aboutMe__imageWrapper--top,
-        .aboutMe__imageWrapper--middle,
-        .aboutMe__imageWrapper--bottom {
-          transform: none; // Disable the spreading effect on mobile
-        }
-      }
+      margin-top: 24px;
+      min-width: 0;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0;
     }
 
     &__imageWrapper {
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       transform: none;
 
-      &--top,
-      &--middle,
-      &--bottom {
+      &--middle {
         top: 0;
         left: 0;
-        right: auto;
+        right: 0;
       }
+
+      &--top {
+        top: 0;
+        left: 30px;
+        transform: rotate(8deg) translateY(-20px);
+      }
+
+      &--bottom {
+        top: 0;
+        right: 30px;
+        transform: rotate(-5deg) translateY(20px);
+      }
+    }
+
+    &__image {
+      width: 100%;
+      max-width: 260px;
+      height: auto;
+      border-radius: 48px;
+    }
+
+    &__text {
+      text-align: center;
+      font-size: 1rem;
+
+      p {
+        margin-bottom: 18px;
+      }
+    }
+
+    &__contactButton {
+      margin-top: 24px;
+      padding: 10px 18px;
+      font-size: 1rem;
     }
   }
 
   .aboutMeHeader {
-    &__title {
-      font-size: 2.5rem;
+    margin-bottom: 28px;
+    text-align: center;
 
-      &::before {
-        font-size: 5rem;
-      }
+    &__label {
+      font-size: 0.75rem;
+      margin-bottom: 8px;
     }
 
-    &__subtitle {
-      font-size: 2rem;
+    &__title {
+      font-size: 2.125rem;
+      margin-bottom: 10px;
+
+      &::before {
+        font-size: 2.5rem;
+        top: -10%;
+      }
     }
   }
 }

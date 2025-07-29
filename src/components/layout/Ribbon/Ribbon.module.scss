@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .ribbon {
   position: relative;
   margin-left: -50vw;
@@ -39,5 +41,12 @@
   }
   100% {
     transform: translateX(-66.666%);
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .ribbon {
+    font-size: .875rem;
+    height: 60px;
   }
 }
