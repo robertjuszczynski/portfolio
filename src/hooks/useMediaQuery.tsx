@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 
-export default function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
+export default function useMediaQuery(): { isMobile: boolean; isTablet: boolean; isDesktop: boolean } {
+  const [width, setWidth] = useState<number>(0);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const media = window.matchMedia(query);
-    const listener = () => setMatches(media.matches);
-    setMatches(media.matches);
-    media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
-  }, [query]);
+    const updateWidth = () => setWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
 
-  return matches;
+  const isMobile = width < 768;
+  const isTablet = width >= 768 && width < 1024;
+  const isDesktop = width >= 1024;
+
+  return { isMobile, isTablet, isDesktop };
 }
