@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .skills {
   display: flex;
   flex-direction: column;
@@ -41,5 +43,37 @@
     background: var(--divider-gradient-240deg);
     border-radius: 8px;
     overflow: hidden;
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .skills {
+    margin-bottom: 64px;
+    padding: 0 8px;
+
+    &__techContainer {
+      gap: 8px;
+      max-width: 100%;
+      justify-content: flex-start;
+    }
+  }
+
+  .skillsHeader {
+    margin-bottom: 18px;
+
+    &__label {
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+    }
+
+    &__title {
+      font-size: 2.75rem;
+      margin-bottom: 10px;
+    }
+
+    &__divider {
+      width: 100px;
+      height: 4px;
+    }
   }
 }
