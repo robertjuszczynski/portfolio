@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, memo } from 'react';
+import React, { useRef, memo, useEffect } from 'react';
 import {
   motion,
   useScroll,

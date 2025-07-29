@@ -19,6 +19,7 @@
     font-size: 3.75rem;
     font-weight: 600;
     z-index: 1;
+    overflow: hidden;
 
     &::before {
       content: 'EXPERIENCE';
@@ -36,6 +37,10 @@
 }
 
 @media (max-width: #{$breakpoint-mobile}) {
+  .experience {
+    margin-bottom: 200px;
+  }
+
   .experienceHeader {
     &__title {
       font-size: 3rem;

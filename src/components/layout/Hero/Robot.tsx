@@ -14,24 +14,19 @@ export const Robot = ({ onReady }: { onReady: () => void }) => {
   }, [splineLoading]);
 
   return (
-      <Suspense fallback={<div>Loading...</div>}>
-          <Spline
-            onLoad={() => setSplineLoading(false)}
-            scene='https://prod.spline.design/Ly3SwDx8y5-TfDP5/scene.splinecode'
-    style={{
-      width: '100vw',
-      position: 'absolute',
-      height: '100%',
-      overflow: 'hidden',
-      bottom: 0
-    }}
-          />
-      </Suspense>
-    // <div
-    //   className={`z-[-1] overflow-x-hidden ${
-    //     isMobile ? '!mt-[-205px]' : '!mt-[-580px] !mb-[-30px]'
-    //   }`}
-    // >
-    // </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Spline
+        onLoad={() => setSplineLoading(false)}
+        scene='https://prod.spline.design/Ly3SwDx8y5-TfDP5/scene.splinecode'
+        style={{
+          width: '100vw',
+          position: 'absolute',
+          height: '100%',
+          overflow: 'hidden',
+          pointerEvents: 'none',
+          bottom: 0,
+        }}
+      />
+    </Suspense>
   );
 };

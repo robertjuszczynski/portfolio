@@ -1,5 +1,7 @@
+@import 'src/app/variables.scss';
+
 .wrapper {
-  height: 2000px;
+  height: 100vh;
 }
 
 .stickyContainer {
@@ -41,4 +43,11 @@
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .summaryGrey,
+  .summaryWhite {
+    font-size: 1.125rem;
+  }
 }
