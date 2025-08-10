@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useEffect, useRef, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import styles from './Hero.module.scss';
-import Image from 'next/image';
 import { motion, useAnimate, Variants } from 'framer-motion';
 import ActivitySign from '@/components/common/ActivitySign';
 import useTranslate from '@/hooks/useTranslate';
@@ -21,7 +20,6 @@ export default function HeroSection({
   const { t } = useTranslate();
   const subtitleRef = useRef<HTMLHeadingElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
-  const [imageHovered, setImageHovered] = useState(false);
   const { isMobile } = useMediaQuery();
 
   const h1Text = isMobile ? t('hero.title-mobile') : t('hero.title');
@@ -130,60 +128,15 @@ export default function HeroSection({
         <h1 className={styles.hero__title}>{titleWords}</h1>
       </div>
 
-      {/* <h2
+      <h2
         className={styles.hero__subtitle}
         ref={subtitleRef}
         style={{ opacity: 0 }}
       >
-        {isMobile ? (
-          <>
-          <span>
-            {firstSubtitlePart}
-              <Image
-                className={styles.hero__image}
-                src='/images/me.png'
-                alt='Robert profile picture'
-                width={24}
-                height={24}
-                priority
-              />
-          </span>
-            {secondSubtitlePart}
-          </>
-        ) : (
-          <>
-            {firstSubtitlePart}{' '}
-            <motion.div
-              className={styles.hero__imageContainer}
-              whileHover={{
-                scale: 1.2,
-                rotate: [0, -5, 5, 0],
-                transition: { rotate: { repeat: Infinity, duration: 1 } },
-              }}
-              onHoverStart={() => setImageHovered(true)}
-              onHoverEnd={() => setImageHovered(false)}
-            >
-              <Image
-                className={styles.hero__image}
-                src='/images/me.png'
-                alt='Robert profile picture'
-                width={32}
-                height={32}
-                priority
-              />
-              <motion.div
-                className={styles.hero__imageGlow}
-                animate={{
-                  opacity: imageHovered ? 1 : 0,
-                  scale: imageHovered ? 1.5 : 1,
-                }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.div>{' '}
-            – {secondSubtitlePart}
-          </>
-        )}
-      </h2> */}
+        <span className={styles.hero__subtitleItem}>{firstSubtitlePart}{' '}</span>
+        <span className="waving-hand">👋</span>{' '}
+        <span className={styles.hero__subtitleItem}>{secondSubtitlePart}</span>
+      </h2>
 
       <div
         className={styles.hero__actions}
@@ -219,7 +172,7 @@ export default function HeroSection({
           <span>{t('hero.actions.callMe')}</span>
         </motion.a>
       </div>
-      <Robot onReady={onReady} />
+      {/* <Robot onReady={onReady} /> */}
     </section>
   );
 }
