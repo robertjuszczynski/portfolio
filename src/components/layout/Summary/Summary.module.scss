@@ -45,6 +45,20 @@
   mask-size: 100% 100%;
 }
 
+@media (max-width: #{$breakpoint-desktop}) {
+  .summaryGrey,
+  .summaryWhite {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet}) {
+  .summaryGrey,
+  .summaryWhite {
+    font-size: 1.5rem;
+  }
+}
+
 @media (max-width: #{$breakpoint-mobile}) {
   .summaryGrey,
   .summaryWhite {

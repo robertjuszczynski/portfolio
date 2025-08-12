@@ -104,18 +104,6 @@ export default function HeroSection({
 
   return (
     <section className={styles.hero} ref={scope} aria-label='Introduction'>
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload='auto'
-        className={styles.hero__video}
-      >
-        <source src='/videos/shadergradient.webm' type='video/webm' />
-        Your browser does not support the video tag.
-      </video>
-
       <div className={styles.hero__announcement}>
         <div className={styles.hero__announcementNew}>
           {t('common.new')}

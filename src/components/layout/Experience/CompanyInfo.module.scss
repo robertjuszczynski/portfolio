@@ -27,6 +27,12 @@
   border-radius: 12px;
 }
 
+@media (max-width: #{$breakpoint-tablet}) {
+  .company {
+    flex: 0 0 100px;
+  }
+}
+
 @media (max-width: #{$breakpoint-mobile}) {
   .company {
     flex: none;

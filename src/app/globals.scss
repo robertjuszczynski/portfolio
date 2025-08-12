@@ -35,7 +35,8 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: -webkit-linear-gradient(-90deg, rgba(33, 33, 33, 1) 25%, rgba(62, 4, 113, 1) 100%); /* iOS prefixed */
+  background: linear-gradient(-90deg, rgba(33, 33, 33, 1) 25%, rgba(62, 4, 113, 1) 100%); /* Standard */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

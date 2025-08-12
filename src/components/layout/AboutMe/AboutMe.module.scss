@@ -137,7 +137,7 @@
   }
 }
 
-@media (max-width: #{$breakpoint-mobile}) {
+@media (max-width: #{$breakpoint-large-desktop}) {
   .aboutMe {
     flex-direction: column;
     gap: 32px;

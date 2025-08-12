@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import projectsData from '@/data/projectsData'
 import ProjectsItem from './ProjectsItem'
 import styles from './ProjectsList.module.scss';
@@ -20,6 +20,17 @@ export default function ProjectsList() {
     [0, 0.1, 0.9, 1],
     [1, 0, 0, 1]
   );
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      if (targetRef.current) {
+        targetRef.current.style.height = '400vh';
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <section ref={targetRef} className={styles.scrollSection}>

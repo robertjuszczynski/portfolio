@@ -18,6 +18,13 @@
   border-radius: 8px;
   transform-origin: top;
   overflow: hidden;
+  min-height: 200px;
+}
+
+.dividerContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 @media (max-width: #{$breakpoint-mobile}) {

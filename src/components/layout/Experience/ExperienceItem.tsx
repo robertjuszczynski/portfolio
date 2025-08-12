@@ -1,29 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ExperienceCompany } from '@/types/experience';
 import styles from './ExperienceItem.module.scss';
 import CompanyInfo from './CompanyInfo';
 import PositionsList from './PositionsList';
 import useMediaQuery from '@/hooks/useMediaQuery';
-
-type DividerProps = {
-  itemContainerRef?: React.RefObject<HTMLDivElement | null>;
-};
-
-function Divider({ itemContainerRef }: DividerProps) {
-  const { scrollYProgress } = useScroll({
-    target: itemContainerRef,
-    offset: ['start center', 'end center'],
-  });
-
-  const height = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
-  return (
-    <div className={styles.dividerContainer}>
-      <motion.div className={styles.divider} style={{ height }} />
-    </div>
-  );
-}
 
 export default function ExperienceItem({
   company,
@@ -33,12 +14,39 @@ export default function ExperienceItem({
 }: ExperienceCompany) {
   const { isMobile } = useMediaQuery();
   const itemContainerRef = useRef<HTMLDivElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: itemContainerRef,
+    offset: ['start center', 'end center'],
+  });
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change', (latest) => {
+      console.log(`${company} scrollYProgress:`, latest);
+    });
+
+    return unsubscribe;
+  }, [scrollYProgress, company]);
+
+  const height = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
 
   return (
-    <div ref={itemContainerRef} className={styles.item}>
+    <div
+      ref={itemContainerRef}
+      className={styles.item}
+      id={`experience-${company.toLowerCase().replace(/\s+/g, '-')}`}
+    >
       {isMobile ? (
         <div className={styles.itemContainer}>
-          <Divider itemContainerRef={itemContainerRef} />
+          <div className={styles.dividerContainer}>
+            <motion.div
+              ref={dividerRef}
+              className={styles.divider}
+              style={{ height }}
+            />
+          </div>
           <div>
             <CompanyInfo company={company} period={period} icon={icon} />
             <PositionsList positions={positions} />

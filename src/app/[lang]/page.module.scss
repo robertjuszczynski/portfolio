@@ -10,8 +10,20 @@
   align-items: center;
 }
 
+@media (max-width: #{$breakpoint-desktop}) {
+  .main {
+    padding: 112px 100px 0px 100px;
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet}) {
+  .main {
+    padding: 112px 100px 0px 100px;
+  }
+}
+
 @media (max-width: #{$breakpoint-mobile}) {
   .main {
-    padding: 112px 28px;
+    padding: 112px 28px 0px 28px;
   }
 }

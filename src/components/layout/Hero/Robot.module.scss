@@ -1,0 +1,47 @@
+@import 'src/app/variables.scss';
+
+// Video styles
+.hero__video {
+  width: 100vw;
+  height: 500px !important;
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+  bottom: 0;
+}
+
+/* Zakres 476px – 636px */
+@media (min-width: 476px) and (max-width: 636.98px) {
+  .hero__video { top: 260px; }
+}
+
+/* Zakres 638px – 768px */
+@media (min-width: 638px) and (max-width: 768.98px) {
+  .hero__video { top: 205px; }
+}
+
+/* Zakres 768px – 898px */
+@media (min-width: 768px) and (max-width: 898.98px) {
+  .hero__video { top: 244px; }
+}
+
+/* Zakres 902px – 1024px */
+@media (min-width: 902px) and (max-width: 1024.98px) {
+  .hero__video { top: 210px; }
+}
+
+/* Zakres 1025px – 1280px */
+@media (min-width: 1025px) and (max-width: 1280.98px) {
+  .hero__video { top: 400px; }
+}
+
+/* >=1281px */
+@media (min-width: 1281px) {
+  .hero__video { top: 125px; height: 1000px !important; }
+}
+
+@media (max-width: #{$breakpoint-mini}) {
+  .hero__video {
+    top: 325px;
+  }
+}
