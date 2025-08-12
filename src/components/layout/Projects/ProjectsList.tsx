@@ -21,17 +21,6 @@ export default function ProjectsList() {
     [1, 0, 0, 1]
   );
 
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      if (targetRef.current) {
-        targetRef.current.style.height = '400vh';
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <section ref={targetRef} className={styles.scrollSection}>
       <div className={styles.projectsContainer}>

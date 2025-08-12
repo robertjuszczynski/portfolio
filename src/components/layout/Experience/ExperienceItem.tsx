@@ -45,13 +45,13 @@ export default function ExperienceItem({
           </div>
         </div>
       ) : (
-        <div className={styles.itemContainer}>
+        <>
           <CompanyInfo company={company} period={period} icon={icon} />
           <motion.div
             className={styles.divider}
           />
           <PositionsList positions={positions} />
-        </div>
+        </>
       )}
     </div>
   );
