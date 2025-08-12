@@ -3,15 +3,11 @@ import experienceData from '@/data/experienceData';
 import ExperienceItem from './ExperienceItem';
 import styles from './ExperienceList.module.scss';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
 export default function ExperienceList() {
   const { isMobile } = useMediaQuery();
 
-  useEffect(() => {
-    console.log('ExperienceList mounted');
-  }, []);
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}

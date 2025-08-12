@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ExperienceCompany } from '@/types/experience';
 import styles from './ExperienceItem.module.scss';
@@ -20,14 +20,6 @@ export default function ExperienceItem({
     target: itemContainerRef,
     offset: ['start center', 'end center'],
   });
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest) => {
-      console.log(`${company} scrollYProgress:`, latest);
-    });
-
-    return unsubscribe;
-  }, [scrollYProgress, company]);
 
   const height = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
@@ -53,24 +45,13 @@ export default function ExperienceItem({
           </div>
         </div>
       ) : (
-        <>
+        <div className={styles.itemContainer}>
           <CompanyInfo company={company} period={period} icon={icon} />
           <motion.div
-            initial={{
-              scaleY: 0,
-            }}
-            whileInView={{
-              scaleY: 1,
-              transition: {
-                duration: 1.5,
-                ease: 'easeInOut',
-              },
-            }}
-            viewport={{ once: true }}
             className={styles.divider}
           />
           <PositionsList positions={positions} />
-        </>
+        </div>
       )}
     </div>
   );
