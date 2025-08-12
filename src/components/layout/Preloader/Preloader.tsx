@@ -72,7 +72,7 @@ export default function Preloader({ visible }: PreloaderProps) {
           style={{
             position: 'fixed',
             width: '100vw',
-            height: '100vh',
+            height: '100dvh',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
