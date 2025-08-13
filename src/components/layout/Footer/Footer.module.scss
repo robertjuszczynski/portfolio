@@ -1,3 +1,5 @@
+@import 'src/app/variables.scss';
+
 .footer {
   background-color: #1A1A1A;
   height: 100vh;
@@ -150,5 +152,178 @@
       border-radius: 100%;
       color: var(--secondary);
     }
+  }
+
+  @media (max-width: #{$breakpoint-desktop}) {
+    height: auto;
+    min-height: unset;
+    width: calc(100% + 56px);
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 40px 0;
+
+    &__section {
+      padding: 24px 20px;
+      border: none !important;
+      grid-area: unset !important;
+      width: 100%;
+      justify-content: flex-start;
+      align-items: flex-start;
+      box-sizing: border-box;
+
+      &--intro {
+        font-size: 3.5rem;
+        padding: 28px 20px 8px 20px;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+
+      &--socials {
+        padding: 12px 0 12px 0;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+
+      &--contact {
+        padding: 12px 0;
+        gap: 6px;
+      }
+
+      &--navigation {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 56px;
+        padding: 20px 0;
+        text-align: left;
+      }
+
+      &--message {
+        padding: 24px 0 0 0;
+        align-items: flex-start;
+      }
+    }
+
+    &__title {
+      font-size: 3rem;
+    }
+
+    &__list {
+      font-size: 1.25rem;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    &__contact {
+      font-size: 1.35rem;
+      gap: 8px;
+    }
+
+    &__column {
+      gap: 16px;
+    }
+
+    &__heading {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    &__itemslist {
+      gap: 6px;
+    }
+
+    &__link,
+    &__phone {
+      font-size: 1.05rem;
+    }
+
+    &__text {
+      font-size: 1.25rem;
+      line-height: 1.55;
+    }
+
+    &__scroll {
+      gap: 14px;
+      font-size: 1.05rem;
+
+      &Icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  @media (max-width: #{$breakpoint-desktop}) {
+    padding: 24px 24px 48px 24px;
+    min-height: unset;
+
+    &__section {
+      padding: 18px 12px;
+
+      &--intro {
+        font-size: 2.2rem;
+        padding: 12px 18px 4px 12px;
+      }
+
+      &--navigation {
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 32px;
+        padding: 12px;
+      }
+    }
+
+    &__title {
+      font-size: 3.25rem;
+      margin-bottom: 8px;
+    }
+
+    &__list {
+      font-size: 1.1rem;
+      gap: 16px;
+    }
+
+    &__contact {
+      font-size: 1.1rem;
+      gap: 0px;
+    }
+
+    &__column {
+      gap: 12px;
+    }
+
+    &__heading {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    &__itemslist {
+      gap: 4px;
+    }
+
+    &__link,
+    &__phone {
+      font-size: 1rem;
+    }
+
+    &__text {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    &__scroll {
+      gap: 10px;
+      font-size: 1rem;
+
+      &Icon {
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .footer {
+    flex-direction: column;
   }
 }

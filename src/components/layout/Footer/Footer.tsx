@@ -4,11 +4,13 @@ import { useRef, memo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import styles from './Footer.module.scss';
 import { ArrowUpRight, MoveUp } from 'lucide-react';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 const Footer = () => {
   const footerRef = useRef(null);
+  const { isMobile } = useMediaQuery();
   const isInView = useInView(footerRef, {
-    amount: 0.8,
+    amount: isMobile ? 0.3 : 0.8,
     once: true,
   });
 
@@ -95,10 +97,10 @@ const Footer = () => {
         </motion.h2>
       </motion.div>
 
-      <motion.div
+      { !isMobile &&<motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-1']}`}
         variants={containerVariants}
-      ></motion.div>
+      ></motion.div> }
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--socials']}`}
@@ -202,14 +204,14 @@ const Footer = () => {
         </motion.a>
       </motion.div>
 
-      <motion.div
+      { !isMobile && <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-2']}`}
         variants={containerVariants}
-      ></motion.div>
-      <motion.div
+      ></motion.div> }
+      { !isMobile &&<motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-3']}`}
         variants={containerVariants}
-      ></motion.div>
+      ></motion.div> }
 
       <motion.div
         className={`${styles.footer__section} ${styles['footer__section--navigation']}`}
@@ -350,12 +352,12 @@ const Footer = () => {
         </motion.div>
       </motion.div>
 
-      <motion.div
+      { !isMobile && <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-4']}`}
         variants={containerVariants}
-      ></motion.div>
+      ></motion.div> }
 
-      <motion.div
+      { !isMobile && <motion.div
         className={`${styles.footer__section} ${styles['footer__section--message']}`}
         variants={containerVariants}
       >
@@ -402,7 +404,7 @@ const Footer = () => {
             <MoveUp width={14} height={14} />
           </motion.div>
         </motion.button>
-      </motion.div>
+      </motion.div> }
     </motion.footer>
   );
 }
