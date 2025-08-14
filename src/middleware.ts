@@ -1,24 +1,35 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-const legacyPrefixes = ['/en', '/pl'];
+const supportedLocales = ['en', 'pl'];
 const excludedPaths = ['/api', '/_next', '/favicon.ico', '/robots.txt'];
 
-export default async function middleware(req: any) {
+const getLocalePrefix = (locale: string): string => {
+  if (locale.startsWith('pl')) return 'pl';
+  if (locale.startsWith('en')) return 'en';
+  return 'en';
+};
+
+export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // We are not using matchers here to avoid unnecessary complexity
-  if (excludedPaths.some((path) => pathname.startsWith(path))) {
+  if (excludedPaths.some(path => pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
-  if (legacyPrefixes.some((prefix) => pathname.startsWith(prefix))) {
+  const alreadyPrefixed = supportedLocales.some(
+    locale => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  );
+  if (alreadyPrefixed) {
     return NextResponse.next();
-  } else {
-    const locale = req.cookies.get('NEXT_LOCALE')?.value || 'en';
-    const newPathname = `/${locale}${pathname}`;
-
-    if (newPathname !== pathname) {
-      return NextResponse.redirect(new URL(newPathname, req.nextUrl));
-    }
   }
+
+  const fullLocale =
+    req.cookies.get('NEXT_LOCALE')?.value ||
+    req.headers.get('accept-language') ||
+    'en';
+  const locale = getLocalePrefix(fullLocale);
+
+  const url = req.nextUrl.clone();
+  url.pathname = `/${locale}${pathname}`;
+  return NextResponse.redirect(url);
 }
