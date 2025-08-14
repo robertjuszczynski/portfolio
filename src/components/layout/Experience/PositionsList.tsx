@@ -43,10 +43,10 @@ function PositionItem({ position }: { position: ExperiencePosition }) {
 
         <div className={styles.description}>
           {position.description.map((desc, index) => (
-            <>
-              <p key={index}>{t(desc)}</p>
+            <div key={index}>
+              <p>{t(desc)}</p>
               <br />
-            </>
+            </div>
           ))}
         </div>
 
