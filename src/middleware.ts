@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const supportedLocales = ['en', 'pl'];
-const excludedPaths = ['/api', '/_next', '/favicon.ico', '/robots.txt'];
+const excludedPaths = ['/api', '/_next', '/favicon.ico', '/robots.txt', '/assets', '/images'];
 
 const getLocalePrefix = (locale: string): string => {
   if (locale.startsWith('pl')) return 'pl';
@@ -32,4 +32,8 @@ export default function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(url);
+}
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico).*)"],
 }

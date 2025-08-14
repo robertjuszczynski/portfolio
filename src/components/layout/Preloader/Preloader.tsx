@@ -77,7 +77,7 @@ export default function Preloader({ visible }: PreloaderProps) {
             justifyContent: 'center',
             alignItems: 'center',
             fontWeight: '300',
-            zIndex: 1000,
+            zIndex: 1001,
             backgroundColor: 'var(--foreground)',
             top: 0,
             left: 0,

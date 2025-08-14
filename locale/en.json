@@ -1,11 +1,54 @@
 {
+  "common": {
+    "new": "New"
+  },
+  "navigation": {
+    "projects": "Projects",
+    "experience": "Experience", 
+    "skills": "Skills & Technologies",
+    "skills--mobile": "Skills",
+    "about": "About me",
+    "contact": "Contact"
+  },
   "hero": {
     "title": "I solve real problems and build clean, maintainable applications that scale",
+    "title-mobile": "I solve real problems and build clean, maintainable apps that scale",
     "subtitle-first": "Hey! I'm Robert",
     "subtitle-sec": "your go-to Full-stack developer",
+    "announcement": "Chatbot available!",
     "actions": {
       "viewProjects": "View Projects",
       "callMe": "Call Me"
+    }
+  },
+  "contact": {
+    "email": "(email)",
+    "phone": "(phone number)"
+  },
+  "projects": {
+    "tigo": {
+      "name": "Tigo",
+      "desc": "Time-tracking application built with Laravel (PHP, MySQL) on the backend and Vue 2 / Nuxt.js on the frontend. Implemented JWT-based authentication, a full authorization system with team and role management, real-time activity tracking via Laravel WebSockets, a complete notification system, email templating and dispatch, PDF/CSV report generation, full i18n support, dark/light mode, an interactive app tour, an activity log, and wrote basic tests using PHPUnit"
+    },
+    "claimStudio": {
+      "name": "Claim Studio",
+      "desc": "Developed and maintained a large-scale insurance management application within a monorepo architecture for an international corporation. Migrated legacy PHP code to a modern stack using React and PHP with Symfony components, ensuring feature continuity. Integrating REST/SOAP APIs with JWT and OAuth2 authentication."
+    },
+    "cashlo": {
+      "name": "Cashlo",
+      "desc": "A personal budget management system built with a modern full-stack architecture. The application leverages Next.js and React for the frontend, with a separate Node.js + Express backend. Data is managed using PostgreSQL, Prisma ORM, and Supabase for authentication and real-time features. The project includes automated testing with Jest."
+    },
+    "portfolio": {
+      "name": "Portfolio",
+      "desc": "This portfolio website is built with Next.js and React, utilizing TypeScript for type safety. It features a modular architecture with reusable components, a custom design system, and responsive layouts. The site is optimized for performance, with server-side rendering and static site generation where appropriate. It includes AI chatbot integrating with Google Gemini."
+    },
+    "cloudrones": {
+      "name": "Cloudrones",
+      "desc": "The website was built using a custom WordPress theme with full responsiveness and a focus on clean, aesthetic UI design. Advanced Custom Fields (ACF) were used for flexible content management. SEO was optimized using the Yoast plugin, and image optimization was implemented to improve performance. The site includes a GDPR-compliant cookie banner via Cookiebot and a contact form built with Contact Form 7."
+    },
+    "sylweriusz": {
+      "name": "Sylweriusz Studio",
+      "desc": "Content management was streamlined with Advanced Custom Fields (ACF), and SEO was handled using the Yoast plugin. Images were optimized for performance and automatically watermarked upon upload. The site includes a multilingual setup using i18n-compatible tools. It also features a GDPR-compliant cookie banner via Cookiebot and a contact form powered by Contact Form 7."
     }
   }
 }

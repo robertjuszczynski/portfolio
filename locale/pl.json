@@ -1,11 +1,54 @@
 {
+  "common": {
+    "new": "Nowe"
+  },
+  "navigation": {
+    "projects": "Projekty",
+    "experience": "Kompetencje",
+    "skills": "Umiejętności i Technologie", 
+    "skills--mobile": "Umiejętności",
+    "about": "O mnie",
+    "contact": "Kontakt"
+  },
   "hero": {
     "title": "Rozwiązuję prawdziwe problemy i tworzę czyste aplikacje, które się skalują",
+    "title-mobile": "Rozwiązuję prawdziwe problemy i tworzę aplikacje, które się skalują",
     "subtitle-first": "Hej! Jestem Robert",
     "subtitle-sec": "twój przyszły Full-stack developer",
+    "announcement": "Chatbot dostępny!",
     "actions": {
-      "viewProjects": "Zobacz projekty",
-      "callMe": "Zadzwoń do mnie"
+      "viewProjects": "Projekty",
+      "callMe": "Zadzwoń"
+    }
+  },
+  "contact": {
+    "email": "(email)",
+    "phone": "(numer telefonu)"
+  },
+  "projects": {
+    "tigo": {
+      "name": "Tigo",
+      "desc": "Aplikacja do śledzenia czasu zbudowana w Laravel (PHP, MySQL) na backendzie i Vue 2 / Nuxt.js na frontendzie. Zaimplementowałem autoryzację opartą na JWT, pełny system autoryzacji z zarządzaniem zespołami i rolami, śledzenie aktywności w czasie rzeczywistym przez Laravel WebSockets, kompletny system powiadomień, templating i wysyłkę emaili, generowanie raportów PDF/CSV, pełne wsparcie i18n, tryb ciemny/jasny, interaktywny tour aplikacji, dziennik aktywności oraz napisałem podstawowe testy używając PHPUnit"
+    },
+    "claimStudio": {
+      "name": "Claim Studio", 
+      "desc": "Rozwijałem i utrzymywałem dużą aplikację do zarządzania ubezpieczeniami w architekturze monorepo dla międzynarodowej korporacji. Migrowałem legacy kod PHP do nowoczesnego stacka używając React i PHP z komponentami Symfony, zapewniając ciągłość funkcji. Integracja REST/SOAP API z autoryzacją JWT i OAuth2."
+    },
+    "cashlo": {
+      "name": "Cashlo",
+      "desc": "System zarządzania budżetem osobistym zbudowany w nowoczesnej architekturze full-stack. Aplikacja wykorzystuje Next.js i React na frontendzie, z oddzielnym backendem Node.js + Express. Dane są zarządzane używając PostgreSQL, Prisma ORM i Supabase do autoryzacji i funkcji czasu rzeczywistego. Projekt zawiera automatyczne testowanie z Jest."
+    },
+    "portfolio": {
+      "name": "Portfolio",
+      "desc": "Ta strona portfolio jest zbudowana w Next.js i React, wykorzystując TypeScript dla bezpieczeństwa typów. Zawiera modularną architekturę z komponentami wielokrotnego użytku, własny system designu i responsywne układy. Strona jest zoptymalizowana pod kątem wydajności, z renderowaniem po stronie serwera i generowaniem stron statycznych gdzie to odpowiednie. Zawiera chatbota AI zintegrowanego z Google Gemini."
+    },
+    "cloudrones": {
+      "name": "Cloudrones",
+      "desc": "Strona została zbudowana używając niestandardowego tematu WordPress z pełną responsywnością i skupieniem na czystym, estetycznym designie UI. Advanced Custom Fields (ACF) zostały użyte do elastycznego zarządzania treścią. SEO zostało zoptymalizowane używając wtyczki Yoast, a optymalizacja obrazów została zaimplementowana w celu poprawy wydajności. Strona zawiera banner cookie zgodny z RODO przez Cookiebot i formularz kontaktowy zbudowany z Contact Form 7."
+    },
+    "sylweriusz": {
+      "name": "Sylweriusz Studio",
+      "desc": "Zarządzanie treścią zostało uproszczone z Advanced Custom Fields (ACF), a SEO było obsługiwane używając wtyczki Yoast. Obrazy zostały zoptymalizowane pod kątem wydajności i automatycznie znakowane wodne przy przesyłaniu. Strona zawiera konfigurację wielojęzyczną używając narzędzi kompatybilnych z i18n. Zawiera również banner cookie zgodny z RODO przez Cookiebot i formularz kontaktowy zasilany przez Contact Form 7."
     }
   }
 }

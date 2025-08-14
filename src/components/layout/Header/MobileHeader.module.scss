@@ -8,6 +8,12 @@
   padding: 0px 30px;
   z-index: 1000;
 
+  &__rightContainer {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
   &__emailWrapper {
     position: relative;
     overflow: hidden;

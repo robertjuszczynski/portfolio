@@ -13,7 +13,11 @@ const languages = [
   { code: 'pl', flag: PLFlag },
 ];
 
-export default function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  mobile?: boolean;
+}
+
+export default function LanguageSwitcher({ mobile = false }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { lang } = useTranslate();
   const selectedLanguage = languages.find((i) => i.code === lang);
@@ -29,26 +33,31 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className={styles.switcher}>
-      <div className={styles.switcher__selected} onClick={toggleDropdown}>
+    <div className={`${styles.switcher} ${mobile ? styles['switcher--mobile'] : ''}`}>
+      <div
+        className={`${styles.switcher__selected} ${mobile ? styles['switcher__selected--mobile'] : ''}`}
+        onClick={toggleDropdown}
+      >
         <Image
           src={selectedLanguage!.flag}
           alt={selectedLanguage!.code}
           width={28}
           height={28}
         />
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <ChevronDown />
-        </motion.div>
+        {!mobile && (
+          <motion.div
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ChevronDown />
+          </motion.div>
+        )}
       </div>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className={styles.switcher__dropdown}
+            className={`${styles.switcher__dropdown} ${mobile ? styles['switcher__dropdown--mobile'] : ''}`}
             initial={{ opacity: 0, y: -10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}

@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import styles from './MobileHeader.module.scss';
 import { animate, AnimatePresence, motion } from 'framer-motion';
 import { Github, Linkedin, Facebook, Instagram, X } from 'lucide-react';
+import useTranslate from '@/hooks/useTranslate';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const SOCIALS = ['github', 'linkedin', 'facebook', 'instagram'];
 
@@ -15,6 +17,7 @@ const ICON_MAP: any = {
 export default function MobileHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const logoRef = useRef(null);
+  const { t } = useTranslate();
 
   const toggleMenu = () => {
     setIsOpen((prev) => {
@@ -38,19 +41,29 @@ export default function MobileHeader() {
 
       <AnimatePresence>
         {!isOpen && (
-          <motion.button
-            key='hamburger'
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.5 }}
-            className={styles.hamburger}
-            onClick={toggleMenu}
-          >
-            <span className={styles.hamburger__line}></span>
-            <span className={styles.hamburger__line}></span>
-            <span className={styles.hamburger__line}></span>
-          </motion.button>
+          <div className={styles.header__rightContainer}>
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, transition: { delay: 0.05, duration: 0.7 } }}
+              exit={{ scale: 0 }}
+              className={styles.header__languageSwitcher}
+            >
+              <LanguageSwitcher mobile />
+            </motion.div>
+            <motion.button
+              key='hamburger'
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.5 }}
+              className={styles.hamburger}
+              onClick={toggleMenu}
+            >
+              <span className={styles.hamburger__line}></span>
+              <span className={styles.hamburger__line}></span>
+              <span className={styles.hamburger__line}></span>
+            </motion.button>
+          </div>
         )}
       </AnimatePresence>
 
@@ -113,7 +126,9 @@ export default function MobileHeader() {
                   }}
                   exit={{ y: 60, transition: { duration: 0.13 } }}
                 >
-                  <span className={styles.header__emailLabel}>(email)</span>
+                  <span className={styles.header__emailLabel}>
+                    {t('contact.email')}
+                  </span>
                   <a
                     href='mailto:robert.j.dev@icloud.com'
                     className={styles.header__emailLink}
@@ -133,7 +148,7 @@ export default function MobileHeader() {
                   exit={{ y: 60, transition: { duration: 0.13 } }}
                 >
                   <span className={styles.header__phoneLabel}>
-                    (phone number)
+                    {t('contact.phone')}
                   </span>
                   <a
                     href='tel:+48515177920'
@@ -145,31 +160,35 @@ export default function MobileHeader() {
               </div>
             </div>
             <ul className={styles.header__nav__list}>
-              {['Projects', 'Experience', 'Skills', 'About me', 'Contact'].map(
-                (item, i) => (
-                  <div key={item} className={styles.header__nav__itemWrapper}>
-                    <motion.li
-                      className={styles.header__nav__item}
-                      initial={{ y: 40, rotate: 4, opacity: 0 }}
-                      animate={{
-                        y: 0,
-                        rotate: 0,
-                        opacity: 1,
-                        transition: { delay: 0.35 + i * 0.1, duration: 0.5 },
-                      }}
-                      exit={{
-                        y: 40,
-                        rotate: 4,
-                        opacity: 0,
-                        transition: { duration: 0.5 },
-                      }}
-                      onClick={toggleMenu}
-                    >
-                      {item}
-                    </motion.li>
-                  </div>
-                )
-              )}
+              {[
+                { key: 'navigation.projects', id: 'projects' },
+                { key: 'navigation.experience', id: 'experience' },
+                { key: 'navigation.skills--mobile', id: 'skillsTech' },
+                { key: 'navigation.about', id: 'aboutMe' },
+                { key: 'navigation.contact', id: 'footer' },
+              ].map((item, i) => (
+                <div key={item.key} className={styles.header__nav__itemWrapper}>
+                  <motion.li
+                    className={styles.header__nav__item}
+                    initial={{ y: 40, rotate: 4, opacity: 0 }}
+                    animate={{
+                      y: 0,
+                      rotate: 0,
+                      opacity: 1,
+                      transition: { delay: 0.35 + i * 0.1, duration: 0.5 },
+                    }}
+                    exit={{
+                      y: 40,
+                      rotate: 4,
+                      opacity: 0,
+                      transition: { duration: 0.5 },
+                    }}
+                    onClick={toggleMenu}
+                  >
+                    {t(item.key)}
+                  </motion.li>
+                </div>
+              ))}
             </ul>
           </motion.nav>
         )}

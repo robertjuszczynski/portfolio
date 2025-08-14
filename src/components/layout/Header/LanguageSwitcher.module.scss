@@ -35,6 +35,10 @@
     gap: 12px;
     cursor: pointer;
     z-index: 1;
+
+    &--mobile {
+      gap: 0;
+    }
   }
   
   &__dropdown {
@@ -68,6 +72,14 @@
       mask-composite: exclude;
       pointer-events: none;
     }
+
+    &--mobile {
+      transform: translateX(-50%);
+
+      &::before {
+        display: none;
+      }
+    }
   }
   
   &__option {
@@ -78,5 +90,14 @@
     width: 100%;
     position: relative;
     z-index: 1;
+  }
+
+  &--mobile {
+    padding: 0;
+    backdrop-filter: none;
+    
+    &::before {
+      display: none;
+    }
   }
 }

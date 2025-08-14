@@ -5,11 +5,14 @@ import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import styles from './Header.module.scss';
 import LanguageSwitcher from './LanguageSwitcher';
 import { smoothScrollTo } from '@/lib/utils';
+import useTranslate from '@/hooks/useTranslate';
+
 export default function Header() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [prevScrollY, setPrevScrollY] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
+  const { t } = useTranslate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,11 +52,11 @@ export default function Header() {
       </div>
       <nav className={styles.header__nav}>
         <ul className={styles.header__nav_list}>
-          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('projects')}>Projects</li>
-          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('experience')}>Experience</li>
-          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('skillsTech')}>Skills & Technologies</li>
-          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('aboutMe')}>About me</li>
-          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('footer')}>Contact</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('projects')}>{t('navigation.projects')}</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('experience')}>{t('navigation.experience')}</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('skillsTech')}>{t('navigation.skills')}</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('aboutMe')}>{t('navigation.about')}</li>
+          <li className={styles.header__nav_item} onClick={() => smoothScrollTo('footer')}>{t('navigation.contact')}</li>
         </ul>
       </nav>
       <div className={styles.header__actions}>
