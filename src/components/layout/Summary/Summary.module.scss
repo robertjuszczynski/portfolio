@@ -45,6 +45,13 @@
   mask-size: 100% 100%;
 }
 
+@media (max-width: #{$breakpoint-large-desktop}) {
+  .summaryGrey,
+  .summaryWhite {
+    font-size: 3rem;
+  }
+}
+
 @media (max-width: #{$breakpoint-desktop}) {
   .summaryGrey,
   .summaryWhite {
@@ -55,13 +62,13 @@
 @media (max-width: #{$breakpoint-tablet}) {
   .summaryGrey,
   .summaryWhite {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 }
 
 @media (max-width: #{$breakpoint-mobile}) {
   .summaryGrey,
   .summaryWhite {
-    font-size: 1.0625rem;
+    font-size: clamp(17px, 4vw, 1.5rem);
   }
 }

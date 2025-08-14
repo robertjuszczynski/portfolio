@@ -236,7 +236,7 @@
 
   .hero__title {
     text-align: start;
-    font-size: 36px;
+    font-size: 48px;
   }
 
   .hero__subtitle {
@@ -274,5 +274,10 @@
 @media (max-width: #{$breakpoint-mobile}) {
   .hero {
     margin-bottom: 250px;
+  }
+
+  .hero__title {
+    text-align: start;
+    font-size: 36px;
   }
 }

@@ -154,7 +154,7 @@
     }
   }
 
-  @media (max-width: #{$breakpoint-desktop}) {
+  @media (max-width: #{$breakpoint-large-desktop}) {
     height: auto;
     min-height: unset;
     width: calc(100% + 56px);
@@ -325,5 +325,36 @@
 @media (max-width: 414px) {
   .footer {
     flex-direction: column;
+  }
+}
+
+@media (max-width: #{$breakpoint-desktop}) {
+  .footer {
+    width: calc(100% + 196px);
+
+    &__title {
+      font-size: 58px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet}) {
+  .footer {
+    width: calc(100% + 196px);
+
+    &__title {
+      margin-bottom: 10px;
+      font-size: 72px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .footer {
+    width: calc(100% + 56px);
+
+    &__title {
+      font-size: 46px;
+    }
   }
 }

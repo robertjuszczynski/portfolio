@@ -36,6 +36,22 @@
   }
 }
 
+@media (max-width: #{$breakpoint-desktop}) {
+  .experienceHeader {
+    &__title {
+      font-size: 58px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet}) {
+  .experienceHeader {
+    &__title {
+      font-size: 48px;
+    }
+  }
+}
+
 @media (max-width: #{$breakpoint-mobile}) {
   .experience {
     margin-bottom: 200px;
@@ -43,10 +59,10 @@
 
   .experienceHeader {
     &__title {
-      font-size: 3rem;
+      font-size: 46px;
 
       &::before {
-        font-size: 5rem;
+        font-size: 4rem;
       }
     }
   }

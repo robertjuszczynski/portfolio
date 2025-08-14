@@ -96,7 +96,7 @@
     }
 
     &__title {
-      font-size: 2.75rem;
+      font-size: 60px;
       margin-bottom: 12px;
 
       &::before {
@@ -132,6 +132,30 @@
     &__desc {
       text-align: center;
       max-width: 500px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-desktop}) {
+  .projectsHeader {
+    &__title {
+      font-size: 58px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-tablet}) {
+  .projectsHeader {
+    &__title {
+      font-size: 48px;
+    }
+  }
+}
+
+@media (max-width: #{$breakpoint-mobile}) {
+  .projectsHeader {
+    &__title {
+      font-size: 46px;
     }
   }
 }
