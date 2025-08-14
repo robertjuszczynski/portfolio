@@ -9,7 +9,7 @@ import useTranslate from '@/hooks/useTranslate';
 
 const Footer = () => {
   const footerRef = useRef(null);
-  const { isMobile } = useMediaQuery();
+  const { isMobile, isDesktop, isTablet } = useMediaQuery();
   const { t } = useTranslate();
   const isInView = useInView(footerRef, {
     amount: isMobile ? 0.3 : 0.8,
@@ -115,7 +115,7 @@ const Footer = () => {
             {...socialHoverProps}
           >
             <motion.a
-              href='https://github.com'
+              href='https://github.com/robertjuszczynski'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -128,7 +128,7 @@ const Footer = () => {
             {...socialHoverProps}
           >
             <motion.a
-              href='https://linkedin.com'
+              href='https://www.linkedin.com/in/robert-juszczynski/'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -141,7 +141,7 @@ const Footer = () => {
             {...socialHoverProps}
           >
             <motion.a
-              href='https://facebook.com'
+              href='https://www.facebook.com/profile.php?id=100008614810091'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -154,7 +154,7 @@ const Footer = () => {
             {...socialHoverProps}
           >
             <motion.a
-              href='https://instagram.com'
+              href='https://www.instagram.com/_jusstuss_/'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -245,7 +245,7 @@ const Footer = () => {
               {t('navigation.experience')}
             </motion.a>
             <motion.a
-              href='#skills'
+              href='#skillsTech'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -253,7 +253,7 @@ const Footer = () => {
               {t('navigation.skills')}
             </motion.a>
             <motion.a
-              href='#about'
+              href='#aboutMe'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -261,7 +261,7 @@ const Footer = () => {
               {t('navigation.about')}
             </motion.a>
             <motion.a
-              href='#contact'
+              href='#footer'
               className={styles.footer__link}
               variants={itemVariants}
               {...linkHoverProps}
@@ -311,7 +311,7 @@ const Footer = () => {
             variants={containerVariants}
           >
             <motion.a
-              href='https://github.com'
+              href='https://github.com/robertjuszczynski'
               target='_blank'
               rel='noopener noreferrer'
               className={styles.footer__link}
@@ -321,7 +321,7 @@ const Footer = () => {
               Github
             </motion.a>
             <motion.a
-              href='https://linkedin.com'
+              href='https://www.linkedin.com/in/robert-juszczynski/'
               target='_blank'
               rel='noopener noreferrer'
               className={styles.footer__link}
@@ -331,7 +331,7 @@ const Footer = () => {
               Linkedin
             </motion.a>
             <motion.a
-              href='https://instagram.com'
+              href='https://www.instagram.com/_jusstuss_/'
               target='_blank'
               rel='noopener noreferrer'
               className={styles.footer__link}
@@ -341,7 +341,7 @@ const Footer = () => {
               Instagram
             </motion.a>
             <motion.a
-              href='https://facebook.com'
+              href='https://www.facebook.com/profile.php?id=100008614810091'
               target='_blank'
               rel='noopener noreferrer'
               className={styles.footer__link}
@@ -359,7 +359,7 @@ const Footer = () => {
         variants={containerVariants}
       ></motion.div> }
 
-      { !isMobile && <motion.div
+      { (!isMobile && !isDesktop && !isTablet) && <motion.div
         className={`${styles.footer__section} ${styles['footer__section--message']}`}
         variants={containerVariants}
       >
