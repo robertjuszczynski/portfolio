@@ -5,7 +5,12 @@ import { Github, Linkedin, Facebook, Instagram, X } from 'lucide-react';
 import useTranslate from '@/hooks/useTranslate';
 import LanguageSwitcher from './LanguageSwitcher';
 
-const SOCIALS = ['github', 'linkedin', 'facebook', 'instagram'];
+const SOCIALS = [
+  { name: 'github', url: 'https://github.com/robertjuszczynski' },
+  { name: 'linkedin', url: 'https://www.linkedin.com/in/robert-juszczynski/' },
+  { name: 'facebook', url: 'https://www.facebook.com/profile.php?id=100008614810091' },
+  { name: 'instagram', url: 'https://www.instagram.com/_jusstuss_/' }
+];
 
 const ICON_MAP: any = {
   github: Github,
@@ -104,11 +109,14 @@ export default function MobileHeader() {
             <div className={styles.header__info}>
               <div className={styles.header__socials}>
                 {SOCIALS.map((item) => {
-                  const Icon = ICON_MAP[item];
+                  const Icon = ICON_MAP[item.name];
                   if (!Icon) return null;
 
                   return (
-                    <motion.div
+                    <motion.a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       transition={{
                         delay: 0.1 * SOCIALS.indexOf(item),
                         duration: 0.7,
@@ -116,11 +124,11 @@ export default function MobileHeader() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      key={item}
+                      key={item.name}
                       className={styles.header__socialsItem}
                     >
                       <Icon size={20} />
-                    </motion.div>
+                    </motion.a>
                   );
                 })}
               </div>

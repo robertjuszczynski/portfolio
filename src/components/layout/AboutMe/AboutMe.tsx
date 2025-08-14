@@ -9,11 +9,8 @@ import useTranslate from '@/hooks/useTranslate';
 const AboutMe = () => {
   const { t } = useTranslate();
   
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  const callPhone = () => {
+    window.location.href = 'tel:+48515177920';
   };
 
   const renderTitle = () => {
@@ -66,7 +63,7 @@ const AboutMe = () => {
           
           <motion.button 
             className={styles.aboutMe__contactButton}
-            onClick={scrollToContact}
+            onClick={callPhone}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             initial={{ opacity: 0 }}

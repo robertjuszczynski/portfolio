@@ -64,6 +64,13 @@
       color: black;
       border-radius: 50%;
       display: flex;
+      text-decoration: none;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        background-color: rgba(black, 0.1);
+      }
     }
   }
 
@@ -92,7 +99,7 @@
 
     &__list {
       display: flex;
-      font-size: 60px;
+      font-size: 56px;
       color: black;
       font-weight: 700;
       line-height: 1.2;

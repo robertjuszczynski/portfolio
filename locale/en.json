@@ -59,7 +59,7 @@
     },
     "cashlo": {
       "name": "Cashlo",
-      "desc": "A personal budget management system built with a modern full-stack architecture. The application leverages Next.js and React for the frontend, with a separate Node.js + Express backend. Data is managed using PostgreSQL, Prisma ORM, and Supabase for authentication and real-time features. The project includes automated testing with Jest."
+      "desc": "A personal budget management system built with a modern full-stack architecture. The application leverages Next.js and React for the frontend, with a separate Node.js + Express backend. Data is managed using PostgreSQL, Prisma ORM, and GraphQL. The project includes automated testing with Jest."
     },
     "portfolio": {
       "name": "Portfolio",
@@ -109,7 +109,8 @@
     "title2": "Technologies"
   },
   "footer": {
-    "title": "Get in touch",
+    "title": "Get in ",
+    "title2": "touch",
     "menu": "Menu",
     "contact": "Contact",
     "socials": "Socials",
