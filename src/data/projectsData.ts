@@ -31,22 +31,13 @@ const projectsData: ProjectsData = [
       'TypeScript',
       'Node.js',
       'Express.js',
-      'Supabase',
-      'PostgreSQL',
+      'GraphQL',
       'Prisma',
+      'PostgreSQL',
       'Tailwind CSS',
       'Jest',
     ],
-    links: [
-      {
-        name: 'Github',
-        src: 'https://google.pl',
-      },
-      {
-        name: 'Demo',
-        src: 'https://google.pl',
-      },
-    ],
+    links: [],
     imgSrc: '/images/screenshots/cashlo.png',
   },
   {
@@ -78,11 +69,11 @@ const projectsData: ProjectsData = [
     links: [
       {
         name: 'Github',
-        src: 'https://google.pl',
+        src: 'https://github.com/robertjuszczynski/portfolio',
       },
       {
         name: 'Demo',
-        src: 'https://google.pl',
+        src: 'https://www.robertjuszczynski.com',
       },
     ],
     imgSrc: '/images/screenshots/portfolio.png',

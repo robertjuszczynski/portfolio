@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import ChatBot from '@/components/chatbot/ChatBot';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import Header from '@/components/layout/Header/Header';
 import HeroSection from '@/components/layout/Hero/Hero';
 import ExperienceSection from '@/components/layout/Experience/Experience';
@@ -14,12 +14,15 @@ import Ribbon from '@/components/layout/Ribbon/Ribbon';
 import Footer from '@/components/layout/Footer/Footer';
 import { Robot } from '@/components/layout/Hero/Robot';
 import AboutMe from '@/components/layout/AboutMe/AboutMe';
+import MobileHeader from '@/components/layout/Header/MobileHeader';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 export default function Home() {
   const [heroReady, setHeroReady] = useState(false);
   const [splineLoading, setSplineLoading] = useState(true);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
   const [startAnimation, setStartAnimation] = useState(false);
+  const { isMobile, isTablet, isLargeDesktop, isDesktop } = useMediaQuery();
 
   const handleHeroReady = () => {
     setHeroReady(true);
@@ -32,7 +35,7 @@ export default function Home() {
   if (heroReady && preloaderVisible && !splineLoading) {
     setPreloaderVisible(false);
     setTimeout(() => setStartAnimation(true), 3750);
-  }
+  };
 
   return (
     <>
@@ -47,11 +50,12 @@ export default function Home() {
         }}
       />
       <Preloader visible={preloaderVisible} />
-      <main className={styles.main} style={{ opacity: preloaderVisible ? 0 : 1, transition: 'opacity 0.5s' }}>
-        <Header />
+      <main className={styles.main} style={{ opacity: 1, transition: 'opacity 0.5s' }}>
+        {(isMobile || isTablet || isDesktop ) && <MobileHeader />}
+        {isLargeDesktop && <Header />}
         <HeroSection onReady={handleHeroReady} startAnimation={startAnimation} />
         <Robot onReady={handleSplineLoad} />
-        {!splineLoading && <ExperienceSection />}
+        {heroReady && <ExperienceSection />}
         <Summary />
         <ProjectsSection />
         <AboutMe />
