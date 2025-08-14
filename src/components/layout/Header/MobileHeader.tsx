@@ -28,6 +28,14 @@ export default function MobileHeader() {
     });
   };
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    toggleMenu();
+  };
+
   return (
     <header className={styles.header}>
       <motion.div
@@ -183,7 +191,7 @@ export default function MobileHeader() {
                       opacity: 0,
                       transition: { duration: 0.5 },
                     }}
-                    onClick={toggleMenu}
+                    onClick={() => scrollToSection(item.id)}
                   >
                     {t(item.key)}
                   </motion.li>
