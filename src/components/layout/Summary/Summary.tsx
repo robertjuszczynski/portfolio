@@ -9,14 +9,7 @@ import {
   useSpring
 } from 'framer-motion';
 import styles from './Summary.module.scss';
-
-const lines = [
-  'From dedicated systems to simple websites',
-  '— I create tailored solutions that combine',
-  'functionality with clean design. I focus on',
-  'delivering reliable, user-centered products',
-  'that meet real-world needs.',
-];
+import useTranslate from '../../../hooks/useTranslate';
 
 const SummaryLine = memo(function SummaryLine({
   item,
@@ -51,13 +44,22 @@ const SummaryLine = memo(function SummaryLine({
 });
 
 const Summary = () => {
+  const { t } = useTranslate();
+  const lines = [
+    t('summary.line1'),
+    t('summary.line2'),
+    t('summary.line3'),
+    t('summary.line4'),
+    t('summary.line5'),
+  ];
+
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end end'],
   });
 
-  const rawScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const rawScale = useTransform(scrollYProgress, [0, 1], [0.8, 0.9]);
   const scale = useSpring(rawScale, {
     stiffness: 100,
     damping: 20,

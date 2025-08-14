@@ -22,6 +22,9 @@
     }
   },
   "experience": {
+    "subtitle": "Where did I get it?",
+    "title1": "Exp",
+    "title2": "erience",
     "period": "July 2023 - Present",
     "position": {
       "solveit": {
@@ -40,6 +43,11 @@
     "phone": "(phone number)"
   },
   "projects": {
+    "header": {
+      "label": "Think. Code. Ship.",
+      "title": "Things I've built",
+      "description": "Explore our portfolio of exceptional web design and custom Webflow websites that drive results for businesses worldwide."
+    },
     "tigo": {
       "name": "Tigo",
       "desc": "Time-tracking application built with Laravel (PHP, MySQL) on the backend and Vue 2 / Nuxt.js on the frontend. Implemented JWT-based authentication, a full authorization system with team and role management, real-time activity tracking via Laravel WebSockets, a complete notification system, email templating and dispatch, PDF/CSV report generation, full i18n support, dark/light mode, an interactive app tour, an activity log, and wrote basic tests using PHPUnit"
@@ -64,5 +72,12 @@
       "name": "Sylweriusz Studio",
       "desc": "Content management was streamlined with Advanced Custom Fields (ACF), and SEO was handled using the Yoast plugin. Images were optimized for performance and automatically watermarked upon upload. The site includes a multilingual setup using i18n-compatible tools. It also features a GDPR-compliant cookie banner via Cookiebot and a contact form powered by Contact Form 7."
     }
+  },
+  "summary": {
+    "line1": "From dedicated systems to simple websites",
+    "line2": "— I create tailored solutions that combine",
+    "line3": "functionality with clean design. I focus on",
+    "line4": "delivering reliable, user-centered products",
+    "line5": "that meet real-world needs."
   }
 }

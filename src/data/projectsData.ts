@@ -2,40 +2,40 @@ import { ProjectsData } from '@/types/projects';
 
 const projectsData: ProjectsData = [
   {
-    name: 'Tigo',
-    desc: 'An application designed to track, plan, and analyze working time. It allows users to create tasks, assign them to projects, monitor progress, and generate time reports. Ideal for freelancers, teams, and companies aiming to improve productivity and manage time more effectively.',
+    name: 'projects.tigo.name',
+    desc: 'projects.tigo.desc',
     technologies: [
       'Vue.js',
       'Nuxt.js',
       'Laravel',
       'PHP',
       'JavaScript',
-      'Webpack',
       'Vuetify',
+      'Webpack',
+      'MySQL'
     ],
     links: [
       {
-        name: 'Github',
-        src: 'https://google.pl',
-      },
-      {
         name: 'Demo',
-        src: 'https://google.pl',
+        src: 'https://app.tigo.pl',
       },
     ],
     imgSrc: '/images/screenshots/tigo.png',
   },
   {
-    name: 'Cashlo',
-    desc: 'An application designed to track, plan, and analyze working time. It allows users to create tasks, assign them to projects, monitor progress, and generate time reports. Ideal for freelancers, teams, and companies aiming to improve productivity and manage time more effectively.',
+    name: 'projects.cashlo.name',
+    desc: 'projects.cashlo.desc',
     technologies: [
-      'Vue.js',
-      'Nuxt.js',
-      'Laravel',
-      'PHP',
-      'JavaScript',
-      'Webpack',
-      'Vuetify',
+      'Next.js',
+      'React.js',
+      'TypeScript',
+      'Node.js',
+      'Express.js',
+      'Supabase',
+      'PostgreSQL',
+      'Prisma',
+      'Tailwind CSS',
+      'Jest',
     ],
     links: [
       {
@@ -49,17 +49,31 @@ const projectsData: ProjectsData = [
     ],
     imgSrc: '/images/screenshots/cashlo.png',
   },
-    {
-    name: 'Cloudrones',
-    desc: 'An application designed to track, plan, and analyze working time. It allows users to create tasks, assign them to projects, monitor progress, and generate time reports. Ideal for freelancers, teams, and companies aiming to improve productivity and manage time more effectively.',
+  {
+    name: 'projects.claimStudio.name',
+    desc: 'projects.claimStudio.desc',
     technologies: [
-      'Vue.js',
-      'Nuxt.js',
-      'Laravel',
+      'React.js',
+      'Node.js',
+      'TypeScript',
       'PHP',
-      'JavaScript',
-      'Webpack',
-      'Vuetify',
+      'Symfony',
+      'PostgreSQL',
+      'Angular',
+      'Jenkins',
+    ],
+    links: [],
+    imgSrc: '/images/screenshots/claimStudio.png',
+  },
+  {
+    name: 'projects.portfolio.name',
+    desc: 'projects.portfolio.desc',
+    technologies: [
+      'Next.js',
+      'React.js',
+      'TypeScript',
+      'Framer Motion',
+      'Spline'
     ],
     links: [
       {
@@ -71,8 +85,49 @@ const projectsData: ProjectsData = [
         src: 'https://google.pl',
       },
     ],
-    imgSrc: '/images/screenshots/cashlo.png',
-  }
+    imgSrc: '/images/screenshots/portfolio.png',
+  },
+  {
+    name: 'projects.cloudrones.name',
+    desc: 'projects.cloudrones.desc',
+    technologies: [
+      'Advanced Custom Fields',
+      'Yoast SEO',
+      'Cookiebot',
+      'Contact Form 7',
+      'Custom Theme',
+      'Responsive Design',
+      'Image Optimization',
+    ],
+    links: [
+      {
+        name: 'Demo',
+        src: 'https://cloudrones.pl/',
+      },
+    ],
+    imgSrc: '/images/screenshots/cloudrones.png',
+  },
+  {
+    name: 'projects.sylweriusz.name',
+    desc: 'projects.sylweriusz.desc',
+    technologies: [
+      'Wordpress',
+      'Advanced Custom Fields',
+      'Yoast SEO',
+      'Cookiebot',
+      'Contact Form 7',
+      'Image Optimization',
+      'i18n',
+      'Watermarking',
+    ],
+    links: [
+      {
+        name: 'Demo',
+        src: 'https://sylweriuszstudio.pl/',
+      },
+    ],
+    imgSrc: '/images/screenshots/sylweriusz.png',
+  },
 ];
 
 export default projectsData;

@@ -5,7 +5,7 @@
   "navigation": {
     "projects": "Projekty",
     "experience": "Kompetencje",
-    "skills": "Umiejętności i Technologie", 
+    "skills": "Umiejętności i Technologie",
     "skills--mobile": "Umiejętności",
     "about": "O mnie",
     "contact": "Kontakt"
@@ -22,6 +22,9 @@
     }
   },
   "experience": {
+    "subtitle": "Droga zawodowa",
+    "title1": "Doś",
+    "title2": "wiadczenie",
     "period": "Lipiec 2023 - Obecnie",
     "position": {
       "solveit": {
@@ -40,12 +43,17 @@
     "phone": "(numer telefonu)"
   },
   "projects": {
+    "header": {
+      "label": "Myśl. Koduj. Wdrażaj.",
+      "title": "Moje Projekty",
+      "description": "Zobacz moje portfolio wyjątkowych systemów dedykowanych i stron internetowych, które przynoszą rezultaty dla firm na całym świecie."
+    },
     "tigo": {
       "name": "Tigo",
       "desc": "Aplikacja do śledzenia czasu zbudowana w Laravel (PHP, MySQL) na backendzie i Vue 2 / Nuxt.js na frontendzie. Zaimplementowałem autoryzację opartą na JWT, pełny system autoryzacji z zarządzaniem zespołami i rolami, śledzenie aktywności w czasie rzeczywistym przez Laravel WebSockets, kompletny system powiadomień, templating i wysyłkę emaili, generowanie raportów PDF/CSV, pełne wsparcie i18n, tryb ciemny/jasny, interaktywny tour aplikacji, dziennik aktywności oraz napisałem podstawowe testy używając PHPUnit"
     },
     "claimStudio": {
-      "name": "Claim Studio", 
+      "name": "Claim Studio",
       "desc": "Rozwijałem i utrzymywałem dużą aplikację do zarządzania ubezpieczeniami w architekturze monorepo dla międzynarodowej korporacji. Migrowałem legacy kod PHP do nowoczesnego stacka używając React i PHP z komponentami Symfony, zapewniając ciągłość funkcji. Integracja REST/SOAP API z autoryzacją JWT i OAuth2."
     },
     "cashlo": {
@@ -64,5 +72,12 @@
       "name": "Sylweriusz Studio",
       "desc": "Zarządzanie treścią zostało uproszczone z Advanced Custom Fields (ACF), a SEO było obsługiwane używając wtyczki Yoast. Obrazy zostały zoptymalizowane pod kątem wydajności i automatycznie znakowane wodne przy przesyłaniu. Strona zawiera konfigurację wielojęzyczną używając narzędzi kompatybilnych z i18n. Zawiera również banner cookie zgodny z RODO przez Cookiebot i formularz kontaktowy zasilany przez Contact Form 7."
     }
+  },
+  "summary": {
+    "line1": "Od dedykowanych systemów po proste strony",
+    "line2": "— tworzę nowoczesne rozwiązania dopasowane",
+    "line3": "do Twoich potrzeb i oczekiwań. Każdy projekt",
+    "line4": "przygotowuję z myślą o wysokiej stabilności",
+    "line5": "doskonałej wydajności i długotrwałej wartości."
   }
 }
