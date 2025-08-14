@@ -21,6 +21,20 @@
       "callMe": "Zadzwoń"
     }
   },
+  "experience": {
+    "period": "Lipiec 2023 - Obecnie",
+    "position": {
+      "solveit": {
+        "period": "Lipiec 2023 – Obecnie",
+        "description": {
+          "1": "Pracowałem przy projektach o dużej skali i złożoności, często mierząc się z niestandardowymi wyzwaniami technicznymi, takimi jak integracja systemów legacy z nowoczesnymi API, poprawa skalowalności systemów czy rozwiązywanie krytycznych problemów wydajnościowych. Przejąłem odpowiedzialność za integracje między projektami i przyczyniłem się do decyzji architektonicznych w wielu zespołach.",
+          "2": "Zaangażowany w rozwój full-stack przy użyciu technologii takich jak React, Node.js, Vue, Laravel, PHP i PostgreSQL. Regularnie współpracowałem z inżynierami QA, projektantami i właścicielami produktów, aby doprecyzować wymagania i dostarczyć wysokiej jakości funkcje w środowiskach zwinnych (Scrum/Kanban).",
+          "3": "Uczestniczyłem w planowaniu sprintów, przeglądzie backlogu i dyskusjach technicznych; brałem aktywny udział w przeglądach kodu i przyczyniłem się do przyjęcia najlepszych praktyk dotyczących czystego kodu, testowania i pipeline'ów CI/CD. Przyczyniłem się do inicjatyw refaktoryzacyjnych mających na celu zmniejszenie długu technicznego, takich jak modularyzacja monolitycznych baz kodu i migracja systemów legacy do mikrousług lub nowocześniejszych stosów front-endowych.",
+          "4": "Wspierałem ulepszenia architektoniczne i ewolucję stosu technologicznego, promując narzędzia i frameworki, które poprawiały produktywność programistów i utrzymywalność kodu. Mentorowałem młodszych programistów i współpracowałem między zespołami, aby zapewnić spójność stylu kodu, strategii testowania i procesów wdrażania."
+        }
+      }
+    }
+  },
   "contact": {
     "email": "(email)",
     "phone": "(numer telefonu)"

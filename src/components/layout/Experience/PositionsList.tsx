@@ -2,6 +2,7 @@ import TechTag from '@/components/common/TechTag';
 import styles from './PositionsList.module.scss';
 import { ExperiencePosition } from '@/types/experience';
 import { motion } from 'framer-motion';
+import useTranslate from '@/hooks/useTranslate';
 
 interface PositionsListProps {
   positions: ExperiencePosition[];
@@ -18,6 +19,8 @@ export default function PositionsList({ positions }: PositionsListProps) {
 }
 
 function PositionItem({ position }: { position: ExperiencePosition }) {
+  const { t } = useTranslate();
+  
   return (
     <>
       <motion.div
@@ -36,12 +39,12 @@ function PositionItem({ position }: { position: ExperiencePosition }) {
       />
       <div className={styles.position}>
         <h3 className={styles.role}>{position.role}</h3>
-        <p className={styles.period}>{position.period}</p>
+        <p className={styles.period}>{t(position.period)}</p>
 
         <div className={styles.description}>
           {position.description.map((desc, index) => (
             <>
-              <p key={index}>{desc}</p>
+              <p key={index}>{t(desc)}</p>
               <br />
             </>
           ))}

@@ -1,6 +1,7 @@
 // CompanyInfo.tsx - komponent informacji o firmie
 import Image from 'next/image';
 import styles from './CompanyInfo.module.scss';
+import useTranslate from '@/hooks/useTranslate';
 
 interface CompanyInfoProps {
   company: string;
@@ -13,10 +14,12 @@ export default function CompanyInfo({
   period,
   icon,
 }: CompanyInfoProps) {
+  const { t } = useTranslate();
+
   return (
     <div className={styles.company}>
       <div>
-        <div className={styles.period}>{period}</div>
+        <div className={styles.period}>{t(period)}</div>
         <div className={styles.name}>{company}</div>
       </div>
       <Image
