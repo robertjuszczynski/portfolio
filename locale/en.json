@@ -45,7 +45,8 @@
   "projects": {
     "header": {
       "label": "Think. Code. Ship.",
-      "title": "Things I've built",
+      "title": "Things I've ",
+      "title1": "built",
       "description": "Explore our portfolio of exceptional web design and custom Webflow websites that drive results for businesses worldwide."
     },
     "tigo": {
@@ -79,5 +80,40 @@
     "line3": "functionality with clean design. I focus on",
     "line4": "delivering reliable, user-centered products",
     "line5": "that meet real-world needs."
+  },
+  "about": {
+    "label": "LITTLE BIT ABOUT MYSELF",
+    "title": "Some say I <debug>debug</debug> in my sleep.",
+    "paragraph1": "I'm Robert a proactive full-stack developer passionate about creating dynamic web experiences. From frontend to backend, I thrive on solving complex problems with clean, efficient code. My expertise spans React, Next.js, and Node.js, and I'm always eager to learn more.",
+    "paragraph2": "When I'm not immersed in work, I'm exploring new ideas and staying curious. Life's about balance, and I love embracing every part of it.",
+    "paragraph3": "I believe in waking up each day eager to make a difference!",
+    "contactButton": "Let's Connect"
+  },
+  "ribbon": {
+    "items": {
+      "fullstack": "Full-stack expertise",
+      "webdev": "Web development",
+      "uiux": "Occasional UI/UX design",
+      "pragmatic": "Pragmatic solutions",
+      "bem": "BEM methodology",
+      "typed": "Strongly typed code",
+      "clean": "Clean and maintainable code",
+      "passionate": "Passionate coder",
+      "fitness": "Fitness enthusiast",
+      "build": "Let's build something together"
+    }
+  },
+  "skills": {
+    "label": "Learn it. Use it. Master it.",
+    "title1": "Skills &",
+    "title2": "Technologies"
+  },
+  "footer": {
+    "title": "Get in touch",
+    "menu": "Menu",
+    "contact": "Contact",
+    "socials": "Socials",
+    "message": "Always curious about new projects and challenges. Whether you're looking for a full-time teammate or a freelance partner, I'm just a message away. Let's connect!",
+    "scrollToTop": "Take me to the top"
   }
 }

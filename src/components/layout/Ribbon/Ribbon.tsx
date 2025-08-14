@@ -1,19 +1,21 @@
 import React, { memo } from 'react'
 import styles from './Ribbon.module.scss';
+import useTranslate from '@/hooks/useTranslate';
 
 const Ribbon = () => {
+  const { t } = useTranslate();
+  
   const items = [
-    "Dedicated systems",
-    "Websites",
-    "Sometimes design",
-    "Do not reinvent the wheel",
-    "BEM",
-    "Strong typing",
-    "Clean code structure",
-    "Code lover",
-    "Working out is life!",
-    "Do you read any of this?",
-    "Let's talk about our future plans"
+    t('ribbon.items.fullstack'),
+    t('ribbon.items.webdev'),
+    t('ribbon.items.uiux'),
+    t('ribbon.items.pragmatic'),
+    t('ribbon.items.bem'),
+    t('ribbon.items.typed'),
+    t('ribbon.items.clean'),
+    t('ribbon.items.passionate'),
+    t('ribbon.items.fitness'),
+    t('ribbon.items.build')
   ];
 
   const renderItems = () => {

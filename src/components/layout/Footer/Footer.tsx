@@ -5,10 +5,12 @@ import { motion, useInView } from 'framer-motion';
 import styles from './Footer.module.scss';
 import { ArrowUpRight, MoveUp } from 'lucide-react';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useTranslate from '@/hooks/useTranslate';
 
 const Footer = () => {
   const footerRef = useRef(null);
   const { isMobile } = useMediaQuery();
+  const { t } = useTranslate();
   const isInView = useInView(footerRef, {
     amount: isMobile ? 0.3 : 0.8,
     once: true,
@@ -93,11 +95,11 @@ const Footer = () => {
         variants={containerVariants}
       >
         <motion.h2 className={styles.footer__title} variants={containerVariants}>
-          Get in <span className='globals_text-gradient'>touch</span>
+          {t('footer.title')}<span className='globals_text-gradient'>{t('footer.title2')}</span>
         </motion.h2>
       </motion.div>
 
-      { !isMobile &&<motion.div
+      { !isMobile && <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-1']}`}
         variants={containerVariants}
       ></motion.div> }
@@ -208,7 +210,7 @@ const Footer = () => {
         className={`${styles.footer__section} ${styles['footer__section--empty-2']}`}
         variants={containerVariants}
       ></motion.div> }
-      { !isMobile &&<motion.div
+      { !isMobile && <motion.div
         className={`${styles.footer__section} ${styles['footer__section--empty-3']}`}
         variants={containerVariants}
       ></motion.div> }
@@ -221,7 +223,7 @@ const Footer = () => {
           className={styles.footer__column}
           variants={containerVariants}
         >
-          <motion.h3 className={styles.footer__heading}>Menu</motion.h3>
+          <motion.h3 className={styles.footer__heading}>{t('footer.menu')}</motion.h3>
           <motion.div
             className={styles.footer__itemslist}
             variants={containerVariants}
@@ -232,7 +234,7 @@ const Footer = () => {
               variants={itemVariants}
               {...linkHoverProps}
             >
-              Projects
+              {t('navigation.projects')}
             </motion.a>
             <motion.a
               href='#experience'
@@ -240,7 +242,7 @@ const Footer = () => {
               variants={itemVariants}
               {...linkHoverProps}
             >
-              Experience
+              {t('navigation.experience')}
             </motion.a>
             <motion.a
               href='#skills'
@@ -248,7 +250,7 @@ const Footer = () => {
               variants={itemVariants}
               {...linkHoverProps}
             >
-              Skills & Technologies
+              {t('navigation.skills')}
             </motion.a>
             <motion.a
               href='#about'
@@ -256,7 +258,7 @@ const Footer = () => {
               variants={itemVariants}
               {...linkHoverProps}
             >
-              About me
+              {t('navigation.about')}
             </motion.a>
             <motion.a
               href='#contact'
@@ -264,7 +266,7 @@ const Footer = () => {
               variants={itemVariants}
               {...linkHoverProps}
             >
-              Contact
+              {t('navigation.contact')}
             </motion.a>
           </motion.div>
         </motion.div>
@@ -274,7 +276,7 @@ const Footer = () => {
           variants={containerVariants}
         >
           <motion.h3 className={styles.footer__heading}>
-            <motion.a href='#contact'>Contact</motion.a>
+            <motion.a href='#contact'>{t('footer.contact')}</motion.a>
           </motion.h3>
           <motion.div
             className={styles.footer__itemslist}
@@ -303,7 +305,7 @@ const Footer = () => {
           className={styles.footer__column}
           variants={containerVariants}
         >
-          <motion.h3 className={styles.footer__heading}>Socials</motion.h3>
+          <motion.h3 className={styles.footer__heading}>{t('footer.socials')}</motion.h3>
           <motion.div
             className={styles.footer__itemslist}
             variants={containerVariants}
@@ -372,11 +374,7 @@ const Footer = () => {
             },
           }}
         >
-          Always curious about new projects and challenges. Whether you're
-          looking for a{' '}
-          <span className='globals_text-gradient'>full-time teammate</span> or a{' '}
-          <span className='globals_text-gradient'>freelance partner</span>, I'm
-          just a message away. Let's connect!
+          {t('footer.message')}
         </motion.p>
         <motion.button
           onClick={scrollToTop}
@@ -395,7 +393,7 @@ const Footer = () => {
           }}
           whileTap={{ scale: 0.95 }}
         >
-          Take me to the top
+          {t('footer.scrollToTop')}
           <motion.div
             className={styles.footer__scrollIcon}
             animate={{ y: [0, -5, 0] }}

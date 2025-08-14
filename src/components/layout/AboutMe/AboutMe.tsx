@@ -4,13 +4,31 @@ import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import styles from './AboutMe.module.scss';
 import Image from 'next/image';
+import useTranslate from '@/hooks/useTranslate';
 
 const AboutMe = () => {
+  const { t } = useTranslate();
+  
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const renderTitle = () => {
+    const title = t('about.title');
+    if (title.includes('<debug>') && title.includes('</debug>')) {
+      const parts = title.split(/<debug>|<\/debug>/);
+      return (
+        <>
+          {parts[0]}
+          <span className="globals_text-gradient">{parts[1]}</span>
+          {parts[2]}
+        </>
+      );
+    }
+    return title;
   };
 
   return (
@@ -26,9 +44,9 @@ const AboutMe = () => {
           viewport={{ amount: 0.3, once: true }}
           className={styles.aboutMeHeader}
         >
-          <p className={styles.aboutMeHeader__label}>LITTLE BIT ABOUT MYSELF</p>
+          <p className={styles.aboutMeHeader__label}>{t('about.label')}</p>
           <h2 className={styles.aboutMeHeader__title}>
-            Some say I <span className="globals_text-gradient">debug</span> in my sleep.
+            {renderTitle()}
           </h2>
         </motion.div>
 
@@ -42,20 +60,9 @@ const AboutMe = () => {
           }}
           viewport={{ amount: 0.3, once: true }}
         >
-          <p>
-            I'm Robert a proactive full-stack developer passionate about creating dynamic web experiences. 
-            From frontend to backend, I thrive on solving complex problems with clean, efficient code. 
-            My expertise spans React, Next.js, and Node.js, and I'm always eager to learn more.
-          </p>
-          
-          <p>
-            When I'm not immersed in work, I'm exploring new ideas and staying curious. 
-            Life's about balance, and I love embracing every part of it.
-          </p>
-          
-          <p>
-            I believe in waking up each day eager to make a difference!
-          </p>
+          <p>{t('about.paragraph1')}</p>
+          <p>{t('about.paragraph2')}</p>
+          <p>{t('about.paragraph3')}</p>
           
           <motion.button 
             className={styles.aboutMe__contactButton}
@@ -69,7 +76,7 @@ const AboutMe = () => {
             }}
             viewport={{ amount: 0.3, once: true }}
           >
-            Let's Connect
+            {t('about.contactButton')}
           </motion.button>
         </motion.div>
       </div>

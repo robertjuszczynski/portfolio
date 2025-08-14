@@ -44,9 +44,10 @@
   },
   "projects": {
     "header": {
-      "label": "Myśl. Koduj. Wdrażaj.",
-      "title": "Moje Projekty",
-      "description": "Zobacz moje portfolio wyjątkowych systemów dedykowanych i stron internetowych, które przynoszą rezultaty dla firm na całym świecie."
+      "label": "Planuję.  Koduję.  Wdrażam.",
+      "title": "Moje ",
+      "title1": "Projekty",
+      "description": "Zobacz moje portfolio systemów dedykowanych i stron internetowych, które przynoszą rezultaty dla firm na całym świecie."
     },
     "tigo": {
       "name": "Tigo",
@@ -79,5 +80,41 @@
     "line3": "do Twoich potrzeb i oczekiwań. Każdy projekt",
     "line4": "przygotowuję z myślą o wysokiej stabilności",
     "line5": "doskonałej wydajności i długotrwałej wartości."
+  },
+  "about": {
+    "label": "KILKA SŁÓW O MNIE",
+    "title": "Niektórzy mówią, że <debug>debuguję</debug> przez sen.",
+    "paragraph1": "Jestem proaktywnym full-stack developerem z pasją do tworzenia nowoczesnych doświadczeń w sieci. Znam się na wielu technologiach i potrafię znaleźć rozwiązanie w każdej sytuacji. Uwielbiam wyzwania, a każdy nowy projekt to okazja do nauki i rozwoju.",
+    "paragraph2": "W życiu szukam równowagi – poza pracą rozwijam się na wielu płaszczyznach, poszerzając horyzonty i odkrywając nowe możliwości.",
+    "paragraph3": "Codziennie staram się przekraczać własne granice i tworzyć rzeczy, które mają znaczenie – zarówno w pracy, jak i w życiu.",
+    "contactButton": "Porozmawiajmy!"
+  },
+  "ribbon": {
+    "items": {
+      "fullstack": "Ekspert w robieniu stron www",
+      "uiux": "Design UI/UX",
+      "pragmatic": "Rozwiązania",
+      "webdev": "Tworzenie stron www",
+      "bem": "Metodologia BEM",
+      "typed": "Silnie typowany kod",
+      "clean": "Czysty i łatwy w utrzymaniu kod",
+      "passionate": "Pasjonat kodowania",
+      "fitness": "Entuzjasta siłowni",
+      "build": "Stwórzmy coś razem!"
+    }
+  },
+  "skills": {
+    "label": "Poznaj. Opanuj. Użyj.",
+    "title1": "Skille i",
+    "title2": "Technologie"
+  },
+  "footer": {
+    "title": "Po",
+    "title2": "gadajmy",
+    "menu": "Menu",
+    "contact": "Kontakt",
+    "socials": "Social Media",
+    "message": "Zawsze jestem ciekaw nowych projektów i wyzwań. Niezależnie od tego, czy szukasz kogoś na pełny etat czy do współpracy freelancerskiej, jestem tylko wiadomość stąd. Połączmy siły!",
+    "scrollToTop": "Wróć na górę"
   }
 }

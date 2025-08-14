@@ -102,6 +102,13 @@
       margin-bottom: 24px;
     }
 
+    &__descExpanded {
+      text-overflow: initial;
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+
     &__technologies {
       gap: 8px;
       margin-bottom: 26px;

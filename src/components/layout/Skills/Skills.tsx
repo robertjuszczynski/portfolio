@@ -4,8 +4,11 @@ import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Skills.module.scss';
 import TechTag from '../../common/TechTag';
+import useTranslate from '@/hooks/useTranslate';
 
 const SkillsSection = () => {
+  const { t } = useTranslate();
+  
   const technologies = [
     'React.js',
     'Next.js',
@@ -39,7 +42,7 @@ const SkillsSection = () => {
         className={styles.skillsHeader}
       >
         <p className={styles.skillsHeader__label}>
-          Learn it. Use it. Master it.
+          {t('skills.label')}
         </p>
         <div className={styles.skillsHeader__title}>
           <div style={{
@@ -47,13 +50,13 @@ const SkillsSection = () => {
             alignItems: 'center',
             gap: '48px'
           }}>
-            Skills &
+            {t('skills.title1')}
             <motion.div
               viewport={{ once: true }}
               className={styles.skillsHeader__divider}
             />
           </div>
-          <span className='globals_text-gradient'>Technologies</span>
+          <span className='globals_text-gradient'>{t('skills.title2')}</span>
         </div>
       </motion.div>
 

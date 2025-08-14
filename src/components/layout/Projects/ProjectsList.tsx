@@ -32,17 +32,8 @@ export default function ProjectsList() {
         >
           <p className={styles.projectsHeader__label}>{t('projects.header.label')}</p>
           <h2 className={styles.projectsHeader__title}>
-            {t('projects.header.title').split('<span>').map((part, index, array) => {
-              if (index < array.length - 1) {
-                const [text, rest] = part.split('</span>');
-                return (
-                  <React.Fragment key={index}>
-                    {text}<span className='globals_text-gradient'>built</span>{rest}
-                  </React.Fragment>
-                );
-              }
-              return part;
-            })}
+            <span>{t('projects.header.title')}</span>
+            <span className='globals_text-gradient'>{t('projects.header.title1')}</span>
           </h2>
           <p className={styles.projectsHeader__desc}>
             {t('projects.header.description')}
