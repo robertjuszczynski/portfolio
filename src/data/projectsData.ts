@@ -2,40 +2,23 @@ import { ProjectsData } from '@/types/projects';
 
 const projectsData: ProjectsData = [
   {
-    name: 'projects.tigo.name',
-    desc: 'projects.tigo.desc',
-    technologies: [
-      'Vue.js',
-      'Nuxt.js',
-      'Laravel',
-      'PHP',
-      'JavaScript',
-      'Vuetify',
-      'Webpack',
-      'MySQL'
-    ],
-    links: [
-      {
-        name: 'Demo',
-        src: 'https://app.tigo.pl',
-      },
-    ],
-    imgSrc: '/images/screenshots/tigo.png',
-  },
-  {
     name: 'projects.cashlo.name',
     desc: 'projects.cashlo.desc',
     technologies: [
-      'Next.js',
-      'React.js',
+      'React Native',
       'TypeScript',
-      'Node.js',
-      'Express.js',
+      'React Query',
+      'Expo',
+      'Tailwind',
+      'Apollo Client',
+      'React Native Reanimated',
+      'React Navigation',
       'GraphQL',
-      'Prisma',
       'PostgreSQL',
-      'Tailwind CSS',
-      'Jest',
+      'Express',
+      'Prisma ORM',
+      'Apollo Server',
+      'JWT',
     ],
     links: [],
     imgSrc: '/images/screenshots/cashlo.png',
@@ -55,6 +38,27 @@ const projectsData: ProjectsData = [
     ],
     links: [],
     imgSrc: '/images/screenshots/claimStudio.png',
+  },
+  {
+    name: 'projects.tigo.name',
+    desc: 'projects.tigo.desc',
+    technologies: [
+      'Vue.js',
+      'Nuxt.js',
+      'Laravel',
+      'PHP',
+      'JavaScript',
+      'Vuetify',
+      'Webpack',
+      'MySQL'
+    ],
+    links: [
+      {
+        name: 'Demo',
+        src: 'https://app.tigo.pl',
+      },
+    ],
+    imgSrc: '/images/screenshots/tigo.png',
   },
   {
     name: 'projects.portfolio.name',

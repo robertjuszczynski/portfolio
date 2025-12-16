@@ -59,7 +59,7 @@
     },
     "cashlo": {
       "name": "Cashlo",
-      "desc": "A personal budget management system built with a modern full-stack architecture. The application leverages Next.js and React for the frontend, with a separate Node.js + Express backend. Data is managed using PostgreSQL, Prisma ORM, and GraphQL. The project includes automated testing with Jest."
+      "desc": "Cashlo is a mobile iOS app for personal finance management based on the envelope budgeting method, helping users plan expenses, track spending, and stay in control of their household budget through clear categories and real-time insights.Cashlo is a mobile iOS app for personal finance management based on the envelope budgeting method, helping users plan expenses, track spending, and stay in control of their household budget through clear categories and real-time insights."
     },
     "portfolio": {
       "name": "Portfolio",

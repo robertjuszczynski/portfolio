@@ -59,7 +59,7 @@
     },
     "cashlo": {
       "name": "Cashlo",
-      "desc": "System zarządzania budżetem osobistym zbudowany w nowoczesnej architekturze full-stack. Aplikacja wykorzystuje Next.js i React na frontendzie, z oddzielnym backendem Node.js + Express. Dane są zarządzane używając PostgreSQL, Prisma ORM i Supabase do autoryzacji i funkcji czasu rzeczywistego. Projekt zawiera automatyczne testowanie z Jest."
+      "desc": "Cashlo to mobilna aplikacja iOS do zarządzania finansami osobistymi oparta na metodzie budżetowania kopertowego. Pomaga użytkownikom planować wydatki, śledzić ich realizację oraz utrzymywać kontrolę nad budżetem domowym dzięki czytelnym kategoriom i danym w czasie rzeczywistym."
     },
     "portfolio": {
       "name": "Portfolio",
