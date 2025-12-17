@@ -4,10 +4,13 @@ import { MessagesSquare, X, Sparkles } from 'lucide-react';
 import styles from './ChatBot.module.scss';
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect, memo } from 'react';
+import { useParams } from 'next/navigation';
 import ChatMessageComponent, { type ChatMessage } from './ChatMessage';
 import ChatInput from './ChatInput';
 
 const ChatBot = () => {
+  const params = useParams();
+  const lang = (params?.lang as 'en' | 'pl') || 'en';
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<any[]>([]);
   const [isWaiting, setIsWaiting] = useState(false);
@@ -80,6 +83,7 @@ const ChatBot = () => {
         <ChatInput
           addMessage={addMessage}
           setIsWaiting={setIsWaiting}
+          lang={lang}
         />
       </motion.div>
     </div>

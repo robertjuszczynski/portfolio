@@ -6,9 +6,10 @@ import { apiRoutes } from '@/lib/apiRoutes';
 interface ChatInputProps {
   addMessage: (message: { text: string, type: 'user' | 'bot' }) => void;
   setIsWaiting: (isWaiting: boolean) => void;
+  lang: 'en' | 'pl';
 }
 
-export default function ChatInput({ addMessage, setIsWaiting }: ChatInputProps) {
+export default function ChatInput({ addMessage, setIsWaiting, lang }: ChatInputProps) {
   const [inputValue, setInputValue] = useState('');
   const [inputWaiting, setInputWaiting] = useState(false);
 
@@ -33,16 +34,20 @@ export default function ChatInput({ addMessage, setIsWaiting }: ChatInputProps) 
         },
         body: JSON.stringify({
           prompt: userMessage,
+          lang: lang,
         }),
       });
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
 
       const data = await response.json();
 
-      addMessage({ text: data.message.text, type: 'bot' });
+      // If response contains an error message, display it
+      if (data.message?.text) {
+        addMessage({ text: data.message.text, type: 'bot' });
+      } else if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      } else {
+        addMessage({ text: data.message.text, type: 'bot' });
+      }
     } catch (error) {
       console.error('Error fetching AI response:', error);
       addMessage({ text: 'Sorry, I encountered an error. Please try again.', type: 'bot' });
