@@ -2,6 +2,12 @@
   "common": {
     "new": "Nowe"
   },
+  "refactoring": {
+    "badge": "W trakcie przebudowy",
+    "title": "Portfolio",
+    "titleAccent": "refaktoryzowane",
+    "desc": "Trwa gruntowna przebudowa projektu. Wróć niebawem — nowa wersja będzie warta czekania."
+  },
   "navigation": {
     "projects": "Projekty",
     "experience": "Kompetencje",

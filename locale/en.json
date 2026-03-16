@@ -2,6 +2,12 @@
   "common": {
     "new": "New"
   },
+  "refactoring": {
+    "badge": "Under refactoring",
+    "title": "Portfolio",
+    "titleAccent": "being refactored",
+    "desc": "A major rebuild is in progress. Check back soon, the new version will be worth the wait."
+  },
   "navigation": {
     "projects": "Projects",
     "experience": "Experience", 
