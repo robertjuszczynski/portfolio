@@ -29,7 +29,7 @@ export function Principles() {
     const reel = el.querySelector<HTMLElement>('.rt-reel')
     const items = gsap.utils.toArray<HTMLElement>('.rt-reel .rt-body', el)
     const last = STEPS.length - 1
-    const roll = gsap.parseEase('expo.inOut')
+    const roll = gsap.parseEase('sine.inOut')
 
     const measure = () => {
       if (!reel) return
@@ -44,11 +44,12 @@ export function Principles() {
       start: 'top top',
       end: () => `+=${STEPS.length * 70}%`,
       pin: true,
+      anticipatePin: 1,
       onRefresh: measure,
       onUpdate: (self) => {
         const raw = self.progress * STEPS.length
         const step = Math.min(last, Math.floor(raw))
-        const local = gsap.utils.clamp(0, 1, (raw - step - 0.45) / 0.55)
+        const local = gsap.utils.clamp(0, 1, (raw - step - 0.2) / 0.8)
         const pos = Math.min(last, step + (step < last ? roll(local) : 0))
         tracks.forEach((track) => { track.style.transform = `translateY(${(-pos / STEPS.length) * 100}%)` })
         fills.forEach((fill, i) => { fill.style.transform = `scaleX(${gsap.utils.clamp(0, 1, raw - i)})` })

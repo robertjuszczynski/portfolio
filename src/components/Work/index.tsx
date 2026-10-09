@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from '../../lib/gsap'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { gsap, ScrollTrigger } from '../../lib/gsap'
 import { useGsap } from '../../hooks/useGsap'
+import { useMotion } from '../../context/motion'
 import { projects } from '../../data/projects'
 import { introDone } from '../../lib/intro'
 import { SectionHead } from '../ui/SectionHead'
@@ -16,6 +17,26 @@ function splitCategory(category: string) {
 export function Work() {
   const ref = useRef<HTMLElement>(null)
   const [open, setOpen] = useState<number | null>(null)
+  const motion = useMotion()
+  const first = useRef(true)
+
+  useLayoutEffect(() => {
+    const details = gsap.utils.toArray<HTMLElement>('.row-detail', ref.current)
+    if (first.current) {
+      first.current = false
+      gsap.set(details, { height: 0 })
+      return
+    }
+    details.forEach((detail, i) => {
+      gsap.to(detail, {
+        height: i === open ? 'auto' : 0,
+        duration: motion ? 0.9 : 0,
+        ease: 'expo.inOut',
+        overwrite: true,
+        onComplete: () => ScrollTrigger.refresh(),
+      })
+    })
+  }, [open, motion])
 
   useEffect(() => {
     let cancelled = false
