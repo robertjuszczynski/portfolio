@@ -47,8 +47,9 @@ export function Hero() {
             <span className="mask"><span>build it, and <em>ship it.</em></span></span>
           </h1>
           <p className="hero-sub">
-            Full-stack, AI-native by default. I run several agents in parallel and review every line they write,
-            because <em>unsupervised AI ships slop</em>, same as a junior nobody reviews.
+            Full-stack engineer building software together with AI agents. AI is a tool worth embracing, not avoiding.
+            I use it to handle boilerplate and repetitive tasks, while staying in control of architecture, complex
+            engineering decisions, and every change that ships. <em>Embrace AI. Stay in control.</em>
           </p>
         </div>
 

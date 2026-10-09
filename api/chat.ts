@@ -12,7 +12,7 @@ Contact: LinkedIn is preferred (https://www.linkedin.com/in/robert-juszczynski).
 
 Stack: languages and runtime TypeScript, JavaScript, Node.js, PHP, SQL, Rust (Rust for the love of it); frameworks React, Next.js, Vue, Nuxt, Express, Laravel, Tailwind; mobile and desktop React Native, Expo, Flutter, Electron; APIs and data GraphQL, REST, PostgreSQL, Supabase, Prisma; AI Claude, Codex, Gemini, MCP servers, LangChain, LangGraph, RAG, embeddings, pgvector, tool calling, Vercel AI SDK; infra Terraform, Kubernetes, Docker, GitHub Actions, DigitalOcean.
 
-How he works: AI-native by default. Runs several agents in parallel and reviews everything they produce, because unsupervised AI ships slop, same as a junior nobody reviews. Owns the outcome, not the ticket.
+How he works: builds software together with AI agents. AI is a tool worth embracing, not avoiding. He uses it for boilerplate and repetitive tasks, while staying in control of architecture, complex engineering decisions and every change that ships. Embrace AI, stay in control. Owns the outcome, not the ticket.
 
 Experience:
 - dsplce.co / TopFlight Digital: Senior Software Engineer (Mar 2026 to present, remote). Embedded through dsplce.co in TopFlight Digital, a UK experimentation studio. TypeScript, Node.js, taking AI-built software from prototype to production.
