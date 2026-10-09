@@ -52,7 +52,7 @@ export function Principles() {
         const local = gsap.utils.clamp(0, 1, (raw - step - 0.2) / 0.8)
         const pos = Math.min(last, step + (step < last ? roll(local) : 0))
         tracks.forEach((track) => { track.style.transform = `translateY(${(-pos / STEPS.length) * 100}%)` })
-        fills.forEach((fill, i) => { fill.style.transform = `scaleX(${gsap.utils.clamp(0, 1, raw - i)})` })
+        fills.forEach((fill, i) => { fill.style.clipPath = `inset(0 ${(1 - gsap.utils.clamp(0, 1, raw - i)) * 100}% 0 0)` })
         if (total) total.textContent = `${String(Math.round(self.progress * 100)).padStart(3, '0')}`
         setIndex(Math.round(pos))
       },
@@ -109,12 +109,15 @@ export function Principles() {
         </div>
 
         <div className="rules-progress" aria-hidden="true">
-          {STEPS.map((_, i) => (
-            <span key={i} className={`cell ${i === index ? 'is-current' : ''}`}>
-              <i />
-              <b>{pad(i + 1)} {STEPS[i].title}{i === index && <> <Arrow dir="left" /></>}</b>
-            </span>
-          ))}
+          {STEPS.map((step, i) => {
+            const label = <b>{pad(i + 1)} {step.title}{i === index && <> <Arrow dir="left" /></>}</b>
+            return (
+              <span key={i} className={`cell ${i === index ? 'is-current' : ''}`}>
+                {label}
+                <i>{label}</i>
+              </span>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -26,6 +26,7 @@ export function Nav({ theme, onTheme }: Props) {
   const [shown, setShown] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const tlRef = useRef<gsap.core.Timeline | null>(null)
+  const pendingRef = useRef<string | number | null>(null)
 
   useEffect(() => {
     if (open) {
@@ -38,6 +39,9 @@ export function Nav({ theme, onTheme }: Props) {
     const finish = () => {
       setShown(false)
       lockScroll(false)
+      const target = pendingRef.current
+      pendingRef.current = null
+      if (target !== null) requestAnimationFrame(() => scrollToTarget(target))
     }
     if (!menu || !motion) {
       finish()
@@ -75,8 +79,8 @@ export function Nav({ theme, onTheme }: Props) {
       scrollToTarget(target)
       return
     }
+    pendingRef.current = target
     setOpen(false)
-    setTimeout(() => scrollToTarget(target), motion ? 950 : 0)
   }
 
   return (

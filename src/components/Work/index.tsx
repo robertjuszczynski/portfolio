@@ -65,7 +65,7 @@ export function Work() {
     })
     gsap.utils.toArray<HTMLElement>('.work-row, .work-head', el).forEach((row) => {
       gsap.fromTo(row, { clipPath: 'inset(-2px 105% -2px -2px)' }, {
-        clipPath: 'inset(-2px -2px -2px -2px)',
+        clipPath: 'inset(-2px -1% -2px -2px)',
         duration: 1.2,
         ease: 'expo.inOut',
         clearProps: 'clipPath',

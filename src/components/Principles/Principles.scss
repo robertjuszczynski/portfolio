@@ -107,7 +107,6 @@
 
   span {
     position: relative;
-    isolation: isolate;
     overflow: hidden;
     padding: 8px 10px;
     font-size: 11px;
@@ -117,10 +116,11 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: #fff;
-    mix-blend-mode: difference;
-    transform: scaleX(0);
-    transform-origin: left;
+    padding: 8px 10px;
+    font-style: normal;
+    background: var(--fg);
+    color: var(--bg);
+    clip-path: inset(0 100% 0 0);
   }
 
   b { font-weight: 400; }

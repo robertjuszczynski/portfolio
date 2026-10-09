@@ -26,7 +26,7 @@ export function Contact() {
       scrollTrigger: { trigger: '.contact-title', start: 'top 85%' },
     })
     gsap.fromTo('.contact-mail', { clipPath: 'inset(-2px 105% -2px -2px)' }, {
-      clipPath: 'inset(-2px -2px -2px -2px)',
+      clipPath: 'inset(-2px -1% -2px -2px)',
       duration: 1.2,
       ease: 'expo.inOut',
       stagger: 0.08,

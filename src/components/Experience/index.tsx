@@ -11,7 +11,7 @@ export function Experience() {
   useGsap(ref, (el) => {
     gsap.utils.toArray<HTMLElement>('.exp-row', el).forEach((row) => {
       gsap.fromTo(row.children, { clipPath: 'inset(-2px 105% -2px -2px)' }, {
-        clipPath: 'inset(-2px -2px -2px -2px)',
+        clipPath: 'inset(-2px -1% -2px -2px)',
         duration: 1.1,
         ease: 'expo.inOut',
         stagger: 0.12,

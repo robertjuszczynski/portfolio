@@ -32,7 +32,7 @@ export function About() {
       }
     )
     gsap.fromTo('.about-photo', { clipPath: 'inset(-2px -2px 105% -2px)' }, {
-      clipPath: 'inset(-2px -2px -2px -2px)',
+      clipPath: 'inset(-2px -2px -1% -2px)',
       duration: 1.1,
       ease: 'expo.inOut',
       clearProps: 'clipPath',
@@ -44,7 +44,7 @@ export function About() {
       scrollTrigger: { trigger: '.about-photo', start: 'top bottom', end: 'bottom top', scrub: true },
     })
     gsap.fromTo('.about-meta > div', { clipPath: 'inset(-2px 105% -2px -2px)' }, {
-      clipPath: 'inset(-2px -2px -2px -2px)',
+      clipPath: 'inset(-2px -1% -2px -2px)',
       duration: 1.1,
       ease: 'expo.inOut',
       stagger: 0.1,
