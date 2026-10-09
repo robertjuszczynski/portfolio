@@ -59,7 +59,7 @@ export function About() {
 
       <div className="about-grid">
         <figure className="cell about-photo">
-          <img src="/assets/robert.jpeg" alt="Portrait of Robert Juszczyński" loading="lazy" decoding="async" width="460" height="460" />
+          <img src="/assets/robert.webp" alt="Portrait of Robert Juszczyński" loading="lazy" decoding="async" width="460" height="460" />
         </figure>
 
         <span className="about-note label muted">

@@ -25,7 +25,7 @@ export const projects: Project[] = [
     stack: ['React', 'Node.js', 'TypeScript', 'PHP', 'PostgreSQL', 'Angular', 'Jenkins'],
     links: [],
     role: 'Full-stack Developer',
-    imgSrc: '/images/screenshots/claimStudio.png',
+    imgSrc: '/images/screenshots/claimStudio.webp',
   },
   {
     number: '02',
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     stack: ['Vue.js', 'Nuxt.js', 'Laravel', 'PHP', 'MySQL', 'WebSockets'],
     links: [{ label: 'Demo', href: 'https://app.tigo.pl' }],
     role: 'Full-stack Developer',
-    imgSrc: '/images/screenshots/tigo.png',
+    imgSrc: '/images/screenshots/tigo.webp',
   },
   {
     number: '03',
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     stackHighlight: 'Lead',
     links: [],
     role: 'Sole Engineer',
-    imgSrc: '/images/screenshots/cashlo.png',
+    imgSrc: '/images/screenshots/cashlo.webp',
   },
   {
     number: '04',
@@ -56,6 +56,6 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Vite', 'GSAP', 'SCSS', 'Claude API'],
     links: [{ label: 'GH', href: 'https://github.com/robertjuszczynski/portfolio' }],
     role: 'Sole Engineer',
-    imgSrc: '/images/screenshots/portfolio.png',
+    imgSrc: '/images/screenshots/portfolio.webp',
   },
 ]

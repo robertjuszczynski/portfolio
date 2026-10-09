@@ -13,6 +13,7 @@ import { Experience } from './components/Experience'
 import { Contact } from './components/Contact'
 import { Cursor } from './components/Cursor'
 import { Loader } from './components/Loader'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import type { Theme } from './components/ui/ThemeSwitch'
 
 const motionAllowed = () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -61,6 +62,7 @@ export function App() {
   return (
     <MotionContext.Provider value={motion}>
       <Loader />
+      <SpeedInsights />
       <Nav theme={theme} onTheme={toggleTheme} />
       <main>
         <Hero />

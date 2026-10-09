@@ -9,14 +9,27 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href="/fonts/FivoSansModern-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800&display=swap"
-      rel="stylesheet"
-    />
+    <script>
+      try {
+        var t = localStorage.getItem('theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
+    <style>
+      @font-face { font-family: 'Fivo Sans Modern'; src: url('/fonts/FivoSansModern-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+      #boot { position: fixed; will-change: transform; inset: 0; z-index: 2001; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(18px, 2.8vw, 44px); background: #0b0b0b; color: #f2f2ef; font-family: 'Fivo Sans Modern', 'Helvetica Neue', Arial, sans-serif; }
+      #boot .bi { width: min(100%, 420px); padding-top: 0.1em; }
+      #boot .bc { display: block; font-size: clamp(96px, 9vw, 136px); line-height: 1; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+      #boot .bb { overflow: hidden; }
+      #boot .bl { display: block; height: 1.5px; margin-top: 14px; background: #5c5c58; }
+      #boot .bl b { display: block; height: 100%; background: currentColor; transform: scaleX(0); transform-origin: left; }
+      html[data-theme='dark'] #boot { background: #f2f2ef; color: #0b0b0b; }
+      html[data-theme='dark'] #boot .bl { background: #9c9c97; }
+      @media (prefers-reduced-motion: reduce) { #boot { display: none; } }
+    </style>
   </head>
   <body>
+    <div id="boot" aria-hidden="true"><div class="bb"><div class="bi"><span class="bc">000</span><i class="bl"><b></b></i></div></div></div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
