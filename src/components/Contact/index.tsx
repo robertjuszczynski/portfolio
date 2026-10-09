@@ -1,15 +1,12 @@
 import { useRef } from 'react'
 import { gsap } from '../../lib/gsap'
-import { useGsap } from '../../hooks/useGsap'
 import { useFitText } from '../../hooks/useFitText'
+import { useGsap } from '../../hooks/useGsap'
+import { EMAIL, LINKEDIN, MAILTO } from '../../data/links'
+import { Arrow } from '../ui/Arrow'
 import { SectionHead } from '../ui/SectionHead'
 import { Star } from '../ui/Star'
 import './Contact.scss'
-import { Arrow } from '../ui/Arrow'
-
-const EMAIL = 'robert.j.dev@icloud.com'
-const MAILTO = 'mailto:robert.j.dev+website@icloud.com'
-const LINKEDIN = 'https://www.linkedin.com/in/robert-juszczynski'
 
 const MARK = "Let's talk..."
 
@@ -37,7 +34,7 @@ export function Contact() {
     const letters = gsap.utils.toArray<HTMLElement>('.footer-mark .mask > span', el)
     gsap.set(letters, { yPercent: 105 })
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return
+      if (!entry?.isIntersecting) return
       gsap.to(letters, { yPercent: 0, duration: 1.4, ease: 'expo.out', stagger: 0.04 })
       observer.disconnect()
     }, { threshold: 0.2 })

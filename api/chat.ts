@@ -60,7 +60,7 @@ function verify(text: string, sig: unknown) {
 const clean = (text: string) =>
   text
     .normalize('NFKC')
-    .replace(/[\u0000-\u0008\u000B-\u001F\u007F\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]/g, '')
+    .replace(/(?![\n\t])[\p{Cc}\p{Cf}]/gu, '')
     .replace(/<\/?visitor>/gi, '')
     .trim()
 
@@ -83,7 +83,7 @@ const inputGuard = createMiddleware({
   name: 'InputGuard',
   beforeAgent: {
     hook: (state) => {
-      const last = [...state.messages].reverse().find((m) => m._getType() === 'human')
+      const last = state.messages.findLast((m) => HumanMessage.isInstance(m))
       if (!last) return
       const text = textOf(last.content)
       if (INJECTION.some((pattern) => pattern.test(text))) {
@@ -99,8 +99,8 @@ const outputGuard = createMiddleware({
   name: 'OutputGuard',
   afterAgent: {
     hook: (state) => {
-      const last = state.messages[state.messages.length - 1]
-      if (!last || last._getType() !== 'ai') return
+      const last = state.messages.at(-1)
+      if (!AIMessage.isInstance(last)) return
       const text = textOf(last.content)
       if (LEAK.some((fragment) => text.toLowerCase().includes(fragment.toLowerCase()))) {
         return { messages: [new AIMessage(REFUSAL)], jumpTo: 'end' }
@@ -119,14 +119,14 @@ const agent = createAgent({
 })
 
 const visitors = new Map<string, { minute: number[]; day: number; dayStart: number }>()
-let global = { count: 0, dayStart: Date.now() }
+let site = { count: 0, dayStart: Date.now() }
 
 const DAY = 24 * 60 * 60 * 1000
 
 function allow(ip: string) {
   const now = Date.now()
-  if (now - global.dayStart > DAY) global = { count: 0, dayStart: now }
-  if (global.count >= GLOBAL_PER_DAY) return false
+  if (now - site.dayStart > DAY) site = { count: 0, dayStart: now }
+  if (site.count >= GLOBAL_PER_DAY) return false
 
   const v = visitors.get(ip) ?? { minute: [], day: 0, dayStart: now }
   if (now - v.dayStart > DAY) {
@@ -140,7 +140,7 @@ function allow(ip: string) {
   }
   v.minute.push(now)
   v.day += 1
-  global.count += 1
+  site.count += 1
   visitors.set(ip, v)
   return true
 }
@@ -162,14 +162,14 @@ function buildHistory(messages: IncomingMessage[]) {
       history.push(new AIMessage(m.content))
     }
   }
-  while (history.length && history[0]._getType() !== 'human') history.shift()
+  while (history.length && !HumanMessage.isInstance(history[0])) history.shift()
   return history
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method not allowed' })
 
-  const ip = String(req.headers['x-forwarded-for'] ?? req.headers['x-real-ip'] ?? 'unknown').split(',')[0].trim()
+  const ip = String(req.headers['x-forwarded-for'] ?? req.headers['x-real-ip'] ?? '').split(',')[0]?.trim() || 'unknown'
   if (!allow(ip)) {
     return res.status(429).json({ message: "That's enough questions for now. Message Robert on LinkedIn for the rest." })
   }
@@ -180,14 +180,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const history = buildHistory(messages)
-  if (!history.length || history[history.length - 1]._getType() !== 'human') {
+  if (!HumanMessage.isInstance(history.at(-1))) {
     return res.status(400).json({ message: 'Invalid request.' })
   }
 
   try {
     const result = await agent.invoke({ messages: history })
-    const last = result.messages[result.messages.length - 1]
-    const text = (typeof last?.content === 'string' ? last.content : last?.text ?? '').trim() || FALLBACK
+    const last = result.messages.at(-1)
+    const text = (typeof last?.content === 'string' ? last.content : (last?.text ?? '')).trim() || FALLBACK
     return res.status(200).json({ message: text, sig: sign(text) })
   } catch (error) {
     const status = (error as { status?: number })?.status

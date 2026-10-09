@@ -32,7 +32,7 @@ export function Experience() {
           <span className="cell">Note</span>
         </div>
         {timeline.map((item) => (
-          <article key={item.year} className="exp-row">
+          <article key={`${item.company}-${item.year}`} className="exp-row">
             <span className="cell exp-year">{item.year}</span>
             <h3 className="cell exp-role">{item.role}</h3>
             <span className="cell exp-company">{item.company}</span>

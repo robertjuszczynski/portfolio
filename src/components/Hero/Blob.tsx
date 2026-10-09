@@ -3,6 +3,9 @@ import { useMotion } from '../../context/motion'
 import { introDone } from '../../lib/intro'
 
 const PIXEL = 2
+const STATIC_TIME = 4000
+
+const clampUnit = (v: number) => Math.max(-1, Math.min(1, v))
 
 const VERTEX = `
 attribute vec2 aPos;
@@ -75,23 +78,41 @@ void main() {
 }
 `
 
-function readColor(name: string) {
+function readColor(name: string): [number, number, number] {
   const el = document.createElement('span')
   el.style.color = `var(${name})`
   document.body.appendChild(el)
-  const rgb = getComputedStyle(el).color.match(/\d+/g)?.map(Number) ?? [0, 0, 0]
+  const [r = 0, g = 0, b = 0] = getComputedStyle(el).color.match(/\d+/g)?.map(Number) ?? []
   el.remove()
-  return rgb.slice(0, 3).map((v) => v / 255)
+  return [r / 255, g / 255, b / 255]
 }
 
 function compile(gl: WebGLRenderingContext, type: number, source: string) {
-  const shader = gl.createShader(type)!
+  const shader = gl.createShader(type)
+  if (!shader) return null
   gl.shaderSource(shader, source)
   gl.compileShader(shader)
-  return shader
+  if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return shader
+  gl.deleteShader(shader)
+  return null
 }
 
-export function Blob({ className = '' }: { className?: string }) {
+function createProgram(gl: WebGLRenderingContext) {
+  const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX)
+  const fragment = compile(gl, gl.FRAGMENT_SHADER, FRAGMENT)
+  const program = gl.createProgram()
+  if (!vertex || !fragment || !program) return null
+  gl.attachShader(program, vertex)
+  gl.attachShader(program, fragment)
+  gl.linkProgram(program)
+  gl.deleteShader(vertex)
+  gl.deleteShader(fragment)
+  if (gl.getProgramParameter(program, gl.LINK_STATUS)) return program
+  gl.deleteProgram(program)
+  return null
+}
+
+export function Blob() {
   const ref = useRef<HTMLCanvasElement>(null)
   const motion = useMotion()
 
@@ -99,11 +120,8 @@ export function Blob({ className = '' }: { className?: string }) {
     const canvas = ref.current
     const gl = canvas?.getContext('webgl', { antialias: false, alpha: false })
     if (!canvas || !gl) return
-
-    const program = gl.createProgram()!
-    gl.attachShader(program, compile(gl, gl.VERTEX_SHADER, VERTEX))
-    gl.attachShader(program, compile(gl, gl.FRAGMENT_SHADER, FRAGMENT))
-    gl.linkProgram(program)
+    const program = createProgram(gl)
+    if (!program) return
     gl.useProgram(program)
 
     const buffer = gl.createBuffer()
@@ -121,25 +139,6 @@ export function Blob({ className = '' }: { className?: string }) {
       paper: gl.getUniformLocation(program, 'uPaper'),
     }
 
-    const setColors = () => {
-      gl.uniform3fv(u.ink, readColor('--fg'))
-      gl.uniform3fv(u.paper, readColor('--bg'))
-    }
-    setColors()
-    const themeObserver = new MutationObserver(() => {
-      setColors()
-      if (!motion) draw(0)
-    })
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-
-    const resize = () => {
-      canvas.width = Math.max(1, Math.floor(canvas.clientWidth / PIXEL))
-      canvas.height = Math.max(1, Math.floor(canvas.clientHeight / PIXEL))
-      gl.viewport(0, 0, canvas.width, canvas.height)
-      gl.uniform2f(u.res, canvas.width, canvas.height)
-      if (!motion) draw(0)
-    }
-
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 }
     const draw = (time: number) => {
       mouse.x += (mouse.tx - mouse.x) * 0.05
@@ -149,22 +148,40 @@ export function Blob({ className = '' }: { className?: string }) {
       gl.drawArrays(gl.TRIANGLES, 0, 3)
     }
 
+    const setColors = () => {
+      gl.uniform3fv(u.ink, readColor('--fg'))
+      gl.uniform3fv(u.paper, readColor('--bg'))
+      if (!motion) draw(STATIC_TIME)
+    }
+
+    const resize = () => {
+      canvas.width = Math.max(1, Math.floor(canvas.clientWidth / PIXEL))
+      canvas.height = Math.max(1, Math.floor(canvas.clientHeight / PIXEL))
+      gl.viewport(0, 0, canvas.width, canvas.height)
+      gl.uniform2f(u.res, canvas.width, canvas.height)
+      if (!motion) draw(STATIC_TIME)
+    }
+
+    const themeObserver = new MutationObserver(setColors)
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
     const sizeObserver = new ResizeObserver(resize)
     sizeObserver.observe(canvas)
+    setColors()
     resize()
 
-    if (!motion) {
-      draw(4000)
-      return () => {
-        sizeObserver.disconnect()
-        themeObserver.disconnect()
-      }
+    const release = () => {
+      themeObserver.disconnect()
+      sizeObserver.disconnect()
+      gl.deleteBuffer(buffer)
+      gl.deleteProgram(program)
     }
+
+    if (!motion) return release
 
     const onMove = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect()
-      mouse.tx = Math.max(-1, Math.min(1, ((e.clientX - r.left - r.width / 2) / window.innerWidth) * 2))
-      mouse.ty = Math.max(-1, Math.min(1, ((e.clientY - r.top - r.height / 2) / window.innerHeight) * 2))
+      mouse.tx = clampUnit(((e.clientX - r.left - r.width / 2) / window.innerWidth) * 2)
+      mouse.ty = clampUnit(((e.clientY - r.top - r.height / 2) / window.innerHeight) * 2)
     }
     window.addEventListener('pointermove', onMove)
 
@@ -175,24 +192,27 @@ export function Blob({ className = '' }: { className?: string }) {
       draw(time)
       frame = visible ? requestAnimationFrame(loop) : 0
     }
-    const visibility = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting
+    const start = () => {
       if (ready && visible && !frame) frame = requestAnimationFrame(loop)
+    }
+    const visibility = new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? false
+      start()
     })
     visibility.observe(canvas)
     introDone.then(() => {
       ready = true
-      if (visible && !frame) frame = requestAnimationFrame(loop)
+      start()
     })
 
     return () => {
+      ready = false
       cancelAnimationFrame(frame)
       window.removeEventListener('pointermove', onMove)
       visibility.disconnect()
-      sizeObserver.disconnect()
-      themeObserver.disconnect()
+      release()
     }
   }, [motion])
 
-  return <canvas ref={ref} className={`blob ${className}`} aria-hidden="true" />
+  return <canvas ref={ref} className="blob" aria-hidden="true" />
 }

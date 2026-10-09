@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { gsap, ScrollTrigger } from '../../lib/gsap'
+import { cx } from '../../lib/cx'
 import { useGsap } from '../../hooks/useGsap'
 import { stackItems } from '../../data/stack'
 import { SectionHead } from '../ui/SectionHead'
@@ -12,7 +13,7 @@ function MarqueeGroup() {
   return (
     <div className="marquee-group">
       {WORDS.map((w, i) => (
-        <span key={w} className={i % 2 ? 'alt' : ''}>
+        <span key={w} className={cx(i % 2 === 1 && 'alt')}>
           {w}
           <i><Star spin={false} /></i>
         </span>

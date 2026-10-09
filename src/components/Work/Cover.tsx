@@ -1,16 +1,17 @@
 import { useState } from 'react'
+import { cx } from '../../lib/cx'
 import type { Project } from '../../data/projects'
 
 export function Cover({ project, index }: { project: Project; index: number }) {
   const [failed, setFailed] = useState(!project.imgSrc)
 
   return (
-    <div className={`cover ${failed && index % 2 === 0 ? 'invert' : ''}`}>
+    <div className={cx('cover', failed && index % 2 === 0 && 'invert')}>
       {failed ? (
         <>
           <span className="cover-top">
             <span>{project.number}</span>
-            <span>{project.category}</span>
+            <span>{project.category} · {project.year}</span>
           </span>
           <span className="cover-title">{project.title}</span>
           <span className="cover-stack">{project.stack.slice(0, 4).join(' / ')}</span>

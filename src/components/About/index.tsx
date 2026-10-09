@@ -20,7 +20,7 @@ const META = [
 export function About() {
   const ref = useRef<HTMLElement>(null)
 
-  useGsap(ref, (el) => {
+  useGsap(ref, () => {
     gsap.fromTo(
       '.about-text .word',
       { opacity: 0.15 },
@@ -49,7 +49,7 @@ export function About() {
       ease: 'expo.inOut',
       stagger: 0.1,
       clearProps: 'clipPath',
-      scrollTrigger: { trigger: el.querySelector('.about-meta'), start: 'top 92%' },
+      scrollTrigger: { trigger: '.about-meta', start: 'top 92%' },
     })
   })
 

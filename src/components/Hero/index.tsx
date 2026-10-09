@@ -1,13 +1,14 @@
 import { useRef } from 'react'
 import { gsap } from '../../lib/gsap'
-import { useGsap } from '../../hooks/useGsap'
-import { useFitText } from '../../hooks/useFitText'
-import { useLocalTime } from '../../hooks/useLocalTime'
-import { scrollToTarget } from '../../lib/scroll'
 import { introDone } from '../../lib/intro'
+import { scrollToTarget } from '../../lib/scroll'
+import { useFitText } from '../../hooks/useFitText'
+import { useGsap } from '../../hooks/useGsap'
+import { useLocalTime } from '../../hooks/useLocalTime'
+import { GITHUB } from '../../data/links'
+import { Arrow } from '../ui/Arrow'
 import { Blob } from './Blob'
 import './Hero.scss'
-import { Arrow } from '../ui/Arrow'
 
 const NAME = 'Robert Juszczyński'
 
@@ -17,14 +18,20 @@ export function Hero() {
   const time = useLocalTime()
 
   useGsap(ref, () => {
+    let active = true
     const intro = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } })
-    introDone.then(() => intro.play())
+    introDone.then(() => {
+      if (active) intro.play()
+    })
     intro
       .from('.hero-statement .mask > span', { yPercent: 110, duration: 1.4, stagger: 0.09 }, 0.1)
       .from('.hero-name .mask > span', { yPercent: 140, duration: 1.6, stagger: 0.025 }, 0.25)
       .from('.hero-visual', { opacity: 0, scale: 0.85, duration: 1.8 }, 0.2)
       .from('.hero-sub, .hero-kicker', { opacity: 0, y: 16, duration: 1.2, stagger: 0.1 }, 0.7)
       .from('.hero-meta > *', { opacity: 0, duration: 1, stagger: 0.06, ease: 'power2.out' }, 0.9)
+    return () => {
+      active = false
+    }
   })
 
   return (
@@ -52,19 +59,20 @@ export function Hero() {
         </aside>
       </div>
 
-      <div className="hero-name" aria-label={NAME}>
+      <p className="hero-name">
+        <span className="sr-only">{NAME}</span>
         <span ref={nameRef} className="name-fit" aria-hidden="true">
           {NAME.split('').map((ch, i) => (
-            <span key={i} className="mask"><span>{ch === ' ' ? ' ' : ch}</span></span>
+            <span key={i} className="mask"><span>{ch === ' ' ? '\u00a0' : ch}</span></span>
           ))}
         </span>
-      </div>
+      </p>
 
       <div className="hero-meta label">
         <span className="cell">TypeScript / Node.JS / React / Vue / Postgres / AI</span>
-        <span className="cell">Poland  / {time}</span>
-        <a className="cell wipe" href="https://github.com/robertjuszczynski" target="_blank" rel="noopener noreferrer">GitHub <Arrow /></a>
-        <button className="cell wipe" onClick={() => scrollToTarget('#about')}>Scroll <Arrow dir="down" /></button>
+        <span className="cell">Poland / {time}</span>
+        <a className="cell wipe" href={GITHUB} target="_blank" rel="noopener noreferrer">GitHub <Arrow /></a>
+        <button type="button" className="cell wipe" onClick={() => scrollToTarget('#about')}>Scroll <Arrow dir="down" /></button>
       </div>
     </section>
   )

@@ -8,6 +8,7 @@ export function useFitText<T extends HTMLElement>() {
     const el = ref.current
     const parent = el?.parentElement
     if (!el || !parent) return
+    let active = true
 
     const fit = () => {
       const styles = getComputedStyle(parent)
@@ -16,22 +17,22 @@ export function useFitText<T extends HTMLElement>() {
       const width = el.getBoundingClientRect().width
       if (width > 0) el.style.fontSize = `${(100 * available) / width}px`
     }
-
-    fit()
-    document.fonts?.ready.then(() => {
-      fit()
-      ScrollTrigger.refresh()
-    })
-    const observer = new ResizeObserver(fit)
-    observer.observe(parent)
     const refit = () => {
+      if (!active) return
       fit()
       ScrollTrigger.refresh()
     }
-    document.fonts?.addEventListener('loadingdone', refit)
+
+    fit()
+    document.fonts.ready.then(refit)
+    document.fonts.addEventListener('loadingdone', refit)
+    const observer = new ResizeObserver(fit)
+    observer.observe(parent)
+
     return () => {
+      active = false
       observer.disconnect()
-      document.fonts?.removeEventListener('loadingdone', refit)
+      document.fonts.removeEventListener('loadingdone', refit)
     }
   }, [])
 

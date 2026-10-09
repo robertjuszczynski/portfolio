@@ -2,11 +2,9 @@ import { useLayoutEffect, type DependencyList, type RefObject } from 'react'
 import { gsap } from '../lib/gsap'
 import { useMotion } from '../context/motion'
 
-export function useGsap(
-  scope: RefObject<HTMLElement | null>,
-  setup: (el: HTMLElement) => void,
-  deps: DependencyList = []
-) {
+type Cleanup = () => void
+
+export function useGsap(scope: RefObject<HTMLElement | null>, setup: (el: HTMLElement) => Cleanup | void, deps: DependencyList = []) {
   const motion = useMotion()
 
   useLayoutEffect(() => {

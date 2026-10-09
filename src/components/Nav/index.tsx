@@ -1,12 +1,14 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from '../../lib/gsap'
+import { cx } from '../../lib/cx'
 import { lockScroll, scrollToTarget } from '../../lib/scroll'
 import { useMotion } from '../../context/motion'
+import { GITHUB, LINKEDIN } from '../../data/links'
+import { Arrow } from '../ui/Arrow'
 import { Star } from '../ui/Star'
 import { ThemeSwitch, type Theme } from '../ui/ThemeSwitch'
 import { Chatbot } from '../Chatbot'
 import './Nav.scss'
-import { Arrow } from '../ui/Arrow'
 
 const LINKS = [
   { label: 'Work', target: '#work' },
@@ -28,33 +30,19 @@ export function Nav({ theme, onTheme }: Props) {
   const tlRef = useRef<gsap.core.Timeline | null>(null)
   const pendingRef = useRef<string | number | null>(null)
 
+  const onClosed = useEffectEvent(() => finishClose())
+  const onEscape = useEffectEvent(() => closeMenu())
+
   useEffect(() => {
-    if (open) {
-      setShown(true)
-      lockScroll(true)
-      return
-    }
-    if (!shown) return
     const menu = menuRef.current
-    const finish = () => {
-      setShown(false)
-      lockScroll(false)
-      const target = pendingRef.current
-      pendingRef.current = null
-      if (target !== null) requestAnimationFrame(() => scrollToTarget(target))
-    }
-    if (!menu || !motion) {
-      finish()
-      return
-    }
+    if (open || !shown || !motion || !menu) return
     tlRef.current?.kill()
     tlRef.current = gsap
-      .timeline({ onComplete: finish })
+      .timeline({ onComplete: onClosed })
       .to(menu.querySelectorAll('.menu-link > span'), { yPercent: -110, duration: 0.5, ease: 'expo.in', stagger: 0.03 })
       .to(menu.querySelectorAll('.menu-foot > *'), { opacity: 0, duration: 0.3 }, 0)
       .to(menu, { clipPath: 'inset(0 0 100% 0)', duration: 0.8, ease: 'expo.inOut' }, 0.25)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open])
+  }, [open, shown, motion])
 
   useLayoutEffect(() => {
     const menu = menuRef.current
@@ -69,22 +57,44 @@ export function Nav({ theme, onTheme }: Props) {
 
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onEscape()
+    }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
-  function go(target: string | number) {
-    if (!open) {
-      scrollToTarget(target)
-      return
-    }
+  function finishClose() {
+    setShown(false)
+    lockScroll(false)
+    const target = pendingRef.current
+    pendingRef.current = null
+    if (target !== null) requestAnimationFrame(() => scrollToTarget(target))
+  }
+
+  function closeMenu(target: string | number | null = null) {
     pendingRef.current = target
     setOpen(false)
+    if (!motion) finishClose()
+  }
+
+  function toggleMenu() {
+    if (open) {
+      closeMenu()
+      return
+    }
+    lockScroll(true)
+    setShown(true)
+    setOpen(true)
+  }
+
+  function go(target: string | number) {
+    if (open) closeMenu(target)
+    else scrollToTarget(target)
   }
 
   return (
-    <header className={`nav ${open ? 'is-open' : ''} ${shown ? 'has-menu' : ''}`}>
+    <header className={cx('nav', open && 'is-open', shown && 'has-menu')}>
       <button className="cell wipe nav-mark" onClick={() => go(0)} aria-label="Back to top">
         <Star spin={false} />
         <span>R.J.</span>
@@ -104,7 +114,7 @@ export function Nav({ theme, onTheme }: Props) {
       </button>
       <button
         className="cell nav-burger"
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggleMenu}
         aria-expanded={open}
         aria-controls="mobile-menu"
         aria-label={open ? 'Close menu' : 'Open menu'}
@@ -125,8 +135,8 @@ export function Nav({ theme, onTheme }: Props) {
           ))}
         </nav>
         <div className="menu-foot">
-          <a href="https://github.com/robertjuszczynski" target="_blank" rel="noopener noreferrer">GitHub <Arrow /></a>
-          <a href="https://linkedin.com/in/robert-juszczynski" target="_blank" rel="noopener noreferrer">LinkedIn <Arrow /></a>
+          <a href={GITHUB} target="_blank" rel="noopener noreferrer">GitHub <Arrow /></a>
+          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">LinkedIn <Arrow /></a>
           <ThemeSwitch theme={theme} onTheme={onTheme} />
         </div>
       </div>

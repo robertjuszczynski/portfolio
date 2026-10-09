@@ -20,9 +20,11 @@ export function Cursor() {
 
     let ready = false
     let moved = false
-    const timer = { id: 0 }
+    let active = true
+    let reveal = 0
     introDone.then(() => {
-      timer.id = window.setTimeout(() => {
+      if (!active) return
+      reveal = window.setTimeout(() => {
         ready = true
         if (moved) el.classList.add('is-visible')
       }, 700)
@@ -34,7 +36,7 @@ export function Cursor() {
       xTo(e.clientX)
       yTo(e.clientY)
       if (ready) el.classList.add('is-visible')
-      const target = (e.target as Element | null)?.closest<HTMLElement>('[data-cursor], a, button')
+      const target = e.target instanceof Element ? e.target.closest<HTMLElement>('[data-cursor], a, button') : null
       const text = target?.dataset.cursor
       const hasLabel = !!text && text !== 'hover'
       el.classList.toggle('is-active', !!target)
@@ -50,7 +52,8 @@ export function Cursor() {
     window.addEventListener('pointerdown', down)
     window.addEventListener('pointerup', up)
     return () => {
-      clearTimeout(timer.id)
+      active = false
+      window.clearTimeout(reveal)
       document.body.classList.remove('has-cursor')
       window.removeEventListener('pointermove', move)
       document.documentElement.removeEventListener('pointerleave', leave)

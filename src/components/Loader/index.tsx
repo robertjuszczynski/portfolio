@@ -5,12 +5,14 @@ import { finishIntro } from '../../lib/intro'
 import { useMotion } from '../../context/motion'
 import './Loader.scss'
 
+const MIN_DURATION = 700
+
 const pad = (n: number) => String(Math.round(n)).padStart(3, '0')
 
 const pageReady = () =>
   Promise.all([
-    document.fonts?.ready ?? Promise.resolve(),
-    document.readyState === 'complete' ? Promise.resolve() : new Promise((r) => window.addEventListener('load', r, { once: true })),
+    document.fonts.ready,
+    document.readyState === 'complete' ? Promise.resolve() : new Promise<void>((resolve) => window.addEventListener('load', () => resolve(), { once: true })),
   ])
 
 export function Loader() {
@@ -36,7 +38,7 @@ export function Loader() {
     const crawl = gsap.to(progress, { v: 86, duration: 2.4, ease: 'power2.out', onUpdate: render })
     let cancelled = false
 
-    Promise.all([pageReady(), new Promise((r) => setTimeout(r, 700))]).then(() => {
+    Promise.all([pageReady(), new Promise<void>((resolve) => window.setTimeout(resolve, MIN_DURATION))]).then(() => {
       if (cancelled) return
       crawl.kill()
       gsap

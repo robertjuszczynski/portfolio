@@ -1,58 +1,58 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, ScrollTrigger } from '../../lib/gsap'
+import { cx } from '../../lib/cx'
+import { introDone } from '../../lib/intro'
 import { useGsap } from '../../hooks/useGsap'
 import { useMotion } from '../../context/motion'
 import { projects } from '../../data/projects'
-import { introDone } from '../../lib/intro'
+import { Arrow } from '../ui/Arrow'
 import { SectionHead } from '../ui/SectionHead'
 import { Cover } from './Cover'
 import './Work.scss'
-import { Arrow } from '../ui/Arrow'
 
-function splitCategory(category: string) {
-  const [cat, year] = category.split(' · ')
-  return { cat, year }
+function preloadScreenshots() {
+  projects.forEach(({ imgSrc }) => {
+    if (!imgSrc) return
+    const img = new Image()
+    img.decoding = 'async'
+    img.src = imgSrc
+  })
 }
 
 export function Work() {
   const ref = useRef<HTMLElement>(null)
   const [open, setOpen] = useState<number | null>(null)
   const motion = useMotion()
-  const first = useRef(true)
+  const mounted = useRef(false)
 
   useLayoutEffect(() => {
-    const details = gsap.utils.toArray<HTMLElement>('.row-detail', ref.current)
-    if (first.current) {
-      first.current = false
-      gsap.set(details, { height: 0 })
+    if (!mounted.current) {
+      mounted.current = true
       return
     }
+    const details = gsap.utils.toArray<HTMLElement>('.row-detail', ref.current)
+    const tl = gsap.timeline({ onComplete: () => ScrollTrigger.refresh() })
     details.forEach((detail, i) => {
-      gsap.to(detail, {
-        height: i === open ? 'auto' : 0,
-        duration: motion ? 0.9 : 0,
-        ease: 'expo.inOut',
-        overwrite: true,
-        onComplete: () => ScrollTrigger.refresh(),
-      })
+      tl.to(detail, { height: i === open ? 'auto' : 0, duration: motion ? 0.9 : 0, ease: 'expo.inOut', overwrite: true }, 0)
     })
+    return () => {
+      tl.kill()
+    }
   }, [open, motion])
 
   useEffect(() => {
-    let cancelled = false
+    const hasIdle = typeof window.requestIdleCallback === 'function'
+    let active = true
+    let handle = 0
     introDone.then(() => {
-      const idle = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 300))
-      idle(() => {
-        if (cancelled) return
-        projects.forEach((p) => {
-          if (!p.imgSrc) return
-          const img = new Image()
-          img.decoding = 'async'
-          img.src = p.imgSrc
-        })
-      })
+      if (!active) return
+      handle = hasIdle ? window.requestIdleCallback(preloadScreenshots) : window.setTimeout(preloadScreenshots, 300)
     })
-    return () => { cancelled = true }
+    return () => {
+      active = false
+      if (hasIdle) window.cancelIdleCallback(handle)
+      else window.clearTimeout(handle)
+    }
   }, [])
 
   useGsap(ref, (el) => {
@@ -94,31 +94,30 @@ export function Work() {
 
         <ol className="work-list">
           {projects.map((p, i) => {
-            const { cat, year } = splitCategory(p.category)
             const isOpen = open === i
+            const detailId = `project-${p.number}`
             return (
-              <li
-                key={p.number}
-                className={`work-row ${isOpen ? 'is-open' : ''}`}
-              >
+              <li key={p.number} className={cx('work-row', isOpen && 'is-open')}>
                 <button
-                  className={`row-main wipe ${isOpen ? 'is-active' : ''}`}
+                  type="button"
+                  className={cx('row-main wipe', isOpen && 'is-active')}
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
+                  aria-controls={detailId}
                   data-cursor={isOpen ? 'Close' : 'Open'}
                 >
                   <span className="row-num">{p.number}</span>
                   <span className="row-title">{p.title}</span>
-                  <span className="row-cat label">{cat}</span>
-                  <span className="row-year label">{year}</span>
+                  <span className="row-cat label">{p.category}</span>
+                  <span className="row-year label">{p.year}</span>
                   <span className="row-plus" aria-hidden="true">{isOpen ? '−' : '+'}</span>
                 </button>
-                <div className="row-detail">
+                <div className="row-detail" id={detailId} inert={!isOpen}>
                   <div className="row-detail-inner">
                     <div className="row-cover"><Cover project={p} index={i} /></div>
                     <p className="row-lede">{p.lede}</p>
                     <dl className="row-meta">
-                      <div><dt className="label muted">Role</dt><dd>{p.role}{p.stackHighlight ? `, ${p.stackHighlight}` : ''}</dd></div>
+                      <div><dt className="label muted">Role</dt><dd>{p.stackHighlight ? `${p.role}, ${p.stackHighlight}` : p.role}</dd></div>
                       <div><dt className="label muted">Stack</dt><dd>{p.stack.join(', ')}</dd></div>
                       {p.links.length > 0 && (
                         <div>

@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import Lenis from 'lenis'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { gsap, ScrollTrigger } from './lib/gsap'
 import { setLenis } from './lib/scroll'
 import { MotionContext } from './context/motion'
+import { Loader } from './components/Loader'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
@@ -12,45 +15,48 @@ import { Principles } from './components/Principles'
 import { Experience } from './components/Experience'
 import { Contact } from './components/Contact'
 import { Cursor } from './components/Cursor'
-import { Loader } from './components/Loader'
-import { SpeedInsights } from '@vercel/speed-insights/react'
-import { Analytics } from '@vercel/analytics/react'
 import type { Theme } from './components/ui/ThemeSwitch'
+
+const THEME_KEY = 'theme'
+const THEME_COLOR: Record<Theme, string> = { light: '#f2f2ef', dark: '#0b0b0b' }
 
 const motionAllowed = () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-function initialTheme(): Theme {
+function readTheme(): Theme {
   try {
-    const saved = localStorage.getItem('theme')
-    if (saved === 'light' || saved === 'dark') return saved
+    const saved = localStorage.getItem(THEME_KEY)
+    return saved === 'dark' ? 'dark' : 'light'
   } catch {
     return 'light'
   }
-  return 'light'
+}
+
+function saveTheme(theme: Theme) {
+  try {
+    localStorage.setItem(THEME_KEY, theme)
+  } catch {
+    return
+  }
 }
 
 export function App() {
-  const [theme, setTheme] = useState<Theme>(initialTheme)
+  const [theme, setTheme] = useState<Theme>(readTheme)
   const [motion] = useState(motionAllowed)
 
   const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'))
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f2f2ef' : '#0b0b0b')
-    try {
-      localStorage.setItem('theme', theme)
-    } catch {
-      return
-    }
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[theme])
+    saveTheme(theme)
   }, [theme])
 
   useEffect(() => {
     if (!motion) return
     const lenis = new Lenis({ lerp: 0.085 })
+    const raf = (time: number) => lenis.raf(time * 1000)
     setLenis(lenis)
     lenis.on('scroll', ScrollTrigger.update)
-    const raf = (time: number) => lenis.raf(time * 1000)
     gsap.ticker.add(raf)
     gsap.ticker.lagSmoothing(0)
     return () => {
@@ -63,8 +69,6 @@ export function App() {
   return (
     <MotionContext.Provider value={motion}>
       <Loader />
-      <SpeedInsights />
-      <Analytics />
       <Nav theme={theme} onTheme={toggleTheme} />
       <main>
         <Hero />
@@ -76,6 +80,8 @@ export function App() {
       </main>
       <Contact />
       <Cursor />
+      <SpeedInsights />
+      <Analytics />
     </MotionContext.Provider>
   )
 }

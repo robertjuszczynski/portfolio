@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap, ScrollTrigger } from '../../lib/gsap'
 import { useMotion } from '../../context/motion'
+import { cx } from '../../lib/cx'
 
 const POINTS = Array.from({ length: 16 }, (_, i) => {
   const r = i % 2 ? 24 : 43
@@ -8,7 +9,7 @@ const POINTS = Array.from({ length: 16 }, (_, i) => {
   return `${(50 + r * Math.cos(a)).toFixed(2)},${(50 + r * Math.sin(a)).toFixed(2)}`
 }).join(' ')
 
-export function Star({ spin = true, className = '' }: { spin?: boolean; className?: string }) {
+export function Star({ spin = true, className }: { spin?: boolean; className?: string }) {
   const ref = useRef<SVGSVGElement>(null)
   const motion = useMotion()
 
@@ -33,7 +34,7 @@ export function Star({ spin = true, className = '' }: { spin?: boolean; classNam
   }, [motion, spin])
 
   return (
-    <svg ref={ref} viewBox="0 0 100 100" className={`star ${className}`} aria-hidden="true">
+    <svg ref={ref} viewBox="0 0 100 100" className={cx('star', className)} aria-hidden="true">
       <polygon points={POINTS} fill="currentColor" stroke="currentColor" strokeWidth="9" strokeLinejoin="round" />
     </svg>
   )
