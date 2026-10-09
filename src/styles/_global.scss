@@ -1,0 +1,201 @@
+@font-face {
+  font-family: 'Fivo Sans Modern';
+  src: url('/fonts/FivoSansModern-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fivo Sans Modern';
+  src: url('/fonts/FivoSansModern-Regular-Oblique.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fivo Sans Modern';
+  src: url('/fonts/FivoSansModern-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fivo Sans Modern';
+  src: url('/fonts/FivoSansModern-Medium-Oblique.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { overflow-x: clip; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg);
+  background: var(--bg);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; text-align: inherit; }
+img { display: block; max-width: 100%; }
+ul, ol { list-style: none; }
+
+@media (pointer: fine) {
+  body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
+}
+
+.cell {
+  position: relative;
+  background: var(--bg);
+  outline: var(--bw) solid var(--line);
+  outline-offset: calc(var(--bw) / -2);
+}
+
+.label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.muted { color: var(--muted); }
+
+.wipe {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--ease-io);
+  }
+
+  &:hover::after,
+  &:focus-visible::after,
+  &.is-active::after { transform: scaleX(1); }
+}
+
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.12em 0.04em 0.08em 0;
+  margin: -0.12em -0.04em -0.08em 0;
+
+  > span { display: inline-block; will-change: transform; }
+}
+
+.section { padding: 0 var(--gutter); }
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  gap: 1.2em;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  i {
+    flex: 1;
+    height: var(--bw);
+    background: currentColor;
+    transform-origin: left;
+  }
+
+  .sh-index { color: var(--muted); }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--fg);
+  animation: blink 1s steps(1) infinite;
+}
+
+.star { display: block; width: 100%; height: auto; }
+
+.theme-switch {
+  font-size: 12px;
+  white-space: nowrap;
+
+  span { padding: 0 0.25em; }
+  .on { background: var(--fg); color: var(--bg); }
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px var(--pad);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.status-text {
+  display: grid;
+  gap: 2px;
+}
+
+.status-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: var(--bw) solid var(--fg);
+
+  .is-open & { background: var(--fg); }
+
+  i {
+    position: absolute;
+    inset: calc(-1 * var(--bw));
+    border-radius: 50%;
+    border: var(--bw) solid var(--fg);
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+}
+
+.arrow {
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  vertical-align: -0.05em;
+  flex: none;
+}

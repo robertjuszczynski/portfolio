@@ -1,0 +1,52 @@
+.experience {
+  padding-top: 26vh;
+  padding-bottom: 26vh;
+}
+
+.exp-table {
+  margin: 10vh 0 0 8.33%;
+}
+
+.exp-row {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr 4fr;
+
+  > * { padding: var(--pad); }
+}
+
+.exp-head > * { padding-top: 10px; padding-bottom: 10px; }
+
+.exp-year,
+.exp-company {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.exp-role {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(30px, 3.2vw, 58px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  padding-bottom: 8vh;
+}
+
+.exp-note {
+  font-size: 13px;
+  color: var(--fg-2);
+}
+
+@media (max-width: 900px) {
+  .exp-table { margin-left: 0; }
+  .exp-head { display: none; }
+  .exp-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: 'year company' 'role role' 'note note';
+    margin-bottom: var(--gutter);
+  }
+  .exp-year { grid-area: year; }
+  .exp-company { grid-area: company; overflow-wrap: anywhere; }
+  .exp-role { grid-area: role; }
+  .exp-note { grid-area: note; }
+  .exp-role { padding-bottom: var(--pad); }
+}

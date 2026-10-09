@@ -1,0 +1,120 @@
+.caps {
+  padding-bottom: 26vh;
+}
+
+.caps-intro {
+  max-width: 22ch;
+  margin: 12vh 0 0 41.66%;
+  font-family: var(--sans);
+  font-size: clamp(28px, 3vw, 54px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+
+  em { font-style: italic; }
+}
+
+.marquee {
+  margin-top: 16vh;
+  overflow: hidden;
+  border-top: var(--bw) solid var(--line);
+  border-bottom: var(--bw) solid var(--line);
+  padding: 2vh 0;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-group {
+  display: flex;
+  flex-shrink: 0;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--sans);
+    font-size: clamp(56px, 9vw, 168px);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    white-space: nowrap;
+
+    &.alt { font-style: italic; }
+  }
+
+  i {
+    display: block;
+    width: 0.32em;
+    margin: 0 0.5em;
+  }
+}
+
+.cap-list {
+  margin-top: 10vh;
+  margin-left: 16.66%;
+}
+
+.cap-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr 4fr;
+  gap: var(--gutter);
+  align-items: start;
+  padding: 3vh 0;
+
+  > :not(.cap-line) { overflow: hidden; }
+  &:last-child { border-bottom: var(--bw) solid var(--line); }
+}
+
+.cap-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--bw);
+  background: var(--line);
+  transform-origin: left;
+}
+
+.cap-reveal { display: inline-block; }
+
+.cap-name {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(30px, 2.8vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  transition: transform 0.6s var(--ease);
+
+  .cap-row:hover & { font-style: italic; transform: translateX(0.3em); }
+}
+
+.cap-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  li {
+    padding: 2px 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    border: 1px solid var(--line);
+  }
+}
+
+.cap-note {
+  padding-top: 4px;
+  font-size: 13px;
+  color: var(--fg-2);
+}
+
+@media (max-width: 1100px) {
+  .cap-list { margin-left: 0; }
+  .caps-intro { margin-left: 0; }
+}
+
+@media (max-width: 800px) {
+  .cap-row { grid-template-columns: 2.6em 1fr; row-gap: 14px; }
+  .cap-tech, .cap-note { grid-column: 2; }
+}
